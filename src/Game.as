@@ -1,6 +1,8 @@
 package  
 {
 	import net.flashpunk.World;
+	import net.flashpunk.FP;
+	
 	/**
 	 * ...
 	 * @author Jordan Magnuson
@@ -10,7 +12,13 @@ package
 		
 		public function Game() 
 		{
-			trace('hello world!');
+		}
+		
+		override public function begin():void
+		{
+			add(Global.heartController = new HeartController);
+			add(Global.hotZone = new HotZone(100, 0));
+			add(Global.inputController = new InputController);
 		}
 		
 	}

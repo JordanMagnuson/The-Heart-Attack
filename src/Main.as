@@ -8,10 +8,11 @@ package
 		public function Main() 
 		{
 			// Initiate the game with a 640x480 screen.
-			super(640, 480);
+			super(600, 400, Global.FRAME_RATE, true);
+			//FP.screen.color = Colors.WHITE;
 			
 			// Console for debugging
-			//FP.console.enable();					
+			FP.console.enable();					
 			
 			FP.world = new Game;
 			
