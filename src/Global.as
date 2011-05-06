@@ -19,9 +19,9 @@ package
 		public static var hotZone:HotZone;
 		public static var inputController:InputController;
 		
-		public static var health:Number = 0.8; 					// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
-		public static var heartRate:Number = 3 * FRAME_RATE;	// How frequently the heart beats
-		public static var pulseSpeed:Number = 1.5;				// Number of pixels the heartbeat images move forward every frame
+		public static var health:Number = 1; 					// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
+		public static var heartRate:Number = 1 * FRAME_RATE;	// How frequently the heart beats
+		public static var pulseSpeed:Number = 3;				// Number of pixels the heartbeat images move forward every frame
 		public static var heartbeatUpWidth;
 		public static var heartbeatDownWidth;
 	}

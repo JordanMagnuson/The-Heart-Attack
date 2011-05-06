@@ -20,8 +20,8 @@ package
 		
 		override public function reset():void
 		{
-			x = FP.width + Global.heartbeatUpWidth;
 			super.reset();
+			x = FP.width + Global.heartbeatUpWidth;
 		}
 	}
 

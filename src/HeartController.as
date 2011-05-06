@@ -3,6 +3,7 @@ package
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.tweens.misc.Alarm;
+	import Math
 	
 	/**
 	 * ...
@@ -42,6 +43,19 @@ package
 			f.reset();					
 			
 			beatAlarm.reset(Global.heartRate);
+		}
+		
+		public function loseHealth():void
+		{
+			Global.health -= 0.1;
+			
+			// Shrink beats
+			var heartbeatList:Array = [];
+			world.getClass(Heartbeat, heartbeatList);
+			for each (var h:Heartbeat in heartbeatList)
+			{
+				h.shrink();
+			}					
 		}
 		
 	}

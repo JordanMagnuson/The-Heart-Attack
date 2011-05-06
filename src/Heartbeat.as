@@ -18,13 +18,13 @@ package
 		public function Heartbeat(x:Number = 0, y:Number = 0, image:Image = null) 
 		{
 			super(x, y, image);
-			this.image = image;
+			this.image = image;			
 			image.scaleX = 2;
-			image.scaleY = 2;
+			image.scaleY = 2 * Global.health;
 			image.originX = 0;
-			image.originY = image.scaledHeight / 2;
+			image.originY = image.height / 2;
 			image.x = 0;
-			image.y = image.originY;	
+			image.y = 0;	
 			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);				
 		}
 		
@@ -40,18 +40,13 @@ package
 			image.color = Global.PULSE_COLOR_DEFAULT;
 			
 			// Adjust scale based on health
-			//image.scale.y *= 0.9;			
-			//image.scaleX = 2;
-			//image.scaleY = 2;
-			//image.originX = 0;
-			//image.originY = image.scaledHeight / 2;
-			//image.x = 0;
-			//image.y = image.originY;	
-			//setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);	
-			trace('scaleY: ' + image.scaleY);
-			trace('scaled height: ' + image.scaledHeight);
-			trace('originY: ' + image.originY);
-			trace('image.y: ' + image.y);
+			image.scaleX = 2;
+			image.scaleY = 2 * Global.health;
+			image.originX = 0;
+			image.originY = image.height / 2;
+			image.x = 0;
+			image.y = 0;	
+			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);	
 			
 			y = Global.HEARTBEAT_Y;
 		}
@@ -60,17 +55,32 @@ package
 		{
 			x -= Global.pulseSpeed;
 			
+			// Missed
 			if (x + width < Global.hotZone.x && !hit && !missed)
 			{
 				missed = true;
 				image.color = Global.PULSE_COLOR_MISSED;
+				Global.heartController.loseHealth();
 			}
+			
+			// Off screen
 			else if (x < (0 - width))
 			{
 				offscreenAction();
 			}
 			
 			super.update();
+		}
+		
+		public function shrink():void
+		{
+			image.scaleX = 2;
+			image.scaleY = 2 * Global.health;
+			image.originX = 0;
+			image.originY = image.height / 2;
+			image.x = 0;
+			image.y = 0;	
+			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);				
 		}
 		
 		public function checkOverlapHotZone():Boolean

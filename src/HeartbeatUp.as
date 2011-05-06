@@ -19,8 +19,8 @@ package
 		
 		override public function reset():void
 		{
-			x = FP.width;
 			super.reset();
+			x = FP.width;			
 		}
 	}
 }
