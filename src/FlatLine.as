@@ -12,9 +12,9 @@ package
 	{
 		public var image:Image = new Image(Assets.WHITE_PIXEL);
 		
-		public function FlatLine() 
+		public function FlatLine(x:Number = 0, y:Number = 0) 
 		{
-			graphic = image;
+			super(x, y, image);
 			image.color = Global.PULSE_COLOR_DEFAULT;
 			image.scaleY = 2;
 		}

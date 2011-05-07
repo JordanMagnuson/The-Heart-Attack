@@ -80,7 +80,7 @@ package
 			image.originY = image.height / 2;
 			image.x = 0;
 			image.y = 0;	
-			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);				
+			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);		
 		}
 		
 		public function checkOverlapHotZone():Boolean

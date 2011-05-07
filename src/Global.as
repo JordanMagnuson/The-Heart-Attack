@@ -15,15 +15,18 @@ package
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		// Variables
+		public static var health:Number = 1; 					// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
+		public static var heartRate:Number = 2 * FRAME_RATE;	// How frequently the heart beats
+		public static var pulseSpeed:Number = 2;				// Number of pixels the heartbeat images move forward every frame
+		public static var heartbeatUpWidth;
+		public static var heartbeatDownWidth;
+		
+		// Global entities
 		public static var heartController:HeartController;
 		public static var hotZone:HotZone;
 		public static var inputController:InputController;
+		public static var soundController:SoundController;
 		
-		public static var health:Number = 1; 					// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
-		public static var heartRate:Number = 1 * FRAME_RATE;	// How frequently the heart beats
-		public static var pulseSpeed:Number = 3;				// Number of pixels the heartbeat images move forward every frame
-		public static var heartbeatUpWidth;
-		public static var heartbeatDownWidth;
 	}
 
 }

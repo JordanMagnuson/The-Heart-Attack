@@ -49,13 +49,35 @@ package
 		{
 			Global.health -= 0.1;
 			
-			// Shrink beats
+			// Die
 			var heartbeatList:Array = [];
+			var flatLineList:Array = [];
 			world.getClass(Heartbeat, heartbeatList);
-			for each (var h:Heartbeat in heartbeatList)
+			world.getClass(FlatLine, flatLineList);				
+			if (Global.health <= 0.1)
 			{
-				h.shrink();
-			}					
+				// Add solid white line
+				FP.world.add(new HeartbeatFlat);
+				
+				// Remove everything else
+				for each (var h:Heartbeat in heartbeatList)
+				{
+					FP.world.remove(h);
+				}	
+				for each (var f:FlatLine in flatLineList)
+				{
+					FP.world.remove(f);
+				}		
+				FP.world.remove(this);
+			}
+			// Shrink
+			else
+			{
+				for each (h in heartbeatList)
+				{
+					h.shrink();
+				}					
+			}	
 		}
 		
 	}
