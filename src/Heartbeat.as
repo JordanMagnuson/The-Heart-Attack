@@ -60,6 +60,7 @@ package
 			{
 				missed = true;
 				image.color = Global.PULSE_COLOR_MISSED;
+				Global.soundController.missed.play(0.5);				
 				Global.heartController.loseHealth();
 			}
 			

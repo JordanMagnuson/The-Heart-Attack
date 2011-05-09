@@ -16,8 +16,8 @@ package
 		
 		// Variables
 		public static var health:Number = 1; 					// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
-		public static var heartRate:Number = 2 * FRAME_RATE;	// How frequently the heart beats
-		public static var pulseSpeed:Number = 2;				// Number of pixels the heartbeat images move forward every frame
+		public static var heartRate:Number = 0.5 * FRAME_RATE;	// How frequently the heart beats
+		public static var pulseSpeed:Number = 6;				// Number of pixels the heartbeat images move forward every frame
 		public static var heartbeatUpWidth;
 		public static var heartbeatDownWidth;
 		
