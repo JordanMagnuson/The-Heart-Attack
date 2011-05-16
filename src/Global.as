@@ -15,9 +15,6 @@ package
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		// Variables
-		public static var health:Number = 1; 					// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
-		public static var heartRate:Number = 0.5 * FRAME_RATE;	// How frequently the heart beats
-		public static var pulseSpeed:Number = 6;				// Number of pixels the heartbeat images move forward every frame
 		public static var heartbeatUpWidth;
 		public static var heartbeatDownWidth;
 		
@@ -26,6 +23,7 @@ package
 		public static var hotZone:HotZone;
 		public static var inputController:InputController;
 		public static var soundController:SoundController;
+		public static var photoController:PhotoController;
 		
 	}
 

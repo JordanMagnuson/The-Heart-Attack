@@ -20,7 +20,7 @@ package
 		{			
 			if (Input.pressed('X'))
 			{
-				trace('input pressed');
+				//trace('input pressed');
 				var heartbeatUpList:Array = [];
 				world.getClass(HeartbeatUp, heartbeatUpList);
 				for each (var u:HeartbeatUp in heartbeatUpList)
@@ -35,7 +35,7 @@ package
 			}
 			else if (Input.released('X'))
 			{
-				trace('input released');
+				//trace('input released');
 				var heartbeatDownList:Array = [];
 				world.getClass(HeartbeatDown, heartbeatDownList);
 				for each (var d:HeartbeatDown in heartbeatDownList)

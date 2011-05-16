@@ -20,7 +20,16 @@ package
 		override public function reset():void
 		{
 			super.reset();
-			x = FP.width;			
+			if (direction)
+			{
+				image.flipped = false;
+				x = FP.width;	
+			}
+			else
+			{
+				image.flipped = true;
+				x = 0 - Global.heartbeatUpWidth;	
+			}
 		}
 	}
 }

@@ -16,10 +16,11 @@ package
 		
 		override public function begin():void
 		{
-			add(Global.heartController = new HeartController);
-			add(Global.hotZone = new HotZone(100, 0));
+			//add(Global.hotZone = new HotZone(100, 0));
+			add(Global.heartController = new HeartController(false));
 			add(Global.inputController = new InputController);
 			add(Global.soundController = new SoundController);
+		//	add(Global.photoController = new PhotoController);
 		}
 		
 	}

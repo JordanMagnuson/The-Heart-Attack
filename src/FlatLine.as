@@ -1,8 +1,8 @@
 package  
 {
 	import net.flashpunk.Entity;
-	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Image;
 	
 	/**
 	 * ...
@@ -10,43 +10,22 @@ package
 	 */
 	public class FlatLine extends Entity
 	{
+		public var heartController:HeartController;
 		public var image:Image = new Image(Assets.WHITE_PIXEL);
 		
-		public function FlatLine(x:Number = 0, y:Number = 0) 
+		public function FlatLine(heartController:HeartController, x:Number = 0, y:Number = 0) 
 		{
-			super(x, y, image);
+			this.heartController = heartController;
+			graphic = image;
 			image.color = Global.PULSE_COLOR_DEFAULT;
 			image.scaleY = 2;
+			image.scaleX = FP.width;
 		}
 		
 		override public function added():void
 		{
-			reset();
+			y = heartController.y + 1;
 		}
-		
-		public function reset():void
-		{
-			image.scaleX = (Global.pulseSpeed * Global.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
-			x = FP.width + Global.heartbeatUpWidth + Global.heartbeatDownWidth;
-			y = Global.HEARTBEAT_Y + 1;
-		}
-		
-		override public function update():void
-		{
-			x -= Global.pulseSpeed;
-			
-			if (x < (0 - image.scaledWidth))
-			{
-				offscreenAction();
-			}
-			
-			super.update();
-		}
-		
-		public function offscreenAction():void
-		{
-			FP.world.recycle(this);
-		}		
 		
 	}
 
