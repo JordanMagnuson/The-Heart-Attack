@@ -3,6 +3,7 @@ package
 	import net.flashpunk.tweens.misc.Alarm;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
+	import net.flashpunk.utils.Key;
 	
 	/**
 	 * ...
@@ -22,7 +23,7 @@ package
 			add(new Ground);
 			add(Global.cheater = new Cheater);
 			add(Global.soundController = new SoundController);
-			add(Global.american = new American(true));
+			add(Global.americanController = new AmericanController(true, Key.S));
 			
 		//	add(Global.photoController = new PhotoController);
 		}
@@ -30,7 +31,7 @@ package
 		public function deactivateAmerican():void
 		{
 			trace('deactivate american');
-			Global.american.deactivate();
+			Global.americanController.deactivate();
 		}
 		
 	}

@@ -9,36 +9,39 @@ package
 	 * ...
 	 * @author Jordan Magnuson
 	 */
-	public class American extends Entity
+	public class PersonController extends Entity
 	{
 		public const ACTIVATE_DURATION:Number = 1 * FP.assignedFrameRate;
 		public const DEACTIVATE_DURATION:Number = 1 * FP.assignedFrameRate;
-		
-		public var completeActivationAlarm:Alarm = new Alarm(ACTIVATE_DURATION, completeActivation);
-		public var activated:Boolean = true;
-		
-		
-		// Whether the American should be on top or bottom
+	
+		// Whether the person should be on top or bottom
 		public var isTop:Boolean;
 		
+		// Controllers for this person
+		public var hotZoneX:Number;
 		public var heartController:HeartController;
+		public var inputKey:int;
 		public var inputController:InputController;
+		public var photoController:PhotoController;		
+		
+		// When not activated, the person's hearbeat etc. is paused
+		public var completeActivationAlarm:Alarm = new Alarm(ACTIVATE_DURATION, completeActivation);
+		public var activated:Boolean = true;		
 		public var darkMask:DarkMask;
 		
-		public var photoController:PhotoController;
-		public var photoArray01:Array;
-		
-		public function American(top:Boolean) 
+		public function PersonController(isTop:Boolean, inputKey:int) 
 		{
-			if (!top) y = FP.halfHeight;
-			photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
+			this.inputKey = inputKey;
+			this.isTop = isTop;
+			if (!isTop) y = FP.halfHeight;
+			if (isTop) hotZoneX = Global.HOT_ZONE_X;
+			else hotZoneX = FP.width - Global.HOT_ZONE_X;
 		}
 		
 		override public function added():void
 		{
-			FP.world.add(heartController = new HeartController(113, !isTop));
-			FP.world.add(inputController = new InputController(Key.S, heartController));
-			FP.world.add(photoController = new PhotoController(photoArray01, 10, 2));
+			FP.world.add(heartController = new HeartController(hotZoneX, isTop));
+			FP.world.add(inputController = new InputController(inputKey, heartController));
 		}
 		
 		override public function update():void

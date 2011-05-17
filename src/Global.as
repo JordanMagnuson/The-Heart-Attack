@@ -1,5 +1,7 @@
 package  
 {
+	import net.flashpunk.utils.Key;
+	
 	/**
 	 * ...
 	 * @author Jordan Magnuson
@@ -9,10 +11,10 @@ package
 		// Constants
 		public static const FRAME_RATE:Number = 60;
 		public static const HOT_ZONE_WIDTH:Number = 20;
+		public static const HOT_ZONE_X:Number = 113;
 		public static const PULSE_COLOR_DEFAULT:uint = Colors.BLACK;
 		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
-		public static const HOT_ZONE_1_X:Number = 100;
 		
 		// Variables
 		public static var heartbeatUpWidth;
@@ -20,8 +22,11 @@ package
 		
 		// Global entities
 		public static var cheater:Cheater;
-		public static var american:American;
+		public static var americanController:AmericanController;
 		public static var soundController:SoundController;
+		
+		// American constants
+
 		
 	}
 
