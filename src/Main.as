@@ -9,7 +9,7 @@ package
 		{
 			// Initiate the game with a 640x480 screen.
 			super(640, 480, Global.FRAME_RATE, true);
-			//FP.screen.color = Colors.WHITE;
+			FP.screen.color = Colors.WHITE;
 			
 			// Console for debugging
 			FP.console.enable();					

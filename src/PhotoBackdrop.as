@@ -13,29 +13,25 @@ package
 	 */
 	public class PhotoBackdrop extends Entity
 	{
-		public static const FADE_IN_DURATION:Number = 1 * FP.assignedFrameRate;		
-		public static const FADE_OUT_DURATION:Number = 1 * FP.assignedFrameRate;
+		public static const FADE_IN_DURATION:Number = 2 * FP.assignedFrameRate;		
+		public static const FADE_OUT_DURATION:Number = 2 * FP.assignedFrameRate;
 		public static const MAX_ALPHA:Number = 0.5;
-		
-		public static const DISPLAY_DURATION:Number = PhotoController.DISPLAY_TIME;
 		
 		public var backdrop:Backdrop;
 		public var fadeTween:ColorTween;
-		public var displayAlarm:Alarm = new Alarm(DISPLAY_DURATION, fadeOut);
 		
 		public function PhotoBackdrop(source:*) 
 		{
-			backdrop = new Backdrop(source);
+			backdrop = new Backdrop(source, false, false);
 			graphic = backdrop;
 			layer = 100;
 			graphic.scrollX = 0;
 			graphic.scrollY = 0;		
-			backdrop.alpha = 0;		
+			backdrop.alpha = 0;	
 		}
 		
 		override public function added():void
 		{
-			//addTween(displayAlarm, true);
 			fadeIn();
 		}
 		
@@ -73,8 +69,7 @@ package
 		
 		override public function render():void
 		{
-			if (PhotoController.show)
-				super.render();
+			super.render();
 		}		
 		
 	}

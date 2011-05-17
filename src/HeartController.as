@@ -25,7 +25,7 @@ package
 		{
 			this.direction = direction;
 			y = 100;
-			FP.world.add(hotZone = new HotZone(500, 0));
+			FP.world.add(hotZone = new HotZone(180, 0));
 		}
 		
 		override public function added():void
