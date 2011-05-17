@@ -14,7 +14,7 @@ package
 		public const ACTIVATE_DURATION:Number = 1 * FP.assignedFrameRate;
 		public const DEACTIVATE_DURATION:Number = 1 * FP.assignedFrameRate;
 		
-		public var activateAlarm:Alarm = new Alarm(ACTIVATE_DURATION, activate);
+		public var completeActivationAlarm:Alarm = new Alarm(ACTIVATE_DURATION, completeActivation);
 		public var activated:Boolean = true;
 		
 		
@@ -46,32 +46,44 @@ package
 			super.update();
 		}
 		
-		public function beginActivation():void
+		public function activate():void
 		{
 			if (darkMask && !darkMask.fadeTween.active)
 			{
 				trace('start activation');
 				darkMask.fadeOut();
-				addTween(activateAlarm, true);
+				addTween(completeActivationAlarm, true);
+				activated = true;
+			}
+			else if (!activated)
+			{
+				trace('start activation');
+				heartController.activate();
+				photoController.activate();
+				inputController.active = true;
+				darkMask = null;				
 				activated = true;
 			}
 		}
 		
-		public function activate():void
+		public function completeActivation():void
 		{
-			removeTween(activateAlarm);
+			removeTween(completeActivationAlarm);
 			heartController.activate();
 			photoController.activate();
 			inputController.active = true;
 			darkMask = null;
 		}
 		
-		public function deactivate():void
+		public function deactivate(shouldFade:Boolean = true):void
 		{
-			if (!darkMask)
+			if (!darkMask && activated)
 			{
-				trace('deactivate');
-				FP.world.add(darkMask = new DarkMask(x, y, DEACTIVATE_DURATION, ACTIVATE_DURATION));
+				trace('deactivating');
+				if (shouldFade)
+				{
+					FP.world.add(darkMask = new DarkMask(x, y, DEACTIVATE_DURATION, ACTIVATE_DURATION));
+				}
 				this.heartController.deactivate();
 				this.photoController.deactivate();
 				this.inputController.active = false;

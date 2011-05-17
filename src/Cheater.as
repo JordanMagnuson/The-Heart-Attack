@@ -20,9 +20,9 @@ package
 		override public function update():void
 		{
 			if (Input.pressed('P'))
-				Global.american.deactivate();
+				Global.american.deactivate(false);
 			else if (Input.pressed('R'))
-				Global.american.beginActivation();
+				Global.american.activate();
 		}
 		
 	}
