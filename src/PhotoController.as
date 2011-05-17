@@ -42,6 +42,9 @@ package
 		
 		override public function added():void
 		{
+			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], false);
+			FP.world.add(currentPhoto);
+			currentIndex++;			
 			if (startDelay > 0)
 			{
 				addTween(startAlarm, true);
@@ -68,9 +71,6 @@ package
 		
 		public function start():void
 		{
-			currentPhoto = new PhotoBackdrop(photoArray[currentIndex]);
-			FP.world.add(currentPhoto);
-			currentIndex++;
 			addTween(nextPhotoAlarm, true);			
 		}		
 		

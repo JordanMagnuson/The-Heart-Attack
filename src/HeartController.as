@@ -13,8 +13,8 @@ package
 	{
 		public var inputController:InputController;
 		public var direction:Boolean;					// Controlls wither the heartbeat pulses travel left or right. True = left.
-		public var heartRate:Number = 2 * FP.assignedFrameRate;	// How frequently the heart beats.
-		public var pulseSpeed:Number = 3;				// Number of pixels the heartbeat images move forward every frame.
+		public var heartRate:Number;	// How frequently the heart beats.
+		public var pulseSpeed:Number;			// Number of pixels the heartbeat images move forward every frame.
 		
 		public var health:Number = 1;							// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
 		
@@ -27,6 +27,8 @@ package
 			this.direction = direction;
 			y = 100;
 			hotZone = new HotZone(hotZoneX, 0);
+			heartRate = Global.STARTING_HEART_RATE;
+			pulseSpeed = Global.STARTING_PULSE_SPEED;
 		}
 		
 		override public function added():void

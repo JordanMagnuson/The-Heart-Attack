@@ -16,6 +16,7 @@ package
 	
 		// Whether the person should be on top or bottom
 		public var isTop:Boolean;
+		public var direction:Boolean;
 		
 		// Controllers for this person
 		public var hotZoneX:Number;
@@ -33,6 +34,7 @@ package
 		{
 			this.inputKey = inputKey;
 			this.isTop = isTop;
+			this.direction = isTop;
 			if (!isTop) y = FP.halfHeight;
 			if (isTop) hotZoneX = Global.HOT_ZONE_X;
 			else hotZoneX = FP.width - Global.HOT_ZONE_X;
@@ -42,6 +44,7 @@ package
 		{
 			FP.world.add(heartController = new HeartController(hotZoneX, isTop));
 			FP.world.add(inputController = new InputController(inputKey, heartController));
+			FP.world.add(new Tutorial(this));
 		}
 		
 		override public function update():void

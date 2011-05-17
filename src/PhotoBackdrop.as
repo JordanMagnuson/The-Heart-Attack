@@ -17,22 +17,33 @@ package
 		public static const FADE_OUT_DURATION:Number = 2 * FP.assignedFrameRate;
 		public static const MAX_ALPHA:Number = 0.5;
 		
+		public var shouldFadeIn:Boolean;
 		public var backdrop:Backdrop;
 		public var fadeTween:ColorTween;
 		
-		public function PhotoBackdrop(source:*) 
+		public function PhotoBackdrop(source:*, shouldFadeIn:Boolean = true) 
 		{
+			this.shouldFadeIn = shouldFadeIn;
 			backdrop = new Backdrop(source, false, false);
 			graphic = backdrop;
 			layer = 100;
 			graphic.scrollX = 0;
-			graphic.scrollY = 0;		
-			backdrop.alpha = 0;	
+			graphic.scrollY = 0;	
+			if (shouldFadeIn)
+				backdrop.alpha = 0;	
+			else
+				backdrop.alpha = MAX_ALPHA;
 		}
 		
 		override public function added():void
 		{
-			fadeIn();
+			if (shouldFadeIn)
+				fadeIn();
+			else
+			{
+				fadeTween = new ColorTween();
+				fadeTween.alpha = MAX_ALPHA;
+			}
 		}
 		
 		public function reset(source:*):void

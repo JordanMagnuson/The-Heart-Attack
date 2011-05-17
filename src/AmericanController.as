@@ -19,7 +19,7 @@ package
 		override public function added():void
 		{
 			super.added();
-			FP.world.add(photoController = new PhotoController(photoArray01, 10, 2));
+			FP.world.add(photoController = new PhotoController(photoArray01, 10, 10));
 		}
 		
 	}
