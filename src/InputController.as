@@ -10,10 +10,12 @@ package
 	 */
 	public class InputController extends Entity
 	{
+		public var heartController:HeartController;
 		
-		public function InputController() 
+		public function InputController(inputKey:int, heartController:HeartController) 
 		{
-			Input.define('X', Key.SPACE);
+			this.heartController = heartController;
+			Input.define('X', inputKey);
 		}
 		
 		override public function update():void

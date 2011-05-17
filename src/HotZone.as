@@ -10,7 +10,7 @@ package
 	 */
 	public class HotZone extends Entity
 	{
-		public var image:Image = Image.createRect(Global.HOT_ZONE_WIDTH, FP.height, Colors.PLAINS_GREEN, 0.5);
+		public var image:Image = Image.createRect(Global.HOT_ZONE_WIDTH, FP.halfHeight, Colors.PLAINS_GREEN, 0.5);
 		
 		public function HotZone(x:Number = 0, y:Number = 0) 
 		{

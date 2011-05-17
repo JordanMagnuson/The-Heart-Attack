@@ -8,14 +8,11 @@ package
 	 * ...
 	 * @author Jordan Magnuson
 	 */
-	public class HeartbeatFlat extends Entity
+	public class HeartbeatFlat extends Heartbeat
 	{
-		public var heartController:HeartController;
-		public var direction:Boolean;
-		public var image:Image = new Image(Assets.WHITE_PIXEL);
-		
 		public function HeartbeatFlat(x:Number = 0, y:Number = 0) 
 		{
+			image = new Image(Assets.WHITE_PIXEL);
 			super(x, y, image);
 			image.color = Global.PULSE_COLOR_DEFAULT;
 			image.scaleY = 2;
@@ -26,7 +23,12 @@ package
 			reset();
 		}
 		
-		public function reset():void
+		override public function shrink():void
+		{
+			return;
+		}
+		
+		override public function reset():void
 		{
 			direction = heartController.direction;
 			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
@@ -50,14 +52,7 @@ package
 			{
 				offscreenAction();
 			}
-			
-			super.update();
 		}
-		
-		public function offscreenAction():void
-		{
-			FP.world.recycle(this);
-		}		
 		
 	}
 

@@ -19,11 +19,9 @@ package
 		public static var heartbeatDownWidth;
 		
 		// Global entities
-		public static var heartController:HeartController;
-		public static var hotZone:HotZone;
-		public static var inputController:InputController;
+		public static var cheater:Cheater;
+		public static var american:American;
 		public static var soundController:SoundController;
-		public static var photoController:PhotoController;
 		
 	}
 

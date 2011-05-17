@@ -52,6 +52,20 @@ package
 			}
 		}
 		
+		public function activate():void
+		{
+			if (lastPhoto) lastPhoto.active = true;
+			if (currentPhoto) currentPhoto.active = true;
+			this.active = true;		
+		}
+		
+		public function deactivate():void
+		{
+			if (lastPhoto) lastPhoto.active = false;
+			if (currentPhoto) currentPhoto.active = false;
+			this.active = false;
+		}
+		
 		public function start():void
 		{
 			currentPhoto = new PhotoBackdrop(photoArray[currentIndex]);

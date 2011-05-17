@@ -11,6 +11,7 @@ package
 	 */
 	public class HeartController extends Entity
 	{
+		public var inputController:InputController;
 		public var direction:Boolean;					// Controlls wither the heartbeat pulses travel left or right. True = left.
 		public var heartRate:Number = 2 * FP.assignedFrameRate;	// How frequently the heart beats.
 		public var pulseSpeed:Number = 3;				// Number of pixels the heartbeat images move forward every frame.
@@ -21,15 +22,16 @@ package
 		
 		public var beatAlarm:Alarm = new Alarm(heartRate, beat);
 		
-		public function HeartController(direction:Boolean = true) 
+		public function HeartController(hotZoneX:Number, direction:Boolean = true) 
 		{
 			this.direction = direction;
 			y = 100;
-			FP.world.add(hotZone = new HotZone(180, 0));
+			hotZone = new HotZone(hotZoneX, 0);
 		}
 		
 		override public function added():void
 		{
+			FP.world.add(hotZone);
 			addTween(beatAlarm);
 			beat();
 			//addTween(beatAlarm, true);
@@ -59,15 +61,51 @@ package
 			beatAlarm.reset(heartRate);
 		}
 		
+		public function getHeartbeats():Array
+		{
+			var heartbeatList:Array = [];
+			var myHeartbeats:Array = [];
+			FP.world.getClass(Heartbeat, heartbeatList);				
+			for each (var h:Heartbeat in heartbeatList)
+			{
+				if (h.heartController == this)
+					myHeartbeats.push(h);
+			}	
+			return myHeartbeats;	
+		}
+		
+		public function deactivate():void
+		{
+			// Stop heartbeats moving
+			var heartBeats:Array = getHeartbeats();
+			for each (var h:Heartbeat in heartBeats)
+			{
+				h.active = false;
+			}			
+			
+			// Deactivate controller
+			this.active = false;
+		}
+		
+		public function activate():void
+		{
+			// Start heartbeats moving
+			var heartBeats:Array = getHeartbeats();
+			for each (var h:Heartbeat in heartBeats)
+			{
+				h.active = true;
+			}			
+			
+			// Activate controller
+			this.active = true;			
+		}
+		
 		public function loseHealth():void
 		{
 			health -= 0.1;
 			
 			// Die
-			var heartbeatList:Array = [];
-			var flatLineList:Array = [];
-			world.getClass(Heartbeat, heartbeatList);
-			world.getClass(HeartbeatFlat, flatLineList);				
+			var heartbeatList:Array = getHeartbeats();			
 			if (health <= 0.1)
 			{
 				// Add solid white line
@@ -78,10 +116,6 @@ package
 				{
 					FP.world.remove(h);
 				}	
-				for each (var f:HeartbeatFlat in flatLineList)
-				{
-					FP.world.remove(f);
-				}		
 				FP.world.remove(this);
 			}
 			// Shrink
