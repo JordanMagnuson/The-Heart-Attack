@@ -10,9 +10,11 @@ package
 	 */
 	public class AmericanController extends PersonController
 	{
-		public var photoArray01:Array;
+		// Phase01 timing
+		public const PHASE01_MUSIC_TIME:Number = 40 * FP.assignedFrameRate;
+		public const PHASE01_BOY_TO_MAN_TIME:Number = 90 * FP.assignedFrameRate;
 		
-		public var music:Sfx;
+		public var photoArray01:Array;
 		
 		public function AmericanController(isTop:Boolean, inputKey:int) 
 		{
@@ -22,8 +24,9 @@ package
 		
 		override public function added():void
 		{
-			startNewPhase();
+			trace('american controller added');
 			super.added();
+			startNewPhase();
 		}
 		
 		override public function startNewPhase():void
@@ -36,10 +39,10 @@ package
 					FP.world.add(photoController = new PhotoController(photoArray01, x, y, 10, 10));
 					FP.world.add(musicController = new MusicController(Assets.MUS_AMERICAN01));	
 					
-					var musicAlarm:Alarm = new Alarm(1 * FP.assignedFrameRate, phase01Music);
+					var musicAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, phase01Music);
 					addTween(musicAlarm, true);
 					
-					var boyToManAlarm:Alarm = new Alarm(80 * FP.assignedFrameRate, boyToMan);
+					var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
 					addTween(boyToManAlarm, true);					
 					break;
 				default:

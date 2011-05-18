@@ -13,6 +13,8 @@ package
 		[Embed(source = '../assets/ground.png')] public static const GROUND:Class;
 		[Embed(source = '../assets/tutorial_text_01.png')] public static const TUT_TEXT_01:Class;
 		[Embed(source = '../assets/tutorial_text_02.png')] public static const TUT_TEXT_02:Class;
+		[Embed(source = '../assets/tutorial_text_01b.png')] public static const TUT_TEXT_01b:Class;
+		[Embed(source = '../assets/tutorial_text_02b.png')] public static const TUT_TEXT_02b:Class;		
 		[Embed(source = '../assets/tutorial_text_03.png')] public static const TUT_TEXT_03:Class;
 		[Embed(source = '../assets/man_walking.png')] public static const MAN_WALKING:Class;
 		[Embed(source = '../assets/boy_walking.png')] public static const BOY_WALKING:Class;
@@ -25,6 +27,7 @@ package
 		
 		// music
 		[Embed(source = '../assets/Montego.mp3')] public static const MUS_AMERICAN01:Class;
+		[Embed(source='../assets/music.swf', symbol='viet01_NgayDoXaRoi')] public static const MUS_VIET01:Class;
 	}
 
 }

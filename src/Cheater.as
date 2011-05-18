@@ -20,9 +20,9 @@ package
 		override public function update():void
 		{
 			if (Input.pressed('P'))
-				Global.americanController.endPhase();
+				Global.americanController.pause();
 			else if (Input.pressed('R'))
-				Global.americanController.startNewPhase();
+				Global.americanController.unpause();
 		}
 		
 	}

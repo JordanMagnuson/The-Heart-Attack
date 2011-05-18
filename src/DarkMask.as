@@ -16,26 +16,43 @@ package
 		public const FADE_OUT_DURATION:Number = 2 * FP.assignedFrameRate;
 		public const MAX_ALPHA:Number = 0.8;	
 		
+		public var shouldFadeIn:Boolean;
 		public var fadeInDuration:Number;
 		public var fadeOutDuration:Number;
 		
 		public var image:Image = Image.createRect(FP.width, FP.halfHeight, Colors.BLACK, 1);
 		public var fadeTween:ColorTween;
 		
-		public function DarkMask(x:Number = 0, y:Number = 0, fadeInDuration:Number = 2, fadeOutDuration:Number = 2) 
+		public function DarkMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 2, fadeOutDuration:Number = 2) 
 		{
 			super(x, y, image);
 			layer = -100;
 			graphic.scrollX = 0;
 			graphic.scrollY = 0;		
-			image.alpha = 0;		
+			
+			this.shouldFadeIn = shouldFadeIn;
+			if (shouldFadeIn)
+				image.alpha = 0;
+			else 
+				image.alpha = MAX_ALPHA;
+				
 			this.fadeInDuration = fadeInDuration;
 			this.fadeOutDuration = fadeOutDuration;
 		}
 		
 		override public function added():void
 		{
-			fadeIn();
+			if (shouldFadeIn)
+			{
+				fadeIn();
+			}
+			else
+			{
+				fadeTween = new ColorTween();
+				fadeTween.alpha = MAX_ALPHA;
+				addTween(fadeTween);				
+			}
+			
 		}
 	
 		override public function update():void

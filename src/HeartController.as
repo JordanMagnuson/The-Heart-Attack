@@ -37,13 +37,17 @@ package
 			addTween(beatAlarm);
 			beat();
 			//addTween(beatAlarm, true);
-			
+		}
+		
+		override public function update():void
+		{
+			super.update();
+			//trace('heart controller updating');
 		}
 		
 		public function beat():void
 		{
 			trace('beat');
-			//Global.heartRate *= 0.75;
 			
 			// Heartbeat up
 			var u:HeartbeatUp = FP.world.create(HeartbeatUp) as HeartbeatUp;

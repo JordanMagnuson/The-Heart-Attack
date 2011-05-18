@@ -22,6 +22,7 @@ package
 		 */
 		public var photoArray:Array;
 		public var currentIndex:int = 0;
+		public var finished:Boolean = false;
 		
 		public var currentPhoto:PhotoBackdrop;
 		public var lastPhoto:PhotoBackdrop;
@@ -90,7 +91,10 @@ package
 			if (currentIndex < photoArray.length - 1)
 				currentIndex++;
 			else
+			{
+				finished = true;
 				currentIndex = 0;
+			}
 			nextPhotoAlarm.reset(displayTime);
 		}
 		

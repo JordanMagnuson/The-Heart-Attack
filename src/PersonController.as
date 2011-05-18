@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.tweens.misc.Alarm;
 	import net.flashpunk.utils.Key;
 	
@@ -26,9 +27,11 @@ package
 		public var photoController:PhotoController;		
 		public var musicController:MusicController;
 		public var personImage:PersonImage;
+		public var music:Sfx;
 		
 		// When not active, the person's hearbeat etc. is paused
 		public var paused:Boolean = false;
+		public var markedForPause:Boolean = false;
 		public var phaseCounter:int = 0;
 		public var darkMask:DarkMask;
 		
@@ -51,19 +54,28 @@ package
 		
 		override public function update():void
 		{
+			//trace('person controller update');
+			if (markedForPause)
+			{
+				pause(true);
+				markedForPause = false;
+			}
 			super.update();
 		}
 		
-		public function pause():void
+		public function pause(makeDark:Boolean = false):void
 		{
 			if (!paused)
 			{
 				trace('pause');
+				if (makeDark)
+				{
+					FP.world.add(darkMask = new DarkMask(x, y, false));
+				}
 				heartController.deactivate();
 				photoController.deactivate();
-				inputController.active = false;
-				personImage.deactivate();
-				active = false;		
+				personImage.deactivate();	
+				musicController.active = false;
 				paused = true;
 			}
 		}
@@ -72,23 +84,25 @@ package
 		{	
 			if (paused)
 			{
-				trace('unpause');
+				trace('unpause');				
+				if (darkMask)
+					FP.world.remove(darkMask);		
 				heartController.activate();
 				photoController.activate();
 				personImage.activate();
-				inputController.active = true;
+				musicController.active = true;
 				darkMask = null;
-				paused = false;
-				active = true;			
+				paused = false;	
 			}
 		}
 		
 		public function startNewPhase():void
 		{
 			trace('start new phase');
+			active = true; 				// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
+			inputController.active = true;
 			if (darkMask && !darkMask.fadeTween.active)
 			{	
-				active = true;				// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
 				trace('should be working');
 				trace('active: ' + active);
 				var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, unpause);
@@ -103,11 +117,13 @@ package
 		
 		public function endPhase():void
 		{
+			active = false;
+			inputController.active = false;
 			if (!darkMask && active)
 			{
 				trace('ending phase');
 				phaseCounter++;
-				FP.world.add(darkMask = new DarkMask(x, y, DEACTIVATE_DURATION, ACTIVATE_DURATION));
+				FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
 				musicController.fader.fadeTo(0, DEACTIVATE_DURATION);
 				pause();
 			}

@@ -15,6 +15,7 @@ package
 		public function Ground(x:Number = 0, y:Number = 0, graphic:Graphic = null) 
 		{
 			super(x, y, image);
+			layer = -50;
 		}
 		
 	}

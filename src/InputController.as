@@ -11,23 +11,26 @@ package
 	public class InputController extends Entity
 	{
 		public var heartController:HeartController;
+		public var inputKeyString:String;
 		
 		public function InputController(inputKey:int, heartController:HeartController) 
 		{
 			this.heartController = heartController;
-			Input.define('X', inputKey);
+			this.inputKeyString = String(inputKey);
+			Input.define(inputKeyString, inputKey);
 		}
 		
 		override public function update():void
 		{			
-			if (Input.pressed('X'))
+			if (Input.pressed(inputKeyString))
 			{
+				trace(inputKeyString + ' pressed');
 				//trace('input pressed');
 				var heartbeatUpList:Array = [];
 				world.getClass(HeartbeatUp, heartbeatUpList);
 				for each (var u:HeartbeatUp in heartbeatUpList)
 				{
-					if (u.checkOverlapHotZone())
+					if (u.heartController == this.heartController && u.checkOverlapHotZone())
 					{
 						Global.soundController.heartbeatUp.play();
 						u.hit = true;
@@ -35,14 +38,14 @@ package
 					}
 				}
 			}
-			else if (Input.released('X'))
+			else if (Input.released(inputKeyString))
 			{
 				//trace('input released');
 				var heartbeatDownList:Array = [];
 				world.getClass(HeartbeatDown, heartbeatDownList);
 				for each (var d:HeartbeatDown in heartbeatDownList)
 				{
-					if (d.checkOverlapHotZone())
+					if (d.heartController == this.heartController && d.checkOverlapHotZone())
 					{
 						Global.soundController.heartbeatDown.play();
 						d.hit = true;
