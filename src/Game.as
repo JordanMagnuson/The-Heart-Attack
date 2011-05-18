@@ -23,7 +23,7 @@ package
 			
 			// Choose randomly who to put on top
 			//if (FP.random > 0.5)
-			if (false)
+			if (true)
 			{
 				trace('American on top');
 				add(Global.americanController = new AmericanController(true, Global.INPUT_KEY_TOP));
@@ -36,11 +36,20 @@ package
 				add(Global.americanController = new AmericanController(false, Global.INPUT_KEY_BOTTOM));
 			}	
 			Global.vietController.markedForPause = true;
+			//Global.americanController.markedForPause = true;
 			FP.world.add(new Tutorial(Global.americanController));
+			FP.world.add(new Tutorial(Global.vietController));
 		}
 		
 		override public function update():void
 		{
+			if (Global.americanController.photoController.finished && Global.phase == 0)
+			{
+				trace('game.as phase 0 trigger');
+				Global.phase++;
+				Global.americanController.endPhase();
+				Global.vietController.startNewPhase();
+			}
 			super.update();
 		}
 		

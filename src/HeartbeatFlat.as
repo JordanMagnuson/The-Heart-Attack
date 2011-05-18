@@ -41,6 +41,14 @@ package
 			y = heartController.y + FP.halfHeight / 2 + 2;
 		}
 		
+		public function updateLength():void
+		{
+			trace('HeartbeatFlat update length');
+			//image.scaleX = 2;
+			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
+			graphic = image;
+		}
+		
 		override public function update():void
 		{
 			if (direction)

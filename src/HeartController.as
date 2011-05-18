@@ -106,6 +106,23 @@ package
 			this.active = true;			
 		}
 		
+		public function updateSpeed(heartRate:Number, pulseSpeed:Number):void
+		{
+			this.heartRate = heartRate;
+			this.pulseSpeed = pulseSpeed;
+			
+			var flatHeartBeatsList:Array = [];
+			FP.world.getClass(HeartbeatFlat, flatHeartBeatsList);				
+			for each (var h:HeartbeatFlat in flatHeartBeatsList)
+			{
+				if (h.heartController == this)
+				{
+					trace('heartcontroller sending update length command');
+					h.updateLength();
+				}
+			}				
+		}
+		
 		public function loseHealth():void
 		{
 			health -= 0.1;

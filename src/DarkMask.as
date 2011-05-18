@@ -68,15 +68,17 @@ package
 			fadeTween.tween(fadeInDuration, Colors.WHITE, Colors.WHITE, 0, MAX_ALPHA);			
 		}
 		
-		public function fadeOut():void
+		public function fadeOut(duration:Number):void
 		{
+			trace('dark mask fade out');
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween);		
-			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as Image).alpha, 0);				
+			fadeTween.tween(duration, Colors.WHITE, Colors.WHITE, (graphic as Image).alpha, 0);				
 		}		
 		
 		public function destroy():void
 		{
+			trace('destroy dark mask');
 			FP.world.remove(this);
 		}		
 		

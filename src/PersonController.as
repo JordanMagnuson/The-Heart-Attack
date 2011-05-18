@@ -12,8 +12,8 @@ package
 	 */
 	public class PersonController extends Entity
 	{
-		public const ACTIVATE_DURATION:Number = 1 * FP.assignedFrameRate;
-		public const DEACTIVATE_DURATION:Number = 1 * FP.assignedFrameRate;
+		public const ACTIVATE_DURATION:Number = 3 * FP.assignedFrameRate;
+		public const DEACTIVATE_DURATION:Number = 3 * FP.assignedFrameRate;
 	
 		// Whether the person should be on top or bottom
 		public var isTop:Boolean;
@@ -58,6 +58,7 @@ package
 			if (markedForPause)
 			{
 				pause(true);
+				active = false;
 				markedForPause = false;
 			}
 			super.update();
@@ -75,8 +76,9 @@ package
 				heartController.deactivate();
 				photoController.deactivate();
 				personImage.deactivate();	
-				musicController.active = false;
+//				musicController.active = false;
 				paused = true;
+				active = false;
 			}
 		}
 		
@@ -90,9 +92,10 @@ package
 				heartController.activate();
 				photoController.activate();
 				personImage.activate();
-				musicController.active = true;
+//				musicController.active = true;
 				darkMask = null;
 				paused = false;	
+				active = true;
 			}
 		}
 		
@@ -103,14 +106,15 @@ package
 			inputController.active = true;
 			if (darkMask && !darkMask.fadeTween.active)
 			{	
-				trace('should be working');
+				trace('startNewPhase = alarm');
 				trace('active: ' + active);
 				var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, unpause);
 				addTween(newPhaseReadyAlarm, true);
-				darkMask.fadeOut();
+				darkMask.fadeOut(ACTIVATE_DURATION);
 			}
 			else
 			{
+				trace('startNewPhase = unpause');
 				unpause();
 			}
 		}
@@ -119,12 +123,12 @@ package
 		{
 			active = false;
 			inputController.active = false;
-			if (!darkMask && active)
+			if (!darkMask && !paused)
 			{
 				trace('ending phase');
 				phaseCounter++;
 				FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
-				musicController.fader.fadeTo(0, DEACTIVATE_DURATION);
+				musicController.fadeOut(DEACTIVATE_DURATION);
 				pause();
 			}
 		}

@@ -3,6 +3,7 @@ package
 	import net.flashpunk.Entity;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.utils.Input;
+	import net.flashpunk.FP;
 	
 	/**
 	 * ...
@@ -23,6 +24,12 @@ package
 				Global.americanController.pause();
 			else if (Input.pressed('R'))
 				Global.americanController.unpause();
+			else if (Input.pressed(Key.S))
+				Global.americanController.startNewPhase();
+			else if (Input.pressed(Key.F))
+			{
+				Global.americanController.endPhase();
+			}
 		}
 		
 	}

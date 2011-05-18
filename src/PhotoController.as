@@ -22,6 +22,7 @@ package
 		 */
 		public var photoArray:Array;
 		public var currentIndex:int = 0;
+		public var loop:Boolean = false;
 		public var finished:Boolean = false;
 		
 		public var currentPhoto:PhotoBackdrop;
@@ -31,12 +32,13 @@ package
 		
 		public var startAlarm:Alarm;
 		
-		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 5, startDelay:Number = 0) 
+		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 5, startDelay:Number = 0, loop:Boolean = false) 
 		{
 			super(x, y);
 			this.photoArray = photoArray;
 			this.startDelay = FP.assignedFrameRate * startDelay;
 			this.displayTime = FP.assignedFrameRate * displayTime;
+			this.loop = loop;
 			if (startDelay > 0)
 				startAlarm = new Alarm(this.startDelay, start);
 			nextPhotoAlarm = new Alarm(this.displayTime, nextPhoto);
@@ -86,16 +88,29 @@ package
 			lastPhoto = currentPhoto;
 			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y);
 			FP.world.add(currentPhoto);
-			if (lastPhoto)
-				lastPhoto.fadeOut();
-			if (currentIndex < photoArray.length - 1)
+			if (currentIndex < photoArray.length)
+			{
+				if (lastPhoto)
+					lastPhoto.fadeOut();				
 				currentIndex++;
+				nextPhotoAlarm.reset(displayTime);
+			}
 			else
 			{
 				finished = true;
-				currentIndex = 0;
+				if (loop)
+				{
+					currentIndex = 0;
+					nextPhotoAlarm.reset(displayTime);
+				}
 			}
-			nextPhotoAlarm.reset(displayTime);
+		}
+		
+		public function destroy():void
+		{
+			if (lastPhoto) FP.world.remove(lastPhoto);
+			if (currentPhoto) FP.world.remove(currentPhoto);
+			FP.world.remove(this);
 		}
 		
 	}

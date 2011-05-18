@@ -24,7 +24,7 @@ package
 		{			
 			if (Input.pressed(inputKeyString))
 			{
-				trace(inputKeyString + ' pressed');
+				//trace(inputKeyString + ' pressed');
 				//trace('input pressed');
 				var heartbeatUpList:Array = [];
 				world.getClass(HeartbeatUp, heartbeatUpList);

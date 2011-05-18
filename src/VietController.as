@@ -22,13 +22,23 @@ package
 		{
 			super(isTop, inputKey);
 			photoArray01 = new Array(Photos.X001, Photos.X002, Photos.X003, Photos.X010, Photos.X020, Photos.X030, Photos.X040, Photos.X050, Photos.X060, Photos.X070, Photos.X080, Photos.X090, Photos.X100, Photos.X105, Photos.X110);
+			//photoArray01 = new Array(Photos.X010, Photos.X020, Photos.X030);
 		}
 		
 		override public function added():void
 		{
 			trace('viet controller added');
 			super.added();
-			startNewPhase();
+			
+			FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
+			FP.world.add(photoController = new PhotoController(photoArray01, x, y, 10, 10));	// FIXME 10, 10
+			FP.world.add(musicController = new MusicController(Assets.MUS_VIET01));	
+			
+			var musicAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, phase01Music);
+			addTween(musicAlarm, true);
+			
+			var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
+			addTween(boyToManAlarm, true);				
 		}
 		
 		override public function update():void
@@ -42,16 +52,7 @@ package
 			super.startNewPhase();
 			switch (phaseCounter)
 			{
-				case 0:
-					FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
-					FP.world.add(photoController = new PhotoController(photoArray01, x, y, 10, 10));
-					FP.world.add(musicController = new MusicController(Assets.MUS_VIET01));	
-					
-					var musicAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, phase01Music);
-					addTween(musicAlarm, true);
-					
-					var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
-					addTween(boyToManAlarm, true);					
+				case 0:				
 					break;
 				default:
 					break;
@@ -64,8 +65,8 @@ package
 		public function phase01Music():void
 		{
 			trace('phase01music');
-			musicController.music.loop(0);
-			musicController.fader.fadeTo(1, 10 * FP.assignedFrameRate);
+			//musicController.music.loop(0);
+			//musicController.fadeIn(10 * FP.assignedFrameRate);
 			personImage.fadeIn(10 * FP.assignedFrameRate);
 		}
 		

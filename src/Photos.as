@@ -21,7 +21,23 @@ package
 		[Embed(source = '../assets/photos/american_01/110_4768007207_cb3a5f025f_o.jpg')] public static const A12:Class;
 		[Embed(source = '../assets/photos/american_01/120_3537048099_a0ba4aaac9_b.jpg')] public static const A13:Class;
 		[Embed(source = '../assets/photos/american_01/140_106217815_6500275fe8_o.jpg')] public static const A14:Class;
-		[Embed(source='../assets/photos/american_01/150_4628669767_a3d2c8d203_o.jpg')] public static const A15:Class;
+		[Embed(source = '../assets/photos/american_01/150_4628669767_a3d2c8d203_o.jpg')] public static const A15:Class;
+		
+		// American second set
+		[Embed(source = '../assets/photos/american_02/010_187499_885c65f512_b.jpg')] public static const B010:Class;
+		[Embed(source = '../assets/photos/american_02/020_ft-ord-3.jpg')] public static const B020:Class;
+		[Embed(source = '../assets/photos/american_02/030_boot-camp.jpg')] public static const B030:Class;
+		[Embed(source = '../assets/photos/american_02/040_ft-ord4.jpg')] public static const B040:Class;
+		[Embed(source = '../assets/photos/american_02/045_marching.jpg')] public static const B045:Class;
+		[Embed(source = '../assets/photos/american_02/050_Maint-Meetingsm.jpg')] public static const B050:Class;
+		[Embed(source = '../assets/photos/american_02/060_OH6-Kontum.jpg')] public static const B060:Class;
+		[Embed(source = '../assets/photos/american_02/070_scan0001.jpg')] public static const B070:Class;
+		[Embed(source = '../assets/photos/american_02/080_3370295297_558ebe6f8c_o.jpg')] public static const B080:Class;
+		[Embed(source = '../assets/photos/american_02/090_viet67.jpg')] public static const B090:Class;
+		[Embed(source = '../assets/photos/american_02/100_viet61.jpg')] public static const B100:Class;
+		[Embed(source = '../assets/photos/american_02/110_viet100.jpg')] public static const B110:Class;
+		[Embed(source = '../assets/photos/american_02/115_vietnam-1stAC.jpg')] public static const B115:Class;
+		[Embed(source='../assets/photos/american_02/120_viet98.jpg')] public static const B120:Class;
 		
 		// Viet first set
 		[Embed(source = '../assets/photos/viet_01/001_304334264_8cba67ad75_o.jpg')] public static const X001:Class;
