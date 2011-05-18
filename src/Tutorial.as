@@ -37,14 +37,14 @@ package
 				if (checkTutorialHotzone(h) && pauseCounter == 0)
 				{
 					pauseCounter++;
-					personController.deactivate(false);
+					personController.pause();
 					FP.world.add(text01 = new EntityFader(185, 20, new Image(Assets.TUT_TEXT_01)));	
 					text01.fadeIn();
 				}
 				else if (checkTutorialHotzone(h, Global.heartbeatUpWidth) && pauseCounter == 2)
 				{
 					pauseCounter++;
-					personController.deactivate(false);
+					personController.pause();
 					FP.world.add(text02 = new EntityFader(155, 140, new Image(Assets.TUT_TEXT_02)));	
 					text02.fadeIn();
 				}				
@@ -54,13 +54,13 @@ package
 			if (!personController.active && Input.pressed(personController.inputKey) && pauseCounter == 1)
 			{
 				pauseCounter++;
-				personController.activate();
+				personController.unpause();
 				text01.fadeOut();
 			}
 			else if (!personController.active && Input.released(personController.inputKey) && pauseCounter == 3)
 			{
 				pauseCounter++;
-				personController.activate();
+				personController.unpause();
 				text02.fadeOut();
 				FP.world.add(text03 = new EntityFader(155, 200, new Image(Assets.TUT_TEXT_03)));
 				addTween(text03Alarm, true);

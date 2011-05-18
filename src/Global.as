@@ -13,8 +13,8 @@ package
 		public static const FRAME_RATE:Number = 60;
 		public static const HOT_ZONE_WIDTH:Number = 20;
 		public static const HOT_ZONE_X:Number = 113;
-		public static const STARTING_HEART_RATE:Number = 180;
-		public static const STARTING_PULSE_SPEED:Number = 2;
+		public static const STARTING_HEART_RATE:Number = 98;	//180
+		public static const STARTING_PULSE_SPEED:Number = 2;	//2
 		public static const PULSE_COLOR_DEFAULT:uint = Colors.BLACK;
 		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;

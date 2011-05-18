@@ -28,6 +28,18 @@ package
 			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);					
 		}
 		
+		public function deactivate():void
+		{
+			image.active = false;
+			active = false;
+		}
+		
+		public function activate():void
+		{
+			image.active = true;
+			active = true;
+		}
+		
 		override public function added():void
 		{
 		}
