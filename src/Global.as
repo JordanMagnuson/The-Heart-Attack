@@ -22,6 +22,7 @@ package
 		// Variables
 		public static var heartbeatUpWidth;
 		public static var heartbeatDownWidth;
+		public static var phase;				// 1. American born, 2. Viet born, 3. American to war, 4. Both at war
 		
 		// Global entities
 		public static var cheater:Cheater;

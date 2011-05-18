@@ -3,6 +3,7 @@ package
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.tweens.misc.Alarm;
 	import net.flashpunk.utils.Input;
 	
 	/**
@@ -18,11 +19,13 @@ package
 		public var text01:EntityFader;
 		public var text02:EntityFader;
 		public var text03:EntityFader;
+		public var text03Alarm:Alarm;
 		
 		public function Tutorial(personController:PersonController) 
 		{
 			this.personController = personController;
 			this.direction = personController.direction;
+			text03Alarm = new Alarm(3 * FP.assignedFrameRate, fadeText03);
 		}
 		
 		override public function update():void
@@ -48,20 +51,26 @@ package
 			}
 			
 			// Check for right input pressed
-			if (!personController.activated && Input.pressed(personController.inputKey) && pauseCounter == 1)
+			if (!personController.active && Input.pressed(personController.inputKey) && pauseCounter == 1)
 			{
 				pauseCounter++;
 				personController.activate();
 				text01.fadeOut();
 			}
-			else if (!personController.activated && Input.released(personController.inputKey) && pauseCounter == 3)
+			else if (!personController.active && Input.released(personController.inputKey) && pauseCounter == 3)
 			{
 				pauseCounter++;
 				personController.activate();
 				text02.fadeOut();
 				FP.world.add(text03 = new EntityFader(155, 200, new Image(Assets.TUT_TEXT_03)));
+				addTween(text03Alarm, true);
 				text03.fadeIn();
 			}			
+		}
+		
+		public function fadeText03():void
+		{
+			text03.fadeOut(3 * FP.assignedFrameRate);
 		}
 		
 		public function checkTutorialHotzone(heartbeat:Heartbeat, distance:Number = 0):Boolean

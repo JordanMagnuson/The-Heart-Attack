@@ -16,6 +16,7 @@ package
 			super(x, y, image);
 			image.color = Global.PULSE_COLOR_DEFAULT;
 			image.scaleY = 2;
+			
 		}
 		
 		override public function added():void
@@ -37,7 +38,7 @@ package
 				x = FP.width + Global.heartbeatUpWidth + Global.heartbeatDownWidth;
 			else
 				x = 0 - Global.heartbeatUpWidth - Global.heartbeatDownWidth - image.scaledWidth;
-			y = heartController.y;
+			y = heartController.y + 2;
 		}
 		
 		override public function update():void

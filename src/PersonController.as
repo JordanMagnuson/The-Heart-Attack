@@ -24,10 +24,10 @@ package
 		public var inputKey:int;
 		public var inputController:InputController;
 		public var photoController:PhotoController;		
+		public var musicController:MusicController;
 		
-		// When not activated, the person's hearbeat etc. is paused
-		public var completeActivationAlarm:Alarm = new Alarm(ACTIVATE_DURATION, completeActivation);
-		public var activated:Boolean = true;		
+		// When not active, the person's hearbeat etc. is paused
+		public var completeActivationAlarm:Alarm = new Alarm(ACTIVATE_DURATION, completeActivation);	
 		public var darkMask:DarkMask;
 		
 		public function PersonController(isTop:Boolean, inputKey:int) 
@@ -59,16 +59,16 @@ package
 				trace('start activation');
 				darkMask.fadeOut();
 				addTween(completeActivationAlarm, true);
-				activated = true;
+				active = true;
 			}
-			else if (!activated)
+			else if (!active)
 			{
 				trace('start activation');
 				heartController.activate();
 				photoController.activate();
 				inputController.active = true;
 				darkMask = null;				
-				activated = true;
+				active = true;
 			}
 		}
 		
@@ -83,17 +83,18 @@ package
 		
 		public function deactivate(shouldFade:Boolean = true):void
 		{
-			if (!darkMask && activated)
+			if (!darkMask && active)
 			{
 				trace('deactivating');
 				if (shouldFade)
 				{
 					FP.world.add(darkMask = new DarkMask(x, y, DEACTIVATE_DURATION, ACTIVATE_DURATION));
+					musicController.fader.fadeTo(0, DEACTIVATE_DURATION);
 				}
-				this.heartController.deactivate();
-				this.photoController.deactivate();
-				this.inputController.active = false;
-				activated = false;
+				heartController.deactivate();
+				photoController.deactivate();
+				inputController.active = false;
+				active = false;
 			}
 		}
 		

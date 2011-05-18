@@ -34,15 +34,14 @@ package
 			super.update();
 		}		
 		
-		public function fadeIn(duration:Number = 1, maxAlpha:Number = 1):void
+		public function fadeIn(duration:Number = 60, maxAlpha:Number = 1):void
 		{
-			duration *= FP.assignedFrameRate;
 			fadeTween = new ColorTween();
 			addTween(fadeTween);		
 			fadeTween.tween(duration, 0xFFFFFFFF, 0xFFFFFFFF, 0, maxAlpha);			
 		}
 		
-		public function fadeOut(duration:Number = 1):void
+		public function fadeOut(duration:Number = 60):void
 		{
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween);		

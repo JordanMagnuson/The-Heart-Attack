@@ -23,7 +23,7 @@ package
 			add(new Ground);
 			add(Global.cheater = new Cheater);
 			add(Global.soundController = new SoundController);
-			add(Global.americanController = new AmericanController(true, Key.S));
+			add(Global.americanController = new AmericanController(true, Key.X));
 			
 		//	add(Global.photoController = new PhotoController);
 		}

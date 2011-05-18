@@ -20,7 +20,7 @@ package
 		override public function update():void
 		{
 			if (Input.pressed('P'))
-				Global.americanController.deactivate(false);
+				Global.americanController.deactivate(true);
 			else if (Input.pressed('R'))
 				Global.americanController.activate();
 		}

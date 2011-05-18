@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.Sfx;
+	import net.flashpunk.tweens.sound.SfxFader;
 	
 	/**
 	 * ...
