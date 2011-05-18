@@ -30,8 +30,9 @@ package
 		
 		public var startAlarm:Alarm;
 		
-		public function PhotoController(photoArray:Array, displayTime:Number = 5, startDelay:Number = 0) 
+		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 5, startDelay:Number = 0) 
 		{
+			super(x, y);
 			this.photoArray = photoArray;
 			this.startDelay = FP.assignedFrameRate * startDelay;
 			this.displayTime = FP.assignedFrameRate * displayTime;
@@ -42,7 +43,7 @@ package
 		
 		override public function added():void
 		{
-			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], false);
+			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, false);
 			FP.world.add(currentPhoto);
 			currentIndex++;			
 			if (startDelay > 0)
@@ -82,7 +83,7 @@ package
 		public function nextPhoto():void
 		{
 			lastPhoto = currentPhoto;
-			currentPhoto = new PhotoBackdrop(photoArray[currentIndex]);
+			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y);
 			FP.world.add(currentPhoto);
 			if (lastPhoto)
 				lastPhoto.fadeOut();

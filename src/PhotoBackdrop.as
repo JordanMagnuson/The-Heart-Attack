@@ -21,8 +21,9 @@ package
 		public var backdrop:Backdrop;
 		public var fadeTween:ColorTween;
 		
-		public function PhotoBackdrop(source:*, shouldFadeIn:Boolean = true) 
+		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true) 
 		{
+			super(x, y);
 			this.shouldFadeIn = shouldFadeIn;
 			backdrop = new Backdrop(source, false, false);
 			graphic = backdrop;

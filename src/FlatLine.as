@@ -24,7 +24,7 @@ package
 		
 		override public function added():void
 		{
-			y = heartController.y + 1;
+			y = heartController.y + FP.halfHeight / 2 + 1;
 		}
 		
 	}

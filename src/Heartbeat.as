@@ -46,7 +46,7 @@ package
 			// Adjust scale based on health
 			shrink();
 			
-			y = heartController.y;
+			y = heartController.y + FP.halfHeight / 2
 		}
 		
 		override public function update():void

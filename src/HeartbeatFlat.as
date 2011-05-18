@@ -38,7 +38,7 @@ package
 				x = FP.width + Global.heartbeatUpWidth + Global.heartbeatDownWidth;
 			else
 				x = 0 - Global.heartbeatUpWidth - Global.heartbeatDownWidth - image.scaledWidth;
-			y = heartController.y + 2;
+			y = heartController.y + FP.halfHeight / 2 + 2;
 		}
 		
 		override public function update():void

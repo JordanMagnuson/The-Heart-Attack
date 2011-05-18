@@ -32,8 +32,8 @@ package
 			switch (phaseCounter)
 			{
 				case 0:
-					FP.world.add(personImage = new BoyWalking(200, y + FP.halfHeight - 2, direction));
-					FP.world.add(photoController = new PhotoController(photoArray01, 10, 10));
+					FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
+					FP.world.add(photoController = new PhotoController(photoArray01, x, y, 10, 10));
 					FP.world.add(musicController = new MusicController(Assets.MUS_AMERICAN01));	
 					
 					var musicAlarm:Alarm = new Alarm(1 * FP.assignedFrameRate, phase01Music);

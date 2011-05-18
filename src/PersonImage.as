@@ -4,6 +4,7 @@ package
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.FP;
 	
 	/**
 	 * ...
@@ -25,7 +26,13 @@ package
 			image.originY = image.scaledHeight;
 			image.x = 0;
 			image.y = image.originY;	
-			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);					
+			setHitbox(image.scaledWidth, image.scaledHeight, image.originX, image.originY);	
+			
+			if (!direction)
+			{
+				image.flipped = true;
+				this.x = FP.width - x;
+			}
 		}
 		
 		public function deactivate():void

@@ -22,11 +22,11 @@ package
 		
 		public var beatAlarm:Alarm = new Alarm(heartRate, beat);
 		
-		public function HeartController(hotZoneX:Number, direction:Boolean = true) 
+		public function HeartController(x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
 		{
+			super(x, y);
 			this.direction = direction;
-			y = 100;
-			hotZone = new HotZone(hotZoneX, 0);
+			hotZone = new HotZone(hotZoneX, y);
 			heartRate = Global.STARTING_HEART_RATE;
 			pulseSpeed = Global.STARTING_PULSE_SPEED;
 		}
