@@ -20,14 +20,22 @@ package
 		
 		override public function added():void
 		{
-			beatLoop.loop();
+			fadeIn();
 			trace('beat loop length:' + beatLoop.length);
 			super.added();
 		}
 		
+		public function updateVolume(newVolume:Number = 1):void
+		{
+			beatLoop.volume = newVolume;
+		}
+		
 		public function fadeIn():void
 		{
-			
+			beatLoop.loop(0);
+			fader = new SfxFader(beatLoop);
+			fader.fadeTo(1, this.heartController.personController.ACTIVATE_DURATION);
+			addTween(fader, true);
 		}
 		
 		public function fadeOut():void

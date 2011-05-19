@@ -11,6 +11,7 @@ package
 	 */
 	public class HeartController extends Entity
 	{
+		public var personController:PersonController;
 		public var heartSoundController:HeartSoundController;
 		public var direction:Boolean;					// Controlls wither the heartbeat pulses travel left or right. True = left.
 		public var heartRate:Number;	// How frequently the heart beats.
@@ -24,9 +25,10 @@ package
 		
 		public var beatCount:int = 0;
 		
-		public function HeartController(x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
+		public function HeartController(personController:PersonController, x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
 		{
 			super(x, y);
+			this.personController = personController;
 			this.direction = direction;
 			hotZone = new HotZone(hotZoneX, y);
 			heartSoundController = new HeartSoundController(this);
@@ -91,6 +93,10 @@ package
 		
 		public function deactivate():void
 		{
+			// Stop sound
+			heartSoundController.active = false;
+			heartSoundController.beatLoop.stop();
+			
 			// Stop heartbeats moving
 			var heartBeats:Array = getHeartbeats();
 			for each (var h:Heartbeat in heartBeats)
@@ -104,6 +110,10 @@ package
 		
 		public function activate():void
 		{
+			// Resume sound
+			heartSoundController.active = true;
+			heartSoundController.beatLoop.resume();			
+			
 			// Start heartbeats moving
 			var heartBeats:Array = getHeartbeats();
 			for each (var h:Heartbeat in heartBeats)
@@ -135,6 +145,9 @@ package
 		public function loseHealth():void
 		{
 			health -= 0.1;
+			
+			// Update sound volume
+			heartSoundController.updateVolume(health);
 			
 			// Die
 			var heartbeatList:Array = getHeartbeats();			

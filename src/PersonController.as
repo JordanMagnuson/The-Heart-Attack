@@ -47,7 +47,7 @@ package
 		
 		override public function added():void
 		{
-			FP.world.add(heartController = new HeartController(x, y, hotZoneX, isTop));
+			FP.world.add(heartController = new HeartController(this, x, y, hotZoneX, isTop));
 			FP.world.add(inputController = new InputController(inputKey, heartController));
 			//FP.world.add(new Tutorial(this));
 		}
