@@ -33,15 +33,16 @@ package
 			this.direction = direction;
 			hotZone = new HotZone(hotZoneX, y);
 			heartSoundController = new HeartSoundController(this);
-			heartRate = Global.STARTING_HEART_RATE;
-			pulseSpeed = Global.STARTING_PULSE_SPEED;
+			heartRate = Global.HEART_RATE_01;
+			pulseSpeed = Global.PULSE_SPEED_01;
 		}
 		
 		override public function added():void
 		{
 			FP.world.add(hotZone);
 			addTween(beatAlarm);
-			beat();
+			if (!this.personController.markedForPause)
+				beat();
 			//addTween(beatAlarm, true);
 		}
 		
@@ -160,16 +161,16 @@ package
 			this.heartRate = heartRate;
 			this.pulseSpeed = pulseSpeed;
 			
-			var flatHeartBeatsList:Array = [];
-			FP.world.getClass(HeartbeatFlat, flatHeartBeatsList);				
-			for each (var h:HeartbeatFlat in flatHeartBeatsList)
-			{
-				if (h.heartController == this)
-				{
-					trace('heartcontroller sending update length command');
-					h.updateLength();
-				}
-			}				
+			//var flatHeartBeatsList:Array = [];
+			//FP.world.getClass(HeartbeatFlat, flatHeartBeatsList);				
+			//for each (var h:HeartbeatFlat in flatHeartBeatsList)
+			//{
+				//if (h.heartController == this)
+				//{
+					//trace('heartcontroller sending update length command');
+					//h.updateLength();
+				//}
+			//}				
 		}
 		
 		public function loseHealth():void

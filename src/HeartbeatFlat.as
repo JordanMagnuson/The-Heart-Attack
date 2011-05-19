@@ -31,7 +31,9 @@ package
 		
 		override public function reset():void
 		{
+			trace('heartbeatflat reset');
 			direction = heartController.direction;
+			trace('heartbeatflat direction: ' + direction);
 			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
 			//trace('line width: ' + image.scaledWidth);
 			if (direction)
@@ -57,6 +59,7 @@ package
 		{
 			if (!paused)
 			{			
+				//trace('heartbeatflat not paused');
 				if (direction)
 					x -= heartController.pulseSpeed;
 				else
@@ -64,7 +67,7 @@ package
 			}
 			
 			// Off screen
-			if (x < (0 - image.scaledWidth * 2) || x > (FP.width + image.scaledWidth * 2))
+			if (x < (0 - image.scaledWidth * 3) || x > (FP.width + image.scaledWidth * 2))
 			{
 				offscreenAction();
 			}

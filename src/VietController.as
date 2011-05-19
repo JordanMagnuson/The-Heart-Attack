@@ -31,14 +31,16 @@ package
 			super.added();
 			
 			FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
-			FP.world.add(photoController = new PhotoController(photoArray01, x, y, 10, 10));	// FIXME 10, 10
+			FP.world.add(photoController = new PhotoController(photoArray01, x, y, 5, 5));	// FIXME 10, 10
 			FP.world.add(musicController = new MusicController(Assets.MUS_VIET01));	
 			
-			var musicAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, phase01Music);
-			addTween(musicAlarm, true);
+			var boyAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, boyAppears);
+			addTween(boyAlarm, true);
 			
 			var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
 			addTween(boyToManAlarm, true);				
+			
+			heartController.updateSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
 		}
 		
 		override public function update():void
@@ -62,7 +64,7 @@ package
 		/**
 		 * Phase control alarm functions
 		 */
-		public function phase01Music():void
+		public function boyAppears():void
 		{
 			trace('phase01music');
 			//musicController.music.loop(0);

@@ -16,12 +16,16 @@ package
 		public static const HOT_ZONE_WIDTH:Number = 20;
 		public static const HOT_ZONE_X:Number = 113;
 		public static const PERSON_IMAGE_X:Number = 200;
-		public static const STARTING_HEART_RATE:Number = 61;	//184	//123	61
-		public static const STARTING_PULSE_SPEED:Number = 2;	//2
 		public static const HOT_ZONE_COLOR:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_DEFAULT:uint = Colors.BLACK;
 		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
+		
+		public static const HEART_RATE_01:Number = 123;	//183.5	//123	61
+		public static const PULSE_SPEED_01:Number = 2;	//2	
+		
+		public static const HEART_RATE_02:Number = 123;	//184	//123	61
+		public static const PULSE_SPEED_02:Number = 2;	//2	
 		
 		// Variables
 		public static var heartbeatUpWidth;

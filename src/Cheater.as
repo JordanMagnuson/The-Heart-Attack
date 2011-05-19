@@ -30,6 +30,11 @@ package
 				Global.americanController.fadeOut();				
 			else if (Input.pressed(Key.Y))
 				Global.americanController.heartController.heartSoundController.fadeOut();
+				
+			if (Input.pressed(Key.F12))
+			{
+				Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
+			}
 		}
 		
 	}

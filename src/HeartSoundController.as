@@ -24,13 +24,13 @@ package
 		{
 			//f
 			//fadeOut(180);
-			reset();
+			//reset();
 		}
 		
 		public function reset():void
 		{
-			delayAlarm = new Alarm(20, fadeIn);
-			addTween(delayAlarm, true);
+			//delayAlarm = new Alarm(20, fadeIn);
+			//addTween(delayAlarm, true);
 		}
 		
 		override public function update():void

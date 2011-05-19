@@ -35,7 +35,7 @@ package
 			
 			if (direction)
 			{
-				t01p = new Point(161, 31);
+				t01p = new Point(181, 31);
 				t02p = new Point(161, 147);
 				t03p = new Point(161, 212);
 			}
