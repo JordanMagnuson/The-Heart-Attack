@@ -24,12 +24,12 @@ package
 				Global.americanController.pause();
 			else if (Input.pressed('R'))
 				Global.americanController.unpause();
-			else if (Input.pressed(Key.S))
-				Global.americanController.startNewPhase();
-			else if (Input.pressed(Key.F))
-			{
-				Global.americanController.endPhase();
-			}
+			else if (Input.pressed(Key.I))
+				Global.americanController.fadeIn();
+			else if (Input.pressed(Key.O))
+				Global.americanController.fadeOut();				
+			else if (Input.pressed(Key.Y))
+				Global.americanController.heartController.heartSoundController.fadeOut();
 		}
 		
 	}

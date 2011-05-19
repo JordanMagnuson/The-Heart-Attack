@@ -20,9 +20,9 @@ package
 		public function AmericanController(isTop:Boolean, inputKey:int) 
 		{
 			super(isTop, inputKey);
-			photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
+			//photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
 			photoArray02 = new Array(Photos.A15, Photos.B010, Photos.B020, Photos.B030, Photos.B040, Photos.B045, Photos.B050, Photos.B060, Photos.B070, Photos.B080, Photos.B090, Photos.B100, Photos.B110, Photos.B115, Photos.B120);
-			//photoArray01 = new Array(Photos.A04, Photos.A05, Photos.A06);
+			photoArray01 = new Array(Photos.A04, Photos.A05);
 		}
 		
 		override public function added():void
@@ -47,15 +47,15 @@ package
 			super.update();
 		}
 		
-		override public function startNewPhase():void
+		override public function fadeIn():void
 		{
-			super.startNewPhase();
+			super.fadeIn();
 			switch (phaseCounter)
 			{
 				case 1:				
 					photoController.destroy();
 					FP.world.add(photoController = new PhotoController(photoArray02, x, y, 5, 5));
-					heartController.updateSpeed(120, 3);
+					heartController.updateSpeed(92, 2);
 					break;
 				default:
 					break;
@@ -63,10 +63,10 @@ package
 			phaseCounter++;
 		}
 		
-		override public function endPhase():void
+		override public function fadeOut():void
 		{
 			trace('american ending phase');
-			super.endPhase();
+			super.fadeOut();
 		}
 		
 		/**

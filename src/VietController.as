@@ -47,9 +47,9 @@ package
 			super.update();
 		}
 		
-		override public function startNewPhase():void
+		override public function fadeIn():void
 		{
-			super.startNewPhase();
+			super.fadeIn();
 			switch (phaseCounter)
 			{
 				case 0:				

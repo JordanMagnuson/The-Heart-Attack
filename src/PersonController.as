@@ -74,9 +74,8 @@ package
 					FP.world.add(darkMask = new DarkMask(x, y, false));
 				}
 				heartController.pause();
-				photoController.deactivate();
-				personImage.deactivate();	
-//				musicController.active = false;
+				photoController.pause();
+				personImage.pause();	
 				paused = true;
 				active = false;
 			}
@@ -88,27 +87,44 @@ package
 			{
 				trace('unpause');				
 				if (darkMask)
+				{
 					FP.world.remove(darkMask);		
+					darkMask = null;
+				}
 				heartController.unpause();
-				photoController.activate();
-				personImage.activate();
-//				musicController.active = true;
-				darkMask = null;
+				photoController.unpause();
+				personImage.unpause();
 				paused = false;	
 				active = true;
 			}
 		}
 		
-		public function startNewPhase():void
+		public function fadeOut():void
 		{
-			trace('start new phase');
-			active = true; 				// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
+			trace('person controller fading out');
+			inputController.active = false;
+			heartController.fadeOut(DEACTIVATE_DURATION);
+			personImage.pause();
+			phaseCounter++;
+			FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
+			var fadeOutCompleteAlarm:Alarm = new Alarm(DEACTIVATE_DURATION, fadeOutComplete);
+			addTween(fadeOutCompleteAlarm, true);			
+		}		
+		
+		public function fadeOutComplete():void
+		{
+			trace('fade out complete');
+			pause();
+		}
+		
+		public function fadeIn():void
+		{
+			trace('person controller fade in');
+			active = true; 									// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
 			inputController.active = true;
 			if (darkMask && !darkMask.fadeTween.active)
 			{	
-				trace('startNewPhase = alarm');
-				trace('active: ' + active);
-				var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, unpause);
+				var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, fadeInComplete);
 				addTween(newPhaseReadyAlarm, true);
 				darkMask.fadeOut(ACTIVATE_DURATION);
 			}
@@ -119,19 +135,11 @@ package
 			}
 		}
 		
-		public function endPhase():void
+		public function fadeInComplete():void
 		{
-			active = false;
-			inputController.active = false;
-			heartController.fadeOut(DEACTIVATE_DURATION);
-			if (!darkMask && !paused)
-			{
-				trace('ending phase');
-				phaseCounter++;
-				FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
-				musicController.fadeOut(DEACTIVATE_DURATION);
-				pause();
-			}
+			trace('fade in complete');
+			unpause();
+			heartController.reset();
 		}
 		
 	}

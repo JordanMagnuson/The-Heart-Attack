@@ -27,7 +27,7 @@ package
 			{
 				trace('American on top');
 				add(Global.americanController = new AmericanController(true, Global.INPUT_KEY_TOP));
-				add(Global.vietController = new VietController(false, Global.INPUT_KEY_BOTTOM));
+			//	add(Global.vietController = new VietController(false, Global.INPUT_KEY_BOTTOM));
 			}
 			else
 			{
@@ -35,9 +35,9 @@ package
 				add(Global.vietController = new VietController(true, Global.INPUT_KEY_TOP));
 				add(Global.americanController = new AmericanController(false, Global.INPUT_KEY_BOTTOM));
 			}	
-			Global.vietController.markedForPause = true;
+			//Global.vietController.markedForPause = true;
 			//Global.americanController.markedForPause = true;
-			FP.world.add(new Tutorial(Global.americanController));
+			//FP.world.add(new Tutorial(Global.americanController));
 			//FP.world.add(new Tutorial(Global.vietController));
 		}
 		
@@ -47,8 +47,8 @@ package
 			{
 				trace('game.as phase 0 trigger');
 				Global.phase++;
-				Global.americanController.endPhase();
-				Global.vietController.startNewPhase();
+				Global.americanController.fadeOut();
+				Global.vietController.fadeIn();
 			}
 			super.update();
 		}

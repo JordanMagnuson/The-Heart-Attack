@@ -48,6 +48,9 @@ package
 			hit = false;
 			missed = false;
 			image.color = Global.PULSE_COLOR_DEFAULT;
+			image.alpha = 1;
+			fading = false;
+			paused = false;
 			
 			// Adjust scale based on health
 			shrink();
@@ -57,6 +60,7 @@ package
 		
 		override public function update():void
 		{
+			//trace('heartbeat update');
 			if (!paused)
 			{
 				if (direction)

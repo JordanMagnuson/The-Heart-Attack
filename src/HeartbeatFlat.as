@@ -39,6 +39,10 @@ package
 			else
 				x = 0 - Global.heartbeatUpWidth - Global.heartbeatDownWidth - image.scaledWidth;
 			y = heartController.y + FP.halfHeight / 2 + 2;
+			
+			image.alpha = 1;
+			fading = false;
+			paused = false;			
 		}
 		
 		public function updateLength():void

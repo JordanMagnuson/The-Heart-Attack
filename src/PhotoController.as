@@ -59,14 +59,14 @@ package
 			}
 		}
 		
-		public function activate():void
+		public function unpause():void
 		{
 			if (lastPhoto) lastPhoto.active = true;
 			if (currentPhoto) currentPhoto.active = true;
 			this.active = true;		
 		}
 		
-		public function deactivate():void
+		public function pause():void
 		{
 			if (lastPhoto) lastPhoto.active = false;
 			if (currentPhoto) currentPhoto.active = false;

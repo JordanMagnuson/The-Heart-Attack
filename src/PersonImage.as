@@ -35,13 +35,13 @@ package
 			}
 		}
 		
-		public function deactivate():void
+		public function pause():void
 		{
 			image.active = false;
 			active = false;
 		}
 		
-		public function activate():void
+		public function unpause():void
 		{
 			image.active = true;
 			active = true;

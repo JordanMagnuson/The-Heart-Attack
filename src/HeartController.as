@@ -45,6 +45,14 @@ package
 			//addTween(beatAlarm, true);
 		}
 		
+		public function reset():void
+		{
+			trace('heartcontroller reset');
+			heartSoundController.reset();
+			beatCount = 0;
+			beat();
+		}
+		
 		override public function update():void
 		{
 			super.update();
@@ -95,6 +103,7 @@ package
 		public function pause():void
 		{
 			// Stop sound
+			//heartSoundController.active = false;
 			heartSoundController.beatLoop.stop();
 			
 			// Stop heartbeats moving
@@ -111,6 +120,7 @@ package
 		public function unpause():void
 		{
 			// Resume sound
+			//heartSoundController.active = true;
 			heartSoundController.beatLoop.resume();			
 			
 			// Start heartbeats moving
@@ -133,11 +143,16 @@ package
 			for each (var h:Heartbeat in heartBeats)
 			{
 				if (h.heartController == this)
+				{
+					h.pause();
 					h.fadeOut(duration);
+				}
 			}			
 			
 			// Fade sound controller
-			//heartSoundController.fadeOut()
+			heartSoundController.fadeOut()
+			
+			this.active = false					// Deactivate this controller, so that beatAlarm stops going
 		}
 		
 		public function updateSpeed(heartRate:Number, pulseSpeed:Number):void
