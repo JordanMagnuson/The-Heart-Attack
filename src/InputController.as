@@ -32,7 +32,7 @@ package
 				{
 					if (u.heartController == this.heartController && u.checkOverlapHotZone())
 					{
-						Global.soundController.heartbeatUp.play();
+						//Global.soundController.heartbeatUp.play();
 						u.hit = true;
 						u.image.color = Global.PULSE_COLOR_HIT;
 					}
@@ -47,7 +47,7 @@ package
 				{
 					if (d.heartController == this.heartController && d.checkOverlapHotZone())
 					{
-						Global.soundController.heartbeatDown.play();
+						//Global.soundController.heartbeatDown.play();
 						d.hit = true;
 						d.image.color = Global.PULSE_COLOR_HIT;
 					}

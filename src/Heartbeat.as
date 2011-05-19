@@ -61,14 +61,14 @@ package
 			{
 				missed = true;
 				image.color = Global.PULSE_COLOR_MISSED;
-				Global.soundController.missed.play(0.5);				
+				//Global.soundController.missed.play(0.5);				
 				heartController.loseHealth();
 			}
 			else if (!direction && (x > heartController.hotZone.x + Global.HOT_ZONE_WIDTH) && !hit && !missed)
 			{
 				missed = true;
 				image.color = Global.PULSE_COLOR_MISSED;
-				Global.soundController.missed.play(0.5);				
+				//Global.soundController.missed.play(0.5);				
 				heartController.loseHealth();
 			}			
 			

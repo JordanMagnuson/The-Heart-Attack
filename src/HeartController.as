@@ -11,7 +11,7 @@ package
 	 */
 	public class HeartController extends Entity
 	{
-		public var inputController:InputController;
+		public var heartSoundController:HeartSoundController;
 		public var direction:Boolean;					// Controlls wither the heartbeat pulses travel left or right. True = left.
 		public var heartRate:Number;	// How frequently the heart beats.
 		public var pulseSpeed:Number;			// Number of pixels the heartbeat images move forward every frame.
@@ -22,11 +22,14 @@ package
 		
 		public var beatAlarm:Alarm = new Alarm(heartRate, beat);
 		
+		public var beatCount:int = 0;
+		
 		public function HeartController(x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
 		{
 			super(x, y);
 			this.direction = direction;
 			hotZone = new HotZone(hotZoneX, y);
+			heartSoundController = new HeartSoundController(this);
 			heartRate = Global.STARTING_HEART_RATE;
 			pulseSpeed = Global.STARTING_PULSE_SPEED;
 		}
@@ -48,6 +51,11 @@ package
 		public function beat():void
 		{
 			trace('beat');
+			// Start sound on first beat
+			if (beatCount == 0)
+			{
+				FP.world.add(heartSoundController);
+			}
 			
 			// Heartbeat up
 			var u:HeartbeatUp = FP.world.create(HeartbeatUp) as HeartbeatUp;
@@ -64,6 +72,7 @@ package
 			f.heartController = this;
 			f.reset();					
 			
+			beatCount++;
 			beatAlarm.reset(heartRate);
 		}
 		
