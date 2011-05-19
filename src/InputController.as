@@ -32,7 +32,9 @@ package
 				{
 					if (u.heartController == this.heartController && u.checkOverlapHotZone())
 					{
-						Global.soundController.heartbeatFull.play();
+						if (!Global.CONSTANT_HEART_SOUND) 
+							Global.soundController.heartbeatFull.play();
+						//Global.soundController.heartbeatUp.play();
 						u.hit = true;
 						u.image.color = Global.PULSE_COLOR_HIT;
 					}

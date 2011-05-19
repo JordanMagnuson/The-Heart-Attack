@@ -22,15 +22,14 @@ package
 		
 		override public function added():void
 		{
-			//f
-			//fadeOut(180);
-			//reset();
+			if (Global.CONSTANT_HEART_SOUND)
+				reset();
 		}
 		
 		public function reset():void
 		{
-			//delayAlarm = new Alarm(20, fadeIn);
-			//addTween(delayAlarm, true);
+			delayAlarm = new Alarm(20, fadeIn);
+			addTween(delayAlarm, true);
 		}
 		
 		override public function update():void
@@ -41,15 +40,19 @@ package
 		
 		public function updateVolume(newVolume:Number = 1):void
 		{
-			//beatLoop.volume = newVolume;
+			if (Global.CONSTANT_HEART_SOUND)
+				beatLoop.volume = newVolume;
 		}
 		
 		public function fadeIn(duration:Number = 180):void
 		{
-			beatLoop.loop(0);
-			fader = new SfxFader(beatLoop);
-			fader.fadeTo(1, duration);
-			addTween(fader, true);
+			if (Global.CONSTANT_HEART_SOUND)
+			{
+				beatLoop.loop(0);
+				fader = new SfxFader(beatLoop);
+				fader.fadeTo(1, duration);
+				addTween(fader, true);
+			}
 		}
 		
 		public function fadeOut(duration:Number = 180):void

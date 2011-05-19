@@ -9,6 +9,8 @@ package
 	 */
 	public class Global 
 	{
+		public static const CONSTANT_HEART_SOUND:Boolean = false;	// FIX ME - get rid of before release
+		
 		// Constants
 		public static const FRAME_RATE:Number = 60;
 		public static const INPUT_KEY_TOP:int = Key.X;
@@ -21,11 +23,11 @@ package
 		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
-		public static const HEART_RATE_01:Number = 123;	//183.5	//123	61
-		public static const PULSE_SPEED_01:Number = 2;	//2	
+		public static const HEART_RATE_01A:Number = 183;	//183.5	//123	61
+		public static const PULSE_SPEED_01A:Number = 2;	//2	
 		
-		public static const HEART_RATE_02:Number = 123;	//184	//123	61
-		public static const PULSE_SPEED_02:Number = 2;	//2	
+		public static const HEART_RATE_01B:Number = 123;	//184	//123	61
+		public static const PULSE_SPEED_01B:Number = 2;	//2	
 		
 		// Variables
 		public static var heartbeatUpWidth;

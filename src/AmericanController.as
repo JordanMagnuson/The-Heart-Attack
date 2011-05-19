@@ -41,6 +41,8 @@ package
 			var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
 			addTween(boyToManAlarm, true);	
 			
+			//heartController.tweenHeartRate(Global.HEART_RATE_01B, 300);
+			
 			//heartController.beat();
 		}
 		

@@ -2,9 +2,14 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.Tween;
+	import net.flashpunk.Tweener;
 	import net.flashpunk.tweens.misc.Alarm;
 	import Math
 	import net.flashpunk.tweens.misc.ColorTween;
+	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.tweens.misc.VarTween;
+	import net.flashpunk.tweens.motion.LinearMotion;
 	
 	/**
 	 * ...
@@ -26,6 +31,9 @@ package
 		
 		public var beatCount:int = 0;
 		
+		public var heartRateTween:NumTween = new NumTween(finishedTweeningHeartRate);
+		public var tweening:Boolean = false;
+		
 		public function HeartController(personController:PersonController, x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
 		{
 			super(x, y);
@@ -33,8 +41,8 @@ package
 			this.direction = direction;
 			hotZone = new HotZone(hotZoneX, y);
 			heartSoundController = new HeartSoundController(this);
-			heartRate = Global.HEART_RATE_01;
-			pulseSpeed = Global.PULSE_SPEED_01;
+			heartRate = Global.HEART_RATE_01A;
+			pulseSpeed = Global.PULSE_SPEED_01A;
 		}
 		
 		override public function added():void
@@ -57,6 +65,12 @@ package
 		override public function update():void
 		{
 			super.update();
+			
+			if (tweening)
+			{
+				trace('heartcontroller tween value: ' + heartRateTween.value);
+				heartRate = heartRateTween.value;
+			}
 			//trace('heart controller updating');
 		}
 		
@@ -154,6 +168,19 @@ package
 			heartSoundController.fadeOut()
 			
 			this.active = false					// Deactivate this controller, so that beatAlarm stops going
+		}
+		
+		public function tweenHeartRate(targetHeartRate:Number, duration:Number):void
+		{
+			tweening = true;
+			heartRateTween.tween(heartRate, targetHeartRate, duration);
+			addTween(heartRateTween, true);
+		}
+		
+		public function finishedTweeningHeartRate():void
+		{
+			removeTween(heartRateTween)
+			tweening = false;
 		}
 		
 		public function updateSpeed(heartRate:Number, pulseSpeed:Number):void

@@ -91,6 +91,9 @@ package
 				FP.world.add(text03 = new EntityFader(t03p.x, t03p.y, new Image(Assets.TUT_TEXT_03)));
 				addTween(text03Alarm, true);
 				text03.fadeIn();
+				
+				// Tween heart rate up after tutorial finishes
+				//personController.heartController.tweenHeartRate(Global.HEART_RATE_01B, 10 * FP.assignedFrameRate);
 			}			
 		}
 		

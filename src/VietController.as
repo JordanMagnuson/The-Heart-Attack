@@ -40,7 +40,7 @@ package
 			var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
 			addTween(boyToManAlarm, true);				
 			
-			heartController.updateSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
+			//heartController.updateSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
 		}
 		
 		override public function update():void
