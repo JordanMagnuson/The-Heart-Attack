@@ -51,16 +51,23 @@ package
 		
 		override public function update():void
 		{
-			if (direction)
-				x -= heartController.pulseSpeed;
-			else
-				x += heartController.pulseSpeed;
+			if (!paused)
+			{			
+				if (direction)
+					x -= heartController.pulseSpeed;
+				else
+					x += heartController.pulseSpeed;
+			}
 			
 			// Off screen
 			if (x < (0 - image.scaledWidth * 2) || x > (FP.width + image.scaledWidth * 2))
 			{
 				offscreenAction();
 			}
+			
+			// Fade out?
+			if (fading)
+				image.alpha = fadeTween.alpha;			
 		}
 		
 	}

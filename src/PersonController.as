@@ -73,7 +73,7 @@ package
 				{
 					FP.world.add(darkMask = new DarkMask(x, y, false));
 				}
-				heartController.deactivate();
+				heartController.pause();
 				photoController.deactivate();
 				personImage.deactivate();	
 //				musicController.active = false;
@@ -89,7 +89,7 @@ package
 				trace('unpause');				
 				if (darkMask)
 					FP.world.remove(darkMask);		
-				heartController.activate();
+				heartController.unpause();
 				photoController.activate();
 				personImage.activate();
 //				musicController.active = true;
@@ -123,6 +123,7 @@ package
 		{
 			active = false;
 			inputController.active = false;
+			heartController.fadeOut(DEACTIVATE_DURATION);
 			if (!darkMask && !paused)
 			{
 				trace('ending phase');

@@ -4,6 +4,7 @@ package
 	import net.flashpunk.FP;
 	import net.flashpunk.tweens.misc.Alarm;
 	import Math
+	import net.flashpunk.tweens.misc.ColorTween;
 	
 	/**
 	 * ...
@@ -91,38 +92,52 @@ package
 			return myHeartbeats;	
 		}
 		
-		public function deactivate():void
+		public function pause():void
 		{
 			// Stop sound
-			heartSoundController.active = false;
 			heartSoundController.beatLoop.stop();
 			
 			// Stop heartbeats moving
 			var heartBeats:Array = getHeartbeats();
 			for each (var h:Heartbeat in heartBeats)
 			{
-				h.active = false;
+				h.pause();
 			}			
 			
-			// Deactivate controller
+			// Deactivate controller (so that the beat alarm stops)
 			this.active = false;
 		}
 		
-		public function activate():void
+		public function unpause():void
 		{
 			// Resume sound
-			heartSoundController.active = true;
 			heartSoundController.beatLoop.resume();			
 			
 			// Start heartbeats moving
 			var heartBeats:Array = getHeartbeats();
 			for each (var h:Heartbeat in heartBeats)
 			{
-				h.active = true;
+				h.unpause();
 			}			
 			
 			// Activate controller
 			this.active = true;			
+		}
+		
+		public function fadeOut(duration:Number):void
+		{
+			trace('heart controller fade out');
+			
+			// Fade beats
+			var heartBeats:Array = getHeartbeats();
+			for each (var h:Heartbeat in heartBeats)
+			{
+				if (h.heartController == this)
+					h.fadeOut(duration);
+			}			
+			
+			// Fade sound controller
+			//heartSoundController.fadeOut()
 		}
 		
 		public function updateSpeed(heartRate:Number, pulseSpeed:Number):void

@@ -4,6 +4,7 @@ package
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
+	import net.flashpunk.tweens.misc.ColorTween;
 	
 	/**
 	 * ...
@@ -16,6 +17,11 @@ package
 		public var image:Image;
 		public var hit:Boolean = false;
 		public var missed:Boolean = false;
+		
+		public var fading:Boolean = false;
+		public var fadeTween:ColorTween;
+		
+		public var paused:Boolean = false;
 		
 		public function Heartbeat(x:Number = 0, y:Number = 0, image:Image = null, direction:Boolean = true) 
 		{
@@ -51,10 +57,13 @@ package
 		
 		override public function update():void
 		{
-			if (direction)
-				x -= heartController.pulseSpeed;
-			else
-				x += heartController.pulseSpeed;
+			if (!paused)
+			{
+				if (direction)
+					x -= heartController.pulseSpeed;
+				else
+					x += heartController.pulseSpeed;
+			}
 			
 			// Missed
 			if (direction && (x + width < heartController.hotZone.x) && !hit && !missed)
@@ -78,7 +87,30 @@ package
 				offscreenAction();
 			}
 			
+			// Fade out?
+			if (fading)
+				image.alpha = fadeTween.alpha;
+			
 			super.update();
+		}
+		
+		public function pause():void
+		{
+			this.paused = true;
+		}
+		
+		public function unpause():void
+		{
+			this.paused = false;
+		}
+		
+		public function fadeOut(duration:Number):void
+		{
+			trace('heartbeat fade out');
+			fading = true;
+			fadeTween = new ColorTween(destroy);
+			addTween(fadeTween, true);
+			fadeTween.tween(duration, Colors.WHITE, Colors.WHITE, 1, 0);
 		}
 		
 		public function shrink():void
@@ -103,6 +135,11 @@ package
 		}
 		
 		public function offscreenAction():void
+		{
+			FP.world.recycle(this);
+		}
+		
+		public function destroy():void
 		{
 			FP.world.recycle(this);
 		}
