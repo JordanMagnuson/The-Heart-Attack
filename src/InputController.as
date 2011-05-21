@@ -37,23 +37,29 @@ package
 						//Global.soundController.heartbeatUp.play();
 						u.hit = true;
 						u.image.color = Global.PULSE_COLOR_HIT;
+												
+						if (Global.COMBINE_UP_DOWN_BEATS)
+							u.pairedHeartbeatDown.image.color = Global.PULSE_COLOR_HIT;							
 					}
 				}
 			}
 			else if (Input.released(inputKeyString))
 			{
-				//trace('input released');
-				var heartbeatDownList:Array = [];
-				world.getClass(HeartbeatDown, heartbeatDownList);
-				for each (var d:HeartbeatDown in heartbeatDownList)
+				if (!Global.COMBINE_UP_DOWN_BEATS)
 				{
-					if (d.heartController == this.heartController && d.checkOverlapHotZone())
+					//trace('input released');
+					var heartbeatDownList:Array = [];
+					world.getClass(HeartbeatDown, heartbeatDownList);
+					for each (var d:HeartbeatDown in heartbeatDownList)
 					{
-						//Global.soundController.heartbeatDown.play();
-						d.hit = true;
-						d.image.color = Global.PULSE_COLOR_HIT;
-					}
-				}				
+						if (d.heartController == this.heartController && d.checkOverlapHotZone())
+						{
+							//Global.soundController.heartbeatDown.play();
+							d.hit = true;
+							d.image.color = Global.PULSE_COLOR_HIT;
+						}
+					}	
+				}
 			}
 			
 			super.update();

@@ -92,6 +92,7 @@ package
 			var d:HeartbeatDown = FP.world.create(HeartbeatDown) as HeartbeatDown;
 			d.heartController = this;
 			d.reset();	
+			u.pairedHeartbeatDown = d;
 			
 			// Flat line between beats
 			var f:HeartbeatFlat = FP.world.create(HeartbeatFlat) as HeartbeatFlat;

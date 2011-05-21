@@ -30,7 +30,7 @@ package
 		public var photoArray:Array;
 		public var photoDisplayTime:Number;
 		public var newPhotoControllerAlarm:Alarm;
-		public var loopPhotos = false;
+		public var loopPhotos:Boolean = false;
 		
 		public var musicController:MusicController;
 		public var music:Sfx;

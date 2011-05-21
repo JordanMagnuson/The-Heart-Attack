@@ -67,23 +67,7 @@ package
 					x -= heartController.pulseSpeed;
 				else
 					x += heartController.pulseSpeed;
-			}
-			
-			// Missed
-			if (direction && (x + width < heartController.hotZone.x) && !hit && !missed)
-			{
-				missed = true;
-				image.color = Global.PULSE_COLOR_MISSED;
-				//Global.soundController.missed.play(0.5);				
-				heartController.loseHealth();
-			}
-			else if (!direction && (x > heartController.hotZone.x + Global.HOT_ZONE_WIDTH) && !hit && !missed)
-			{
-				missed = true;
-				image.color = Global.PULSE_COLOR_MISSED;
-				//Global.soundController.missed.play(0.5);				
-				heartController.loseHealth();
-			}			
+			}	
 			
 			// Off screen
 			else if (x < (0 - image.scaledWidth * 4) || x > (FP.width + image.scaledWidth * 4))
@@ -96,6 +80,18 @@ package
 				image.alpha = fadeTween.alpha;
 			
 			super.update();
+		}
+		
+		public function checkMissed():Boolean
+		{
+			if (hit || missed)
+				return false;
+			else if (direction && (x + width < heartController.hotZone.x))
+				return true;
+			else if (!direction && (x > heartController.hotZone.x + Global.HOT_ZONE_WIDTH))
+				return true;
+			else
+				return false;
 		}
 		
 		public function pause():void

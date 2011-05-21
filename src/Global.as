@@ -9,13 +9,15 @@ package
 	 */
 	public class Global 
 	{
+		// Gameplay Settings
 		public static const CONSTANT_HEART_SOUND:Boolean = false;	// FIX ME - get rid of before release
+		public static const COMBINE_UP_DOWN_BEATS:Boolean = true;
 		
 		// Constants
 		public static const FRAME_RATE:Number = 60;
 		public static const INPUT_KEY_TOP:int = Key.X;
 		public static const INPUT_KEY_BOTTOM:int = Key.M;
-		public static const HOT_ZONE_WIDTH:Number = 20;
+		public static const HOT_ZONE_WIDTH:Number = 40;
 		public static const HOT_ZONE_X:Number = 113;
 		public static const PERSON_IMAGE_X:Number = 200;
 		public static const HOT_ZONE_COLOR:uint = Colors.PLAINS_GREEN;
