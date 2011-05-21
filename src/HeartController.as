@@ -33,20 +33,20 @@ package
 		public var beatCount:int = 0;
 		
 		public var heartRateTween:NumTween = new NumTween(finishedTweeningHeartRate);
-		public var tweening:Boolean = false;
+		public var tweeningHeartRate:Boolean = false;
 		
 		public var pulseSpeedTween:NumTween = new NumTween(finishedTweeningPulseSpeed);
 		public var tweeningPulseSpeed:Boolean = false;
 		
-		public function HeartController(personController:PersonController, x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
+		public function HeartController(personController:PersonController, x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true, heartRate:Number = 120, pulseSpeed:Number = 2) 
 		{
 			super(x, y);
 			this.personController = personController;
 			this.direction = direction;
 			hotZone = new HotZone(hotZoneX, y, this);
 			heartSoundController = new HeartSoundController(this);
-			heartRate = Global.HEART_RATE_01A;
-			pulseSpeed = Global.PULSE_SPEED_01A;
+			this.heartRate = heartRate;
+			this.pulseSpeed = pulseSpeed;
 		}
 		
 		override public function added():void
@@ -61,7 +61,11 @@ package
 		public function reset():void
 		{
 			trace('heartcontroller reset');
+			trace('heart rate: ' + heartRate);
+			trace('pulse speed: ' + pulseSpeed);
 			heartSoundController.reset();
+			if (tweeningHeartRate) finishedTweeningHeartRate();
+			if (tweeningPulseSpeed) finishedTweeningPulseSpeed();
 			beatCount = 0;
 			lastFlatHeartbeat = null;
 			beat();
@@ -71,15 +75,15 @@ package
 		{
 			super.update();
 			
-			if (tweening)
+			if (tweeningHeartRate)
 			{
-				trace('heartcontroller tween value: ' + heartRateTween.value);
+				//trace('heartcontroller tween value: ' + heartRateTween.value);
 				heartRate = heartRateTween.value;
 			}
 			
 			if (tweeningPulseSpeed)
 			{
-				trace('heartcontroller pulseSpeedTween value: ' + pulseSpeedTween.value);
+				//trace('heartcontroller pulseSpeedTween value: ' + pulseSpeedTween.value);
 				pulseSpeed = pulseSpeedTween.value;				
 			}
 			//trace('heart controller updating');
@@ -87,7 +91,10 @@ package
 		
 		public function beat():void
 		{
-			trace('beat');
+			trace('heartcontroller beat');
+			trace('heartRate: ' + heartRate);
+			trace('pulseSpeed: ' + pulseSpeed);
+			//trace('beat');
 			// Start sound on first beat
 			if (Global.CONSTANT_HEART_SOUND && beatCount == 0)
 			{
@@ -188,7 +195,8 @@ package
 			
 			// Resume sound
 			//heartSoundController.active = true;
-			if (!heartSoundController.beatLoop.playing) heartSoundController.beatLoop.resume();			
+			if (Global.CONSTANT_HEART_SOUND)
+				if (!heartSoundController.beatLoop.playing) heartSoundController.beatLoop.resume();			
 			
 			// Start heartbeats moving
 			var heartBeats:Array = getHeartbeats();
@@ -222,7 +230,7 @@ package
 		public function tweenHeartRate(targetHeartRate:Number, duration:Number):void
 		{
 			trace('heartController.tweenHeartRate');
-			tweening = true;
+			tweeningHeartRate = true;
 			heartRateTween.tween(heartRate, targetHeartRate, duration);
 			addTween(heartRateTween, true);
 		}
@@ -230,7 +238,7 @@ package
 		public function finishedTweeningHeartRate():void
 		{
 			removeTween(heartRateTween)
-			tweening = false;
+			tweeningHeartRate = false;
 		}
 		
 		public function tweenPulseSpeed(targetPulseSpeed:Number, duration:Number):void
@@ -249,18 +257,7 @@ package
 		
 		public function setHeartRate(heartRate:Number):void
 		{
-			this.heartRate = heartRate;
-			
-			//var flatHeartBeatsList:Array = [];
-			//FP.world.getClass(HeartbeatFlat, flatHeartBeatsList);				
-			//for each (var h:HeartbeatFlat in flatHeartBeatsList)
-			//{
-				//if (h.heartController == this)
-				//{
-					//trace('heartcontroller sending update length command');
-					//h.updateLength();
-				//}
-			//}				
+			this.heartRate = heartRate;		
 		}
 		
 		public function loseHealth():void

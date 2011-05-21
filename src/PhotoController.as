@@ -91,7 +91,7 @@ package
 			lastPhoto = currentPhoto;
 			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y);
 			FP.world.add(currentPhoto);
-			if (currentIndex < photoArray.length)
+			if (currentIndex < photoArray.length - 1)
 			{
 				if (lastPhoto)
 					lastPhoto.fadeOut();				
@@ -113,6 +113,7 @@ package
 		
 		public function fadeOut():void
 		{
+			unpause();
 			if (lastPhoto) lastPhoto.fadeOut();
 			if (currentPhoto) currentPhoto.fadeOut();
 			FP.world.remove(this);			

@@ -28,7 +28,7 @@ package
 			{
 				missed = true;
 				image.color = Global.PULSE_COLOR_MISSED;
-				//Global.soundController.missed.play(0.5);				
+				Global.soundController.missed.play(heartController.health * 0.1);				
 				heartController.loseHealth();
 				
 				if (Global.COMBINE_UP_DOWN_BEATS)

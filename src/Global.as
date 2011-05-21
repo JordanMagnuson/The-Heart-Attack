@@ -21,16 +21,29 @@ package
 		public static const HOT_ZONE_X:Number = 113;
 		public static const PERSON_IMAGE_X:Number = 200;
 		public static const HOT_ZONE_COLOR_DEFAULT:uint = Colors.BLACK;
-		public static const HOT_ZONE_COLOR_ACTIVE:uint = Colors.WHITE;
+		public static const HOT_ZONE_COLOR_ACTIVE:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_DEFAULT:uint = Colors.BLACK;
-		public static const PULSE_COLOR_HIT:uint = Colors.WHITE;
+		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
-		public static const HEART_RATE_01A:Number = 120;	//183.5	//123	61
-		public static const PULSE_SPEED_01A:Number = 1;	//2	
+		// Constants - heart controller
+		public static const HEART_RATE_01:Number = 60;
+		public static const PULSE_SPEED_01:Number = 3;
 		
-		public static const HEART_RATE_01B:Number = 61;	//184	//123	61
-		public static const PULSE_SPEED_01B:Number = 2;	//2	
+		public static const HEART_RATE_02:Number = 90;
+		public static const PULSE_SPEED_02:Number = 2.7
+		
+		// Constants - photo controller
+		public static const PHOTO_DISPLAY_TIME_01:Number = 6 * FRAME_RATE;	// 7
+		public static const PHOTO_DISPLAY_TIME_02:Number = 5 * FRAME_RATE; 	// 5
+		public static const PHOTO_DISPLAY_TIME_03:Number = 2 * FRAME_RATE; 	// 3
+		
+		
+		
+		
+
+		//public static const HEART_RATE_01B:Number = 61;	//184	//123	61
+		//public static const PULSE_SPEED_01B:Number = 2;	//2	
 		
 		// Variables
 		public static var heartbeatUpWidth;

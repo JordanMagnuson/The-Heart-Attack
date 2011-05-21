@@ -35,7 +35,7 @@ package
 				add(Global.vietController = new VietController(true, Global.INPUT_KEY_TOP));
 				add(Global.americanController = new AmericanController(false, Global.INPUT_KEY_BOTTOM));
 			}	
-			//Global.vietController.markedForPause = true;
+			Global.vietController.markedForPause = true;
 			//Global.americanController.markedForPause = true;
 			//FP.world.add(new Tutorial(Global.americanController));
 			//FP.world.add(new Tutorial(Global.vietController));
@@ -43,9 +43,16 @@ package
 		
 		override public function update():void
 		{
+		//	trace(Global.phase);
 			switch (Global.phase)
 			{
 				case 0:
+					//if (Global.americanController.heartController.beatAlarm.percent <= 0.005)
+					//{
+						//Global.vietController.fadeIn();
+						//Global.phase++;
+					//}			
+					//break;
 				case 2:
 					if (Global.americanController.photoController.finished)
 					{
@@ -64,11 +71,21 @@ package
 					}			
 					break;
 				case 4:
-					if (Global.americanController.photoController.finished)
+					//if (Global.americanController.photoController.finished)
+					//{
+						//if (Global.americanController.heartController.beatAlarm.percent <= 0.5)
+						//{
+							//Global.vietController.fadeIn();
+							//Global.phase++;
+						//}
+					//}	
+					trace(Global.americanController.heartController.beatAlarm.percent);
+					if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
 					{
 						Global.vietController.fadeIn();
 						Global.phase++;
-					}						
+					}					
+					break;
 					
 				default:
 					break;

@@ -39,14 +39,13 @@ package
 			super.added();
 
 			photoArray = photoArray01;
-			photoDisplayTime = 7 * FP.assignedFrameRate;
+			photoDisplayTime = Global.PHOTO_DISPLAY_TIME_01;
 			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
 		
 		}
 		
 		override public function update():void
 		{
-			//trace('VietController updating');
 			super.update();
 		}
 		
@@ -56,13 +55,13 @@ package
 			trace('vietcontroller phase: ' + Global.phase);
 			switch (Global.phase)
 			{
-				case 3:				
-					photoDisplayTime = 5 * FP.assignedFrameRate;
+				case 2:				
+					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
 					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
-				case 5:
-					photoDisplayTime = 3 * FP.assignedFrameRate;
+				case 4:
+					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
 					loopPhotos = true;
 					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);

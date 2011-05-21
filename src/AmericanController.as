@@ -34,16 +34,18 @@ package
 			trace('american controller added');
 			super.added();
 			
-			//FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
-			
 			photoArray = photoArray01;
-			photoDisplayTime = 7 * FP.assignedFrameRate;
+			photoDisplayTime = Global.PHOTO_DISPLAY_TIME_01;
 			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
+			
+			//heartController.tweenHeartRate(Global.HEART_RATE_02, photoDisplayTime * photoArray.length);
+			//heartController.tweenPulseSpeed(Global.PULSE_SPEED_02, photoDisplayTime * photoArray.length);
 		}
 		
 		override public function update():void
 		{
-		//	trace('AmericanController updating');
+			//trace('AmericanController');
+			//trace('American beat alarm percent: ' + heartController.beatAlarm.percent);
 			super.update();
 		}
 		
@@ -53,13 +55,13 @@ package
 			trace('americancontroller phase: ' + Global.phase);
 			switch (Global.phase)
 			{
-				case 2:				
-					photoDisplayTime = 5 * FP.assignedFrameRate;
+				case 1:				
+					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
 					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
-				case 4:
-					photoDisplayTime = 3 * FP.assignedFrameRate;
+				case 3:
+					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
 					loopPhotos = true;
 					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);

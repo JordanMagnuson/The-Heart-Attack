@@ -32,7 +32,7 @@ package
 				Global.americanController.heartController.heartSoundController.fadeOut();
 				
 			if (Input.pressed(Key.F1))
-				Global.americanController.heartController.setHeartRate(Global.HEART_RATE_01B);		
+				//Global.americanController.heartController.setHeartRate(Global.HEART_RATE_01B);		
 				
 			if (Input.pressed(Key.F2))
 			{
@@ -42,47 +42,44 @@ package
 			
 			if (Input.pressed(Key.F4))
 			{
-				Global.americanController.heartController.tweenPulseSpeed(3, 5 * FP.assignedFrameRate);
-				Global.vietController.heartController.tweenPulseSpeed(3, 5 * FP.assignedFrameRate);
+				Global.americanController.heartController.tweenHeartRate(60, 5 * FP.assignedFrameRate);
+				Global.vietController.heartController.tweenHeartRate(60, 5 * FP.assignedFrameRate);				
+				//Global.americanController.heartController.tweenPulseSpeed(2, 5 * FP.assignedFrameRate);
+				//Global.vietController.heartController.tweenPulseSpeed(2, 5 * FP.assignedFrameRate);
 			}			
 			//if (Input.pressed(Key.F12))
 			//{
 				//Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
 			//}
 			
-			
-			switch (Global.phase)
+			if (Input.pressed(Key.F12))
 			{
-				case 0:
-				case 2:
-					if (Input.pressed(Key.F12))
-					{
+				trace('cheater phase: ' + Global.phase);
+				switch (Global.phase)
+				{
+					case 0:
+					case 2:
 						trace('cheater going to Viet');
-						Global.phase++;
 						Global.americanController.fadeOut();
 						Global.vietController.fadeIn();
-					}				
-					break;
-				case 1:
-				case 3:
-					if (Input.pressed(Key.F12))
-					{
+						Global.phase++;			
+						break;
+					case 1:
+					case 3:
 						trace('cheater going to American');
-						Global.phase++;
 						Global.vietController.fadeOut();
 						Global.americanController.fadeIn();
-					}			
-					break;
-				case 4:
-					if (Input.pressed(Key.F12))
-					{
+						Global.phase++;		
+						break;
+					case 4:
 						Global.vietController.fadeIn();
 						Global.phase++;
-					}	
-					break;
-				default:
-					break;
-			}			
+						break;
+					default:
+						break;
+				}					
+			}
+		
 		}
 		
 	}

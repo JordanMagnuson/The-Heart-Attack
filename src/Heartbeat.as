@@ -70,7 +70,7 @@ package
 			}	
 			
 			// Off screen
-			else if (x < (0 - image.scaledWidth * 4) || x > (FP.width + image.scaledWidth * 4))
+			if (x < (0 - image.scaledWidth * 4) || x > (FP.width + image.scaledWidth * 4))
 			{
 				offscreenAction();
 			}
@@ -136,6 +136,7 @@ package
 		
 		public function offscreenAction():void
 		{
+			trace('heart beat offscreen action');
 			FP.world.recycle(this);
 		}
 		
