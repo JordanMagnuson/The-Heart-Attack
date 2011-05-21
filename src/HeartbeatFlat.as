@@ -34,7 +34,7 @@ package
 			//trace('heartbeatflat reset');
 			direction = heartController.direction;
 			//trace('heartbeatflat direction: ' + direction);
-			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
+			image.scaleX = FP.width;
 			//trace('line width: ' + image.scaledWidth);
 			if (direction)
 				x = FP.width + Global.heartbeatUpWidth + Global.heartbeatDownWidth;
@@ -51,8 +51,15 @@ package
 		{
 			//trace('HeartbeatFlat update length');
 			//image.scaleX = 2;
-			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
-			graphic = image;
+			//image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
+			if (direction)
+				image.scaleX = (FP.width - x);
+			else
+			{
+				image.scaleX = (FP.width + x);
+				x = 0;
+			}
+			//graphic = image;
 		}
 		
 		override public function update():void

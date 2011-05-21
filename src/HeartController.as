@@ -22,6 +22,7 @@ package
 		public var direction:Boolean;					// Controlls wither the heartbeat pulses travel left or right. True = left.
 		public var heartRate:Number;	// How frequently the heart beats.
 		public var pulseSpeed:Number;			// Number of pixels the heartbeat images move forward every frame.
+		public var lastFlatHeartbeat:HeartbeatFlat = null;
 		
 		public var health:Number = 1;							// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
 		
@@ -33,6 +34,9 @@ package
 		
 		public var heartRateTween:NumTween = new NumTween(finishedTweeningHeartRate);
 		public var tweening:Boolean = false;
+		
+		public var pulseSpeedTween:NumTween = new NumTween(finishedTweeningPulseSpeed);
+		public var tweeningPulseSpeed:Boolean = false;
 		
 		public function HeartController(personController:PersonController, x:Number = 0, y:Number = 0, hotZoneX:Number = 100, direction:Boolean = true) 
 		{
@@ -59,6 +63,7 @@ package
 			trace('heartcontroller reset');
 			heartSoundController.reset();
 			beatCount = 0;
+			lastFlatHeartbeat = null;
 			beat();
 		}
 		
@@ -71,6 +76,12 @@ package
 				trace('heartcontroller tween value: ' + heartRateTween.value);
 				heartRate = heartRateTween.value;
 			}
+			
+			if (tweeningPulseSpeed)
+			{
+				trace('heartcontroller pulseSpeedTween value: ' + pulseSpeedTween.value);
+				pulseSpeed = pulseSpeedTween.value;				
+			}
 			//trace('heart controller updating');
 		}
 		
@@ -78,9 +89,15 @@ package
 		{
 			trace('beat');
 			// Start sound on first beat
-			if (beatCount == 0)
+			if (Global.CONSTANT_HEART_SOUND && beatCount == 0)
 			{
 				FP.world.add(heartSoundController);
+			}
+			
+			// Update the length of last flat heart beat to meet current up beat
+			if (lastFlatHeartbeat)
+			{
+				lastFlatHeartbeat.updateLength();
 			}
 			
 			// Heartbeat up
@@ -97,7 +114,8 @@ package
 			// Flat line between beats
 			var f:HeartbeatFlat = FP.world.create(HeartbeatFlat) as HeartbeatFlat;
 			f.heartController = this;
-			f.reset();					
+			f.reset();				
+			lastFlatHeartbeat = f;
 			
 			beatCount++;
 			beatAlarm.reset(heartRate);
@@ -214,6 +232,20 @@ package
 			removeTween(heartRateTween)
 			tweening = false;
 		}
+		
+		public function tweenPulseSpeed(targetPulseSpeed:Number, duration:Number):void
+		{
+			trace('heartController.tweenPulseSpeed');
+			tweeningPulseSpeed = true;
+			pulseSpeedTween.tween(pulseSpeed, targetPulseSpeed, duration);
+			addTween(pulseSpeedTween, true);
+		}
+		
+		public function finishedTweeningPulseSpeed():void
+		{
+			removeTween(pulseSpeedTween)
+			tweeningPulseSpeed = false;
+		}		
 		
 		public function setHeartRate(heartRate:Number):void
 		{

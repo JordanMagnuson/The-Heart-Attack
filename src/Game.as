@@ -35,7 +35,7 @@ package
 				add(Global.vietController = new VietController(true, Global.INPUT_KEY_TOP));
 				add(Global.americanController = new AmericanController(false, Global.INPUT_KEY_BOTTOM));
 			}	
-			Global.vietController.markedForPause = true;
+			//Global.vietController.markedForPause = true;
 			//Global.americanController.markedForPause = true;
 			//FP.world.add(new Tutorial(Global.americanController));
 			//FP.world.add(new Tutorial(Global.vietController));

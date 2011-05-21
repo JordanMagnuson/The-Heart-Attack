@@ -39,6 +39,12 @@ package
 				Global.americanController.heartController.tweenHeartRate(61, 1200);
 				Global.vietController.heartController.tweenHeartRate(61, 1200);
 			}
+			
+			if (Input.pressed(Key.F4))
+			{
+				Global.americanController.heartController.tweenPulseSpeed(3, 5 * FP.assignedFrameRate);
+				Global.vietController.heartController.tweenPulseSpeed(3, 5 * FP.assignedFrameRate);
+			}			
 			//if (Input.pressed(Key.F12))
 			//{
 				//Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
