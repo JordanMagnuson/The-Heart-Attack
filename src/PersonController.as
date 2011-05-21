@@ -51,7 +51,7 @@ package
 			this.direction = isTop;
 			if (!isTop) y = FP.halfHeight;
 			if (isTop) hotZoneX = Global.HOT_ZONE_X;
-			else hotZoneX = FP.width - Global.HOT_ZONE_X;	
+			else hotZoneX = FP.width - Global.HOT_ZONE_X - Global.HOT_ZONE_WIDTH;	
 		}
 		
 		override public function added():void

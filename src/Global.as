@@ -17,12 +17,13 @@ package
 		public static const FRAME_RATE:Number = 60;
 		public static const INPUT_KEY_TOP:int = Key.X;
 		public static const INPUT_KEY_BOTTOM:int = Key.M;
-		public static const HOT_ZONE_WIDTH:Number = 40;
+		public static const HOT_ZONE_WIDTH:Number = 60;
 		public static const HOT_ZONE_X:Number = 113;
 		public static const PERSON_IMAGE_X:Number = 200;
-		public static const HOT_ZONE_COLOR:uint = Colors.PLAINS_GREEN;
+		public static const HOT_ZONE_COLOR_DEFAULT:uint = Colors.BLACK;
+		public static const HOT_ZONE_COLOR_ACTIVE:uint = Colors.WHITE;
 		public static const PULSE_COLOR_DEFAULT:uint = Colors.BLACK;
-		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
+		public static const PULSE_COLOR_HIT:uint = Colors.WHITE;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		public static const HEART_RATE_01A:Number = 120;	//183.5	//123	61

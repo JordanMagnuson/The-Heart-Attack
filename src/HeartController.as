@@ -39,7 +39,7 @@ package
 			super(x, y);
 			this.personController = personController;
 			this.direction = direction;
-			hotZone = new HotZone(hotZoneX, y);
+			hotZone = new HotZone(hotZoneX, y, this);
 			heartSoundController = new HeartSoundController(this);
 			heartRate = Global.HEART_RATE_01A;
 			pulseSpeed = Global.PULSE_SPEED_01A;
@@ -103,16 +103,46 @@ package
 			beatAlarm.reset(heartRate);
 		}
 		
-		public function getHeartbeats():Array
+		public function getHeartbeats(upBeats:Boolean = true, downBeats:Boolean = true, flatBeats:Boolean = true):Array
 		{
-			var heartbeatList:Array = [];
-			var myHeartbeats:Array = [];
-			FP.world.getClass(Heartbeat, heartbeatList);				
-			for each (var h:Heartbeat in heartbeatList)
+			var myHeartbeats:Array = [];	
+			
+			// up beats
+			if (upBeats)
 			{
-				if (h.heartController == this)
-					myHeartbeats.push(h);
-			}	
+				var heartbeatUpList:Array = [];
+				FP.world.getClass(HeartbeatUp, heartbeatUpList);				
+				for each (var u:HeartbeatUp in heartbeatUpList)
+				{
+					if (u.heartController == this)
+						myHeartbeats.push(u);
+				}	
+			}
+			
+			// down beats
+			if (downBeats)
+			{
+				var heartbeatDownList:Array = [];
+				FP.world.getClass(HeartbeatDown, heartbeatDownList);
+				for each (var d:HeartbeatDown in heartbeatDownList)
+				{
+					if (d.heartController == this)
+						myHeartbeats.push(d);
+				}	
+			}
+			
+			// flat beats
+			if (flatBeats)
+			{
+				var heartbeatFlatList:Array = [];
+				FP.world.getClass(HeartbeatFlat, heartbeatFlatList);				
+				for each (var f:HeartbeatFlat in heartbeatFlatList)
+				{
+					if (f.heartController == this)
+						myHeartbeats.push(f);
+				}	
+			}			
+			
 			return myHeartbeats;	
 		}
 		
