@@ -31,9 +31,9 @@ package
 		
 		override public function reset():void
 		{
-			trace('heartbeatflat reset');
+			//trace('heartbeatflat reset');
 			direction = heartController.direction;
-			trace('heartbeatflat direction: ' + direction);
+			//trace('heartbeatflat direction: ' + direction);
 			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
 			//trace('line width: ' + image.scaledWidth);
 			if (direction)
@@ -49,7 +49,7 @@ package
 		
 		public function updateLength():void
 		{
-			trace('HeartbeatFlat update length');
+			//trace('HeartbeatFlat update length');
 			//image.scaleX = 2;
 			image.scaleX = (heartController.pulseSpeed * heartController.heartRate) - Global.heartbeatUpWidth - Global.heartbeatDownWidth;
 			graphic = image;

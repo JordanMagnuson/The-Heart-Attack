@@ -134,9 +134,12 @@ package
 		
 		public function unpause():void
 		{
+			// Activate controller	
+			this.active = true;
+			
 			// Resume sound
 			//heartSoundController.active = true;
-			heartSoundController.beatLoop.resume();			
+			if (!heartSoundController.beatLoop.playing) heartSoundController.beatLoop.resume();			
 			
 			// Start heartbeats moving
 			var heartBeats:Array = getHeartbeats();
@@ -144,9 +147,6 @@ package
 			{
 				h.unpause();
 			}			
-			
-			// Activate controller
-			this.active = true;			
 		}
 		
 		public function fadeOut(duration:Number):void
@@ -172,6 +172,7 @@ package
 		
 		public function tweenHeartRate(targetHeartRate:Number, duration:Number):void
 		{
+			trace('heartController.tweenHeartRate');
 			tweening = true;
 			heartRateTween.tween(heartRate, targetHeartRate, duration);
 			addTween(heartRateTween, true);
@@ -183,10 +184,9 @@ package
 			tweening = false;
 		}
 		
-		public function updateSpeed(heartRate:Number, pulseSpeed:Number):void
+		public function setHeartRate(heartRate:Number):void
 		{
 			this.heartRate = heartRate;
-			this.pulseSpeed = pulseSpeed;
 			
 			//var flatHeartBeatsList:Array = [];
 			//FP.world.getClass(HeartbeatFlat, flatHeartBeatsList);				

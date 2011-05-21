@@ -16,14 +16,17 @@ package
 		
 		public var photoArray01:Array;
 		public var photoArray02:Array;
+		public var photoArray03:Array;
 		
 		public function AmericanController(isTop:Boolean, inputKey:int) 
 		{
 			super(isTop, inputKey);
 			photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
-			photoArray02 = new Array(Photos.A15, Photos.B010, Photos.B020, Photos.B030, Photos.B040, Photos.B045, Photos.B050, Photos.B060, Photos.B070, Photos.B080, Photos.B090, Photos.B100, Photos.B110, Photos.B115, Photos.B120);
+			photoArray02 = new Array(Photos.B010, Photos.B020, Photos.B030, Photos.B040, Photos.B045, Photos.B050, Photos.B060, Photos.B070, Photos.B080, Photos.B090, Photos.B100, Photos.B110, Photos.B115, Photos.B120);
+			photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020, Photos.Z025, Photos.Z030, Photos.Z040, Photos.Z045, Photos.Z050, Photos.Z060, Photos.Z070, Photos.Z090, Photos.Z100, Photos.Z110, Photos.Z115, Photos.Z120, Photos.Z130, Photos.Z140);
 			
-			//photoArray01 = new Array(Photos.A04, Photos.A05);	// FIX ME - DELETE
+			//photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03);	// FIX ME - DELETE
+			//photoArray02 = new Array(Photos.A03, Photos.A15, Photos.B010);	// FIX ME - DELETE
 		}
 		
 		override public function added():void
@@ -31,19 +34,11 @@ package
 			trace('american controller added');
 			super.added();
 			
-			FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
-			FP.world.add(photoController = new PhotoController(photoArray01, x, y, 5, 5));	// FIX ME 10, 10
-			//FP.world.add(musicController = new MusicController(Assets.MUS_AMERICAN01));	
+			//FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
 			
-			var boyAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, boyAppears);
-			addTween(boyAlarm, true);
-			
-			var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
-			addTween(boyToManAlarm, true);	
-			
-			//heartController.tweenHeartRate(Global.HEART_RATE_01B, 300);
-			
-			//heartController.beat();
+			photoArray = photoArray01;
+			photoDisplayTime = 7 * FP.assignedFrameRate;
+			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
 		}
 		
 		override public function update():void
@@ -55,17 +50,23 @@ package
 		override public function fadeIn():void
 		{
 			super.fadeIn();
-			switch (phaseCounter)
+			trace('americancontroller phase: ' + Global.phase);
+			switch (Global.phase)
 			{
-				case 1:				
-					photoController.destroy();
-					FP.world.add(photoController = new PhotoController(photoArray02, x, y, 5, 5));
-					heartController.updateSpeed(92, 2);
+				case 2:				
+					photoDisplayTime = 5 * FP.assignedFrameRate;
+					photoArray = photoArray02;
+					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
+					break;
+				case 4:
+					photoDisplayTime = 3 * FP.assignedFrameRate;
+					photoArray = photoArray03;
+					loopPhotos = true;
+					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
 				default:
 					break;
 			}
-			phaseCounter++;
 		}
 		
 		override public function fadeOut():void

@@ -37,26 +37,43 @@ package
 			}	
 			Global.vietController.markedForPause = true;
 			//Global.americanController.markedForPause = true;
-			FP.world.add(new Tutorial(Global.americanController));
-			FP.world.add(new Tutorial(Global.vietController));
+			//FP.world.add(new Tutorial(Global.americanController));
+			//FP.world.add(new Tutorial(Global.vietController));
 		}
 		
 		override public function update():void
 		{
-			if (Global.americanController.photoController.finished && Global.phase == 0)
+			switch (Global.phase)
 			{
-				trace('game.as phase 0 trigger');
-				Global.phase++;
-				Global.americanController.fadeOut();
-				Global.vietController.fadeIn();
+				case 0:
+				case 2:
+					if (Global.americanController.photoController.finished)
+					{
+						Global.americanController.fadeOut();
+						Global.vietController.fadeIn();
+						Global.phase++;
+					}				
+					break;
+				case 1:
+				case 3:
+					if (Global.vietController.photoController.finished)
+					{
+						Global.vietController.fadeOut();
+						Global.americanController.fadeIn();
+						Global.phase++;
+					}			
+					break;
+				case 4:
+					if (Global.americanController.photoController.finished)
+					{
+						Global.vietController.fadeIn();
+						Global.phase++;
+					}						
+					
+				default:
+					break;
 			}
-			if (Global.vietController.photoController.finished && Global.phase == 1)
-			{
-				trace('game.as phase 1 trigger');
-				Global.phase++;
-				Global.vietController.fadeOut();
-				Global.americanController.fadeIn();
-			}			
+			
 			super.update();
 		}
 		

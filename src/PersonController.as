@@ -20,20 +20,29 @@ package
 		public var direction:Boolean;
 		
 		// Controllers for this person
-		public var hotZoneX:Number;
 		public var heartController:HeartController;
-		public var inputKey:int;
+		public var hotZoneX:Number;
+		
 		public var inputController:InputController;
-		public var photoController:PhotoController;		
+		public var inputKey:int;
+		
+		public var photoController:PhotoController;	
+		public var photoArray:Array;
+		public var photoDisplayTime:Number;
+		public var newPhotoControllerAlarm:Alarm;
+		public var loopPhotos = false;
+		
 		public var musicController:MusicController;
-		public var personImage:PersonImage;
 		public var music:Sfx;
+		
+		public var personImage:PersonImage;
+		
 		
 		// When not active, the person's hearbeat etc. is paused
 		public var paused:Boolean = false;
 		public var markedForPause:Boolean = false;
-		public var phaseCounter:int = 0;
 		public var darkMask:DarkMask;
+		
 		
 		public function PersonController(isTop:Boolean, inputKey:int) 
 		{
@@ -75,7 +84,7 @@ package
 				}
 				heartController.pause();
 				photoController.pause();
-				personImage.pause();	
+				if (personImage) personImage.pause();	
 				paused = true;
 				active = false;
 			}
@@ -93,7 +102,7 @@ package
 				}
 				heartController.unpause();
 				photoController.unpause();
-				personImage.unpause();
+				if (personImage) personImage.unpause();
 				paused = false;	
 				active = true;
 			}
@@ -104,8 +113,7 @@ package
 			trace('person controller fading out');
 			inputController.active = false;
 			heartController.fadeOut(DEACTIVATE_DURATION);
-			personImage.pause();
-			phaseCounter++;
+			if (personImage) personImage.pause();
 			FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
 			var fadeOutCompleteAlarm:Alarm = new Alarm(DEACTIVATE_DURATION, fadeOutComplete);
 			addTween(fadeOutCompleteAlarm, true);			
@@ -122,11 +130,14 @@ package
 			trace('person controller fade in');
 			active = true; 									// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
 			inputController.active = true;
-			if (darkMask && !darkMask.fadeTween.active)
+			if (darkMask)
 			{	
-				var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, fadeInComplete);
-				addTween(newPhaseReadyAlarm, true);
-				darkMask.fadeOut(ACTIVATE_DURATION);
+				if (!darkMask.fadeTween.active)
+				{
+					var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, fadeInComplete);
+					addTween(newPhaseReadyAlarm, true);
+					darkMask.fadeOut(ACTIVATE_DURATION);
+				}
 			}
 			else
 			{
@@ -140,6 +151,12 @@ package
 			trace('fade in complete');
 			unpause();
 			heartController.reset();
+		}
+		
+		public function replacePhotoController():void
+		{
+				photoController.fadeOut();
+				FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, 0, loopPhotos));			
 		}
 		
 	}

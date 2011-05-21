@@ -32,12 +32,15 @@ package
 		
 		public var startAlarm:Alarm;
 		
-		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 5, startDelay:Number = 0, loop:Boolean = false) 
+		public var fadeIn:Boolean;
+		
+		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 300, startDelay:Number = 0, loop:Boolean = false, fadeIn:Boolean = true) 
 		{
 			super(x, y);
+			this.fadeIn = fadeIn;
 			this.photoArray = photoArray;
-			this.startDelay = FP.assignedFrameRate * startDelay;
-			this.displayTime = FP.assignedFrameRate * displayTime;
+			this.startDelay = startDelay;
+			this.displayTime = displayTime;
 			this.loop = loop;
 			if (startDelay > 0)
 				startAlarm = new Alarm(this.startDelay, start);
@@ -46,7 +49,7 @@ package
 		
 		override public function added():void
 		{
-			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, false);
+			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, this.fadeIn);
 			FP.world.add(currentPhoto);
 			currentIndex++;			
 			if (startDelay > 0)
@@ -100,10 +103,19 @@ package
 				finished = true;
 				if (loop)
 				{
+					if (lastPhoto)
+						lastPhoto.fadeOut();						
 					currentIndex = 0;
 					nextPhotoAlarm.reset(displayTime);
 				}
 			}
+		}
+		
+		public function fadeOut():void
+		{
+			if (lastPhoto) lastPhoto.fadeOut();
+			if (currentPhoto) currentPhoto.fadeOut();
+			FP.world.remove(this);			
 		}
 		
 		public function destroy():void

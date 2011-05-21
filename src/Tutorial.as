@@ -92,8 +92,9 @@ package
 				addTween(text03Alarm, true);
 				text03.fadeIn();
 				
-				// Tween heart rate up after tutorial finishes
-				//personController.heartController.tweenHeartRate(Global.HEART_RATE_01B, 10 * FP.assignedFrameRate);
+				// Tween heart rate up after tutorial finishesce
+				//if (!Global.CONSTANT_HEART_SOUND)
+					//personController.heartController.tweenHeartRate(Global.HEART_RATE_01B, 10 * FP.assignedFrameRate);
 			}			
 		}
 		

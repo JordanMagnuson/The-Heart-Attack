@@ -17,30 +17,31 @@ package
 		// Phase02 timing
 		
 		public var photoArray01:Array;
+		public var photoArray02:Array;
+		public var photoArray03:Array;
 		
 		public function VietController(isTop:Boolean, inputKey:int) 
 		{
 			super(isTop, inputKey);
 			photoArray01 = new Array(Photos.X001, Photos.X002, Photos.X003, Photos.X010, Photos.X020, Photos.X030, Photos.X040, Photos.X050, Photos.X060, Photos.X070, Photos.X080, Photos.X090, Photos.X100, Photos.X105, Photos.X110);
-			//photoArray01 = new Array(Photos.X010, Photos.X020, Photos.X030);
+			photoArray02 = new Array(Photos.Y005, Photos.Y010, Photos.Y020, Photos.Y025, Photos.Y030, Photos.Y035, Photos.Y040, Photos.Y050, Photos.Y060, Photos.Y070, Photos.Y080, Photos.Y090, Photos.Y100, Photos.Y110);
+			photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020, Photos.Z025, Photos.Z030, Photos.Z040, Photos.Z045, Photos.Z050, Photos.Z060, Photos.Z070, Photos.Z090, Photos.Z100, Photos.Z110, Photos.Z115, Photos.Z120, Photos.Z130, Photos.Z140);
+			
+			//photoArray01 = new Array(Photos.X001, Photos.X002, Photos.X003);	// FIX ME - DELETE
+			//photoArray02 = new Array(Photos.X003, Photos.Y005, Photos.Y010);	// FIX ME - DELETE
+			
+			
 		}
 		
 		override public function added():void
 		{
 			trace('viet controller added');
 			super.added();
-			
-			FP.world.add(personImage = new BoyWalking(Global.PERSON_IMAGE_X, y + FP.halfHeight - 2, direction));
-			FP.world.add(photoController = new PhotoController(photoArray01, x, y, 5, 5));	// FIXME 10, 10
-			FP.world.add(musicController = new MusicController(Assets.MUS_VIET01));	
-			
-			var boyAlarm:Alarm = new Alarm(PHASE01_MUSIC_TIME, boyAppears);
-			addTween(boyAlarm, true);
-			
-			var boyToManAlarm:Alarm = new Alarm(PHASE01_BOY_TO_MAN_TIME, boyToMan);
-			addTween(boyToManAlarm, true);				
-			
-			//heartController.updateSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
+
+			photoArray = photoArray01;
+			photoDisplayTime = 7 * FP.assignedFrameRate;
+			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
+		
 		}
 		
 		override public function update():void
@@ -52,9 +53,19 @@ package
 		override public function fadeIn():void
 		{
 			super.fadeIn();
-			switch (phaseCounter)
+			trace('vietcontroller phase: ' + Global.phase);
+			switch (Global.phase)
 			{
-				case 0:				
+				case 3:				
+					photoDisplayTime = 5 * FP.assignedFrameRate;
+					photoArray = photoArray02;
+					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
+					break;
+				case 5:
+					photoDisplayTime = 3 * FP.assignedFrameRate;
+					photoArray = photoArray03;
+					loopPhotos = true;
+					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
 				default:
 					break;

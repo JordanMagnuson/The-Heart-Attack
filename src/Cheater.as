@@ -31,10 +31,52 @@ package
 			else if (Input.pressed(Key.Y))
 				Global.americanController.heartController.heartSoundController.fadeOut();
 				
-			if (Input.pressed(Key.F12))
+			if (Input.pressed(Key.F1))
+				Global.americanController.heartController.setHeartRate(Global.HEART_RATE_01B);		
+				
+			if (Input.pressed(Key.F2))
 			{
-				Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
+				Global.americanController.heartController.tweenHeartRate(61, 1200);
+				Global.vietController.heartController.tweenHeartRate(61, 1200);
 			}
+			//if (Input.pressed(Key.F12))
+			//{
+				//Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
+			//}
+			
+			
+			switch (Global.phase)
+			{
+				case 0:
+				case 2:
+					if (Input.pressed(Key.F12))
+					{
+						trace('cheater going to Viet');
+						Global.phase++;
+						Global.americanController.fadeOut();
+						Global.vietController.fadeIn();
+					}				
+					break;
+				case 1:
+				case 3:
+					if (Input.pressed(Key.F12))
+					{
+						trace('cheater going to American');
+						Global.phase++;
+						Global.vietController.fadeOut();
+						Global.americanController.fadeIn();
+					}			
+					break;
+				case 4:
+					if (Input.pressed(Key.F12))
+					{
+						Global.vietController.fadeIn();
+						Global.phase++;
+					}	
+					break;
+				default:
+					break;
+			}			
 		}
 		
 	}

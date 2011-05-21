@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
+	import flash.ui.Mouse;
 	
 	public class Main extends Engine
 	{
@@ -16,7 +17,7 @@ package
 			
 			FP.world = new Game;
 			
-			//Mouse.hide();
+			Mouse.hide();
 			//Mouse.cursor
 		}
 		

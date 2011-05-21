@@ -23,10 +23,10 @@ package
 		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
-		public static const HEART_RATE_01A:Number = 183;	//183.5	//123	61
+		public static const HEART_RATE_01A:Number = 120;	//183.5	//123	61
 		public static const PULSE_SPEED_01A:Number = 2;	//2	
 		
-		public static const HEART_RATE_01B:Number = 123;	//184	//123	61
+		public static const HEART_RATE_01B:Number = 61;	//184	//123	61
 		public static const PULSE_SPEED_01B:Number = 2;	//2	
 		
 		// Variables
