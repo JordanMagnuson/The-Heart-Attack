@@ -94,6 +94,16 @@ package
 				return false;
 		}
 		
+		public function hitAction():void
+		{
+			
+		}
+		
+		public function missedAction():void
+		{
+			
+		}
+		
 		public function pause():void
 		{
 			this.paused = true;
@@ -106,7 +116,7 @@ package
 		
 		public function fadeOut(duration:Number):void
 		{
-			trace('heartbeat fade out');
+			//trace('heartbeat fade out');
 			fading = true;
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween, true);
@@ -136,7 +146,7 @@ package
 		
 		public function offscreenAction():void
 		{
-			trace('heart beat offscreen action');
+			//trace('heart beat offscreen action');
 			FP.world.recycle(this);
 		}
 		

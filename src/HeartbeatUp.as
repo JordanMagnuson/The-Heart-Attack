@@ -26,14 +26,34 @@ package
 			// Missed
 			if (checkMissed())
 			{
-				missed = true;
-				image.color = Global.PULSE_COLOR_MISSED;
-				Global.soundController.missed.play(heartController.health * 0.1);				
-				heartController.loseHealth();
-				
-				if (Global.COMBINE_UP_DOWN_BEATS)
-					pairedHeartbeatDown.image.color = Global.PULSE_COLOR_MISSED;	
+				missedAction();	
 			}
+		}
+		
+		override public function hitAction():void
+		{
+			// Play sound
+			if (!Global.CONSTANT_HEART_SOUND) 
+				Global.soundController.heartbeatFull.play(heartController.health);
+			
+			// Change beat color
+			hit = true;
+			image.color = Global.PULSE_COLOR_HIT;
+									
+			if (Global.COMBINE_UP_DOWN_BEATS)
+				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_HIT;				
+		}
+		
+		override public function missedAction():void
+		{
+			missed = true;
+			image.color = Global.PULSE_COLOR_MISSED;
+			if (Global.soundController.heartbeatFull.playing) Global.soundController.heartbeatFull.stop();
+			Global.soundController.missed.play((1 - heartController.health + 0.1) * 0.2);				
+			heartController.loseHealth();
+			
+			if (Global.COMBINE_UP_DOWN_BEATS)
+				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_MISSED;				
 		}
 		
 		override public function reset():void

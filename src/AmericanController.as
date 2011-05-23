@@ -25,8 +25,9 @@ package
 			photoArray02 = new Array(Photos.B010, Photos.B020, Photos.B030, Photos.B040, Photos.B045, Photos.B050, Photos.B060, Photos.B070, Photos.B080, Photos.B090, Photos.B100, Photos.B110, Photos.B115, Photos.B120);
 			photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020, Photos.Z025, Photos.Z030, Photos.Z040, Photos.Z045, Photos.Z050, Photos.Z060, Photos.Z070, Photos.Z090, Photos.Z100, Photos.Z110, Photos.Z115, Photos.Z120, Photos.Z130, Photos.Z140);
 			
-			//photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03);	// FIX ME - DELETE
-			//photoArray02 = new Array(Photos.A03, Photos.A15, Photos.B010);	// FIX ME - DELETE
+			//photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03);		// FIX ME - DELETE
+			//photoArray02 = new Array(Photos.B010, Photos.B020, Photos.B030);		// FIX ME - DELETE
+			//photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020);	// FIX ME - DELETE
 		}
 		
 		override public function added():void
@@ -37,9 +38,11 @@ package
 			photoArray = photoArray01;
 			photoDisplayTime = Global.PHOTO_DISPLAY_TIME_01;
 			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
+			photoController.nextPhoto(false);
 			
-			//heartController.tweenHeartRate(Global.HEART_RATE_02, photoDisplayTime * photoArray.length);
-			//heartController.tweenPulseSpeed(Global.PULSE_SPEED_02, photoDisplayTime * photoArray.length);
+			//var tweenTime:Number = heartController.heartRate * photoArray.length;
+			heartController.tweenHeartRate(Global.HEART_RATE_02, heartController.heartRate * photoArray.length);
+			heartController.tweenPulseSpeed(Global.PULSE_SPEED_02, heartController.heartRate * photoArray.length);
 		}
 		
 		override public function update():void
@@ -58,13 +61,18 @@ package
 				case 1:				
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
-					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
+					replacePhotoController();
+					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
+					heartController.tweenHeartRate(Global.HEART_RATE_03, heartController.heartRate * photoArray.length);
+					heartController.tweenPulseSpeed(Global.PULSE_SPEED_03, heartController.heartRate * photoArray.length);					
+					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
 				case 3:
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
 					loopPhotos = true;
-					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
+					replacePhotoController();				
+					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
 				default:
 					break;

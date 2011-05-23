@@ -17,14 +17,19 @@ package
 		public static const FADE_OUT_DURATION:Number = 2 * FP.assignedFrameRate;
 		public static const MAX_ALPHA:Number = 0.5;
 		
+		public var fadeInDuration:Number;
+		public var fadeOutDuration:Number;
+		
 		public var shouldFadeIn:Boolean;
 		public var backdrop:Backdrop;
 		public var fadeTween:ColorTween;
 		
-		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true) 
+		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120) 
 		{
 			super(x, y);
 			this.shouldFadeIn = shouldFadeIn;
+			this.fadeInDuration = fadeInDuration;
+			this.fadeOutDuration = fadeOutDuration;
 			backdrop = new Backdrop(source, false, false);
 			graphic = backdrop;
 			layer = 100;
@@ -64,14 +69,14 @@ package
 		{
 			fadeTween = new ColorTween();
 			addTween(fadeTween);		
-			fadeTween.tween(FADE_IN_DURATION, Colors.WHITE, Colors.WHITE, 0, MAX_ALPHA);			
+			fadeTween.tween(fadeInDuration, Colors.WHITE, Colors.WHITE, 0, MAX_ALPHA);			
 		}
 		
 		public function fadeOut():void
 		{
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween);		
-			fadeTween.tween(FADE_OUT_DURATION, Colors.WHITE, Colors.WHITE, (graphic as Backdrop).alpha, 0);				
+			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as Backdrop).alpha, 0);				
 		}
 		
 		public function destroy():void

@@ -27,16 +27,23 @@ package
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		// Constants - heart controller
-		public static const HEART_RATE_01:Number = 60;
-		public static const PULSE_SPEED_01:Number = 3;
+		public static const HEART_RATE_01:Number = 4 * FRAME_RATE;
+		public static const PULSE_SPEED_01:Number = 1;
 		
-		public static const HEART_RATE_02:Number = 90;
-		public static const PULSE_SPEED_02:Number = 2.7
+		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;
+		public static const PULSE_SPEED_02:Number = 1.5;
+		
+		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;
+		public static const PULSE_SPEED_03:Number = 2;		
+		
+		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 45 * FRAME_RATE;
+		public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
+		public static const PULSE_SPEED_04:Number = 8;				
 		
 		// Constants - photo controller
-		public static const PHOTO_DISPLAY_TIME_01:Number = 6 * FRAME_RATE;	// 7
-		public static const PHOTO_DISPLAY_TIME_02:Number = 5 * FRAME_RATE; 	// 5
-		public static const PHOTO_DISPLAY_TIME_03:Number = 2 * FRAME_RATE; 	// 3
+		public static const PHOTO_DISPLAY_TIME_01:Number = 3 * FRAME_RATE;	// 7
+		public static const PHOTO_DISPLAY_TIME_02:Number = 3 * FRAME_RATE; 	// 5
+		public static const PHOTO_DISPLAY_TIME_03:Number = 3 * FRAME_RATE; 	// 3
 		
 		
 		

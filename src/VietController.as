@@ -28,9 +28,8 @@ package
 			photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020, Photos.Z025, Photos.Z030, Photos.Z040, Photos.Z045, Photos.Z050, Photos.Z060, Photos.Z070, Photos.Z090, Photos.Z100, Photos.Z110, Photos.Z115, Photos.Z120, Photos.Z130, Photos.Z140);
 			
 			//photoArray01 = new Array(Photos.X001, Photos.X002, Photos.X003);	// FIX ME - DELETE
-			//photoArray02 = new Array(Photos.X003, Photos.Y005, Photos.Y010);	// FIX ME - DELETE
-			
-			
+			//photoArray02 = new Array(Photos.Y005, Photos.Y010, Photos.Y020);	// FIX ME - DELETE
+			//photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020);	// FIX ME - DELETE
 		}
 		
 		override public function added():void
@@ -41,7 +40,7 @@ package
 			photoArray = photoArray01;
 			photoDisplayTime = Global.PHOTO_DISPLAY_TIME_01;
 			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
-		
+			photoController.nextPhoto(false);		
 		}
 		
 		override public function update():void
@@ -55,21 +54,49 @@ package
 			trace('vietcontroller phase: ' + Global.phase);
 			switch (Global.phase)
 			{
+				case 0:
+					//heartController.unpause();
+					heartController.tweenHeartRate(Global.HEART_RATE_02, heartController.heartRate * photoArray.length);
+					heartController.tweenPulseSpeed(Global.PULSE_SPEED_02, heartController.heartRate * photoArray.length);	
+					break;
 				case 2:				
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
-					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
+					replacePhotoController();
+					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
+					heartController.tweenHeartRate(Global.HEART_RATE_03, heartController.heartRate * photoArray.length);
+					heartController.tweenPulseSpeed(Global.PULSE_SPEED_03, heartController.heartRate * photoArray.length);					
+					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
 				case 4:
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
 					loopPhotos = true;
-					addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
-					break;
+					replacePhotoController();
+					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_03, Global.PULSE_SPEED_03);
+					Global.americanController.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_03, Global.PULSE_SPEED_03);
 				default:
 					break;
 			}
 		}
+		
+		override public function fadeInComplete():void
+		{
+			super.fadeInComplete();
+			trace('vietcontroller fade in phase: ' + Global.phase);
+			switch (Global.phase)
+			{
+				case 5:
+					trace('yeppers');
+					this.heartController.tweenHeartRate(Global.HEART_RATE_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);
+					this.heartController.tweenPulseSpeed(Global.PULSE_SPEED_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);	
+					Global.americanController.heartController.tweenHeartRate(Global.HEART_RATE_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);
+					Global.americanController.heartController.tweenPulseSpeed(Global.PULSE_SPEED_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);						
+					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
+					Global.phase++;
+					break;		
+			}
+		}		
 		
 		/**
 		 * Phase control alarm functions

@@ -27,6 +27,7 @@ package
 		public var inputKey:int;
 		
 		public var photoController:PhotoController;	
+		public var oldPhotoController:PhotoController;
 		public var photoArray:Array;
 		public var photoDisplayTime:Number;
 		public var newPhotoControllerAlarm:Alarm;
@@ -123,6 +124,7 @@ package
 		{
 			trace('fade out complete');
 			pause();
+			heartController.reset();
 		}
 		
 		public function fadeIn():void
@@ -150,13 +152,13 @@ package
 		{
 			trace('fade in complete');
 			unpause();
-			heartController.reset();
+			heartController.beat();
 		}
 		
 		public function replacePhotoController():void
 		{
-				photoController.fadeOut();
-				FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, 0, loopPhotos));			
+				oldPhotoController = photoController;
+				FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, loopPhotos));			
 		}
 		
 	}

@@ -14,7 +14,7 @@ package
 		// How long to wait before starting the "slide show"
 		public var startDelay:Number;
 		
-		// How long to display each photo
+		// How long to display each photo - includes fade in time
 		public var displayTime:Number;
 	
 		/**
@@ -34,6 +34,9 @@ package
 		
 		public var fadeIn:Boolean;
 		
+		public var fadeInDuration:Number = 120;
+		public var fadeOutDuration:Number = 120;
+		
 		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 300, startDelay:Number = 0, loop:Boolean = false, fadeIn:Boolean = true) 
 		{
 			super(x, y);
@@ -42,24 +45,22 @@ package
 			this.startDelay = startDelay;
 			this.displayTime = displayTime;
 			this.loop = loop;
-			if (startDelay > 0)
-				startAlarm = new Alarm(this.startDelay, start);
-			nextPhotoAlarm = new Alarm(this.displayTime, nextPhoto);
+			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y);
+			//nextPhotoAlarm = new Alarm(this.displayTime, nextPhoto);
 		}
 		
 		override public function added():void
 		{
-			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, this.fadeIn);
-			FP.world.add(currentPhoto);
-			currentIndex++;			
-			if (startDelay > 0)
-			{
-				addTween(startAlarm, true);
-			}
-			else 
-			{
-				start();
-			}
+			//FP.world.add(currentPhoto);
+			//currentIndex++;			
+			//if (startDelay > 0)
+			//{
+				//addTween(startAlarm, true);
+			//}
+			//else 
+			//{
+				//start();
+			//}
 		}
 		
 		public function unpause():void
@@ -78,7 +79,8 @@ package
 		
 		public function start():void
 		{
-			addTween(nextPhotoAlarm, true);			
+			//addTween(nextPhotoAlarm, true);	
+			//nextPhoto();
 		}		
 		
 		override public function update():void
@@ -86,29 +88,32 @@ package
 			super.update();
 		}
 		
-		public function nextPhoto():void
+		public function nextPhoto(fadeIn:Boolean = true):void
 		{
-			lastPhoto = currentPhoto;
-			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y);
-			FP.world.add(currentPhoto);
-			if (currentIndex < photoArray.length - 1)
+			if (finished && !loop)
 			{
-				if (lastPhoto)
-					lastPhoto.fadeOut();				
-				currentIndex++;
-				nextPhotoAlarm.reset(displayTime);
+				return;
+			}
+				
+			if (currentIndex < photoArray.length)
+			{
+				lastPhoto = currentPhoto;
+				lastPhoto.fadeOut();
+				FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration));
 			}
 			else
 			{
 				finished = true;
+				currentIndex = 0;
 				if (loop)
 				{
-					if (lastPhoto)
-						lastPhoto.fadeOut();						
-					currentIndex = 0;
-					nextPhotoAlarm.reset(displayTime);
-				}
+					lastPhoto = currentPhoto;
+					lastPhoto.fadeOut();
+					FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration));
+					//nextPhotoAlarm.reset(displayTime);
+				}				
 			}
+			currentIndex++;
 		}
 		
 		public function fadeOut():void

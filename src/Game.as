@@ -47,15 +47,10 @@ package
 			switch (Global.phase)
 			{
 				case 0:
-					//if (Global.americanController.heartController.beatAlarm.percent <= 0.005)
-					//{
-						//Global.vietController.fadeIn();
-						//Global.phase++;
-					//}			
-					//break;
 				case 2:
 					if (Global.americanController.photoController.finished)
 					{
+						Global.americanController.photoController.finished = false;
 						Global.americanController.fadeOut();
 						Global.vietController.fadeIn();
 						Global.phase++;
@@ -65,26 +60,27 @@ package
 				case 3:
 					if (Global.vietController.photoController.finished)
 					{
+						Global.vietController.photoController.finished = false;
 						Global.vietController.fadeOut();
 						Global.americanController.fadeIn();
 						Global.phase++;
 					}			
 					break;
 				case 4:
-					//if (Global.americanController.photoController.finished)
-					//{
-						//if (Global.americanController.heartController.beatAlarm.percent <= 0.5)
-						//{
-							//Global.vietController.fadeIn();
-							//Global.phase++;
-						//}
-					//}	
-					trace(Global.americanController.heartController.beatAlarm.percent);
-					if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
+					if (Global.americanController.photoController.finished)
 					{
-						Global.vietController.fadeIn();
-						Global.phase++;
-					}					
+						if (Global.americanController.heartController.beatAlarm.percent <= 0.05)
+						{
+							Global.vietController.fadeIn();
+							Global.phase++;
+						}
+					}	
+					//trace(Global.americanController.heartController.beatAlarm.percent);
+					//if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
+					//{
+						//Global.vietController.fadeIn();
+						//Global.phase++;
+					//}					
 					break;
 					
 				default:

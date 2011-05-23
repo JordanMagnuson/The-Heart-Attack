@@ -53,6 +53,8 @@ package
 		{
 			FP.world.add(hotZone);
 			addTween(beatAlarm);
+			addTween(heartRateTween);
+			addTween(pulseSpeedTween);
 			if (!this.personController.markedForPause)
 				beat();
 			//addTween(beatAlarm, true);
@@ -60,15 +62,14 @@ package
 		
 		public function reset():void
 		{
-			trace('heartcontroller reset');
-			trace('heart rate: ' + heartRate);
-			trace('pulse speed: ' + pulseSpeed);
+			//trace('heartcontroller reset');
+			//trace('heart rate: ' + heartRate);
+			//trace('pulse speed: ' + pulseSpeed);
 			heartSoundController.reset();
-			if (tweeningHeartRate) finishedTweeningHeartRate();
-			if (tweeningPulseSpeed) finishedTweeningPulseSpeed();
+			//if (tweeningHeartRate) finishedTweeningHeartRate();
+			//if (tweeningPulseSpeed) finishedTweeningPulseSpeed();
 			beatCount = 0;
 			lastFlatHeartbeat = null;
-			beat();
 		}
 		
 		override public function update():void
@@ -79,6 +80,7 @@ package
 			{
 				//trace('heartcontroller tween value: ' + heartRateTween.value);
 				heartRate = heartRateTween.value;
+				//trace('heart rate tween: ' + heartRateTween.value);
 			}
 			
 			if (tweeningPulseSpeed)
@@ -94,7 +96,13 @@ package
 			trace('heartcontroller beat');
 			trace('heartRate: ' + heartRate);
 			trace('pulseSpeed: ' + pulseSpeed);
-			//trace('beat');
+
+			// Adjust photo fade in speed to heart rate
+			this.personController.photoController.fadeInDuration = heartRate / 2;
+			this.personController.photoController.fadeOutDuration = heartRate / 2;
+			trace('heartcntrlr fadeInduration: ' + this.personController.photoController.fadeInDuration);		
+			
+			
 			// Start sound on first beat
 			if (Global.CONSTANT_HEART_SOUND && beatCount == 0)
 			{
@@ -208,7 +216,7 @@ package
 		
 		public function fadeOut(duration:Number):void
 		{
-			trace('heart controller fade out');
+			//trace('heart controller fade out');
 			
 			// Fade beats
 			var heartBeats:Array = getHeartbeats();
@@ -229,35 +237,39 @@ package
 		
 		public function tweenHeartRate(targetHeartRate:Number, duration:Number):void
 		{
-			trace('heartController.tweenHeartRate');
-			tweeningHeartRate = true;
+			//trace('heartController.tweenHeartRate');
 			heartRateTween.tween(heartRate, targetHeartRate, duration);
-			addTween(heartRateTween, true);
+			//addTween(heartRateTween, true);
+			tweeningHeartRate = true;
 		}
 		
 		public function finishedTweeningHeartRate():void
 		{
-			removeTween(heartRateTween)
+			trace('finished tweening heart rate');
+			//heartRateTween.cancel();
+			//removeTween(heartRateTween)
 			tweeningHeartRate = false;
 		}
 		
 		public function tweenPulseSpeed(targetPulseSpeed:Number, duration:Number):void
 		{
-			trace('heartController.tweenPulseSpeed');
-			tweeningPulseSpeed = true;
+			//trace('heartController.tweenPulseSpeed');
 			pulseSpeedTween.tween(pulseSpeed, targetPulseSpeed, duration);
-			addTween(pulseSpeedTween, true);
+			//addTween(pulseSpeedTween, true);
+			tweeningPulseSpeed = true;
 		}
 		
 		public function finishedTweeningPulseSpeed():void
 		{
-			removeTween(pulseSpeedTween)
+			//pulseSpeedTween.cancel();
+			//removeTween(pulseSpeedTween)
 			tweeningPulseSpeed = false;
 		}		
 		
-		public function setHeartRate(heartRate:Number):void
+		public function setHeartRatePulseSpeed(heartRate:Number, pulseSpeed:Number):void
 		{
 			this.heartRate = heartRate;		
+			this.pulseSpeed = pulseSpeed;
 		}
 		
 		public function loseHealth():void
