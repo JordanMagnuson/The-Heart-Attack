@@ -15,6 +15,9 @@ package
 		public var fader:SfxFader;
 		public var delayAlarm:Alarm;
 		
+		public var sndMissed:Sfx = new Sfx(Assets.SND_MISSED);
+		public var sndBeat:Sfx = new Sfx(Assets.SND_BEAT_LOOP);
+		
 		public function HeartSoundController(heartController:HeartController) 
 		{
 			this.heartController = heartController;

@@ -83,7 +83,7 @@ package
 			trace('start music');
 			music.play(0);
 			addTween(musicFader, true);
-			musicFader.fadeTo(1, MUSIC_IN_DURATION);
+			musicFader.fadeTo(0.75, MUSIC_IN_DURATION);
 		}
 		
 		public function generateSlideshow():void
