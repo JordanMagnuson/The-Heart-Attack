@@ -27,14 +27,15 @@ package
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		// Constants - heart controller
-		public static const HEART_RATE_01:Number = 4 * FRAME_RATE;
-		public static const PULSE_SPEED_01:Number = 1;
+		public static const STARTING_HEALTH:Number = 1;
+		public static const HEART_RATE_01:Number = 4 * FRAME_RATE;	// 4
+		public static const PULSE_SPEED_01:Number = 1;					// 1
 		
-		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;
-		public static const PULSE_SPEED_02:Number = 1.5;
+		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;		// 3
+		public static const PULSE_SPEED_02:Number = 1.5;				// 1.5
 		
-		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;
-		public static const PULSE_SPEED_03:Number = 2;		
+		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;		// 2
+		public static const PULSE_SPEED_03:Number = 2;					// 2
 		
 		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 45 * FRAME_RATE;
 		public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
@@ -56,6 +57,7 @@ package
 		public static var heartbeatUpWidth;
 		public static var heartbeatDownWidth;
 		public static var phase:int = 0;				// 1. American born, 2. Viet born, 3. American to war, 4. Both at war
+		public static var gameOver:Boolean = false;
 		
 		// Global entities
 		public static var cheater:Cheater;

@@ -18,6 +18,7 @@ package
 		// Whether the person should be on top or bottom
 		public var isTop:Boolean;
 		public var direction:Boolean;
+		public var dead:Boolean = false;
 		
 		// Controllers for this person
 		public var heartController:HeartController;
@@ -29,9 +30,14 @@ package
 		public var photoController:PhotoController;	
 		public var oldPhotoController:PhotoController;
 		public var photoArray:Array;
+		public var photoArrayNumber:int = 1;
 		public var photoDisplayTime:Number;
 		public var newPhotoControllerAlarm:Alarm;
 		public var loopPhotos:Boolean = false;
+		
+		public var photoArray01:Array;
+		public var photoArray02:Array;
+		public var photoArray03:Array;
 		
 		public var musicController:MusicController;
 		public var music:Sfx;
@@ -67,6 +73,8 @@ package
 			//trace('person controller update');
 			if (markedForPause)
 			{
+				//heartController.hotZone.fadeTween.alpha = 0;
+				//heartController.hotZone.image.alpha = 0;
 				pause(true);
 				active = false;
 				markedForPause = false;
@@ -116,6 +124,7 @@ package
 			heartController.fadeOut(DEACTIVATE_DURATION);
 			if (personImage) personImage.pause();
 			FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
+			this.heartController.hotZone.fadeOut(DEACTIVATE_DURATION);
 			var fadeOutCompleteAlarm:Alarm = new Alarm(DEACTIVATE_DURATION, fadeOutComplete);
 			addTween(fadeOutCompleteAlarm, true);			
 		}		
@@ -132,6 +141,7 @@ package
 			trace('person controller fade in');
 			active = true; 									// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
 			inputController.active = true;
+			this.heartController.hotZone.fadeIn(ACTIVATE_DURATION);
 			if (darkMask)
 			{	
 				if (!darkMask.fadeTween.active)

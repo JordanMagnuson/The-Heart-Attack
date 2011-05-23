@@ -51,6 +51,18 @@ package
 			//{
 				//Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
 			//}
+			if (Input.pressed(Key.F10))
+			{
+				Global.americanController.heartController.health = 0.2
+				Global.vietController.heartController.health = 0.2
+			}
+			
+			if (Input.pressed(Key.F11))
+			{
+				Global.phase = 4;
+				Global.vietController.fadeIn();
+				Global.phase++;						
+			}
 			
 			if (Input.pressed(Key.F12))
 			{

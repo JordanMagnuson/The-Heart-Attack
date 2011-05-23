@@ -11,12 +11,8 @@ package
 	public class AmericanController extends PersonController
 	{
 		// Phase01 timing
-		public const PHASE01_MUSIC_TIME:Number = 40 * FP.assignedFrameRate;			// 40
-		public const PHASE01_BOY_TO_MAN_TIME:Number = 90 * FP.assignedFrameRate;	// 90
-		
-		public var photoArray01:Array;
-		public var photoArray02:Array;
-		public var photoArray03:Array;
+		//public const PHASE01_MUSIC_TIME:Number = 40 * FP.assignedFrameRate;			// 40
+		//public const PHASE01_BOY_TO_MAN_TIME:Number = 90 * FP.assignedFrameRate;	// 90
 		
 		public function AmericanController(isTop:Boolean, inputKey:int) 
 		{
@@ -39,6 +35,7 @@ package
 			photoDisplayTime = Global.PHOTO_DISPLAY_TIME_01;
 			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false));	// FIX ME 10, 10
 			photoController.nextPhoto(false);
+			heartController.hotZone.fadeIn();
 			
 			//var tweenTime:Number = heartController.heartRate * photoArray.length;
 			heartController.tweenHeartRate(Global.HEART_RATE_02, heartController.heartRate * photoArray.length);
@@ -61,6 +58,7 @@ package
 				case 1:				
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
+					photoArrayNumber = 2;
 					replacePhotoController();
 					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
 					heartController.tweenHeartRate(Global.HEART_RATE_03, heartController.heartRate * photoArray.length);
@@ -70,6 +68,7 @@ package
 				case 3:
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
+					photoArrayNumber = 3;
 					loopPhotos = true;
 					replacePhotoController();				
 					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);

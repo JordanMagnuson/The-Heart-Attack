@@ -23,12 +23,13 @@ package
 		[Embed(source = '../assets/sfx01.swf', symbol = 'heartbeat_up.wav')] public static const SND_HEARTBEAT_UP:Class;
 		[Embed(source = '../assets/sfx01.swf', symbol = 'heartbeat_down.wav')] public static const SND_HEARTBEAT_DOWN:Class;
 		[Embed(source = '../assets/sfx01.swf', symbol = 'missed.wav')] public static const SND_MISSED:Class;
-		[Embed(source = '../assets/sfx01.swf', symbol = 'flatline.wav')] public static const SND_FLATLINE:Class;
+		[Embed(source = '../assets/sfx01.swf', symbol = 'flatline_20s.wav')] public static const SND_FLATLINE:Class;
 		[Embed(source = '../assets/sfx01.swf', symbol = 'heart_beat_full.wav')] public static const SND_BEAT_LOOP:Class;
 		
 		// music
-		[Embed(source = '../assets/Montego.mp3')] public static const MUS_AMERICAN01:Class;
-		[Embed(source='../assets/music.swf', symbol='viet01_NgayDoXaRoi')] public static const MUS_VIET01:Class;
+		//[Embed(source = '../assets/Montego.mp3')] public static const MUS_AMERICAN01:Class;
+		//[Embed(source = '../assets/music.swf', symbol = 'viet01_NgayDoXaRoi')] public static const MUS_VIET01:Class;
+		[Embed(source = '../assets/music.swf', symbol = 'fitzgerald_bones_and_skin.wav')] public static const MUS_BONES_SKIN:Class;
 	}
 
 }

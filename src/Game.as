@@ -21,6 +21,8 @@ package
 			add(Global.cheater = new Cheater);
 			add(Global.soundController = new SoundController);
 			
+			//Global.soundController.flatline.loop(0.5);
+			
 			// Choose randomly who to put on top
 			//if (FP.random > 0.5)
 			if (true)
@@ -36,6 +38,8 @@ package
 				add(Global.americanController = new AmericanController(false, Global.INPUT_KEY_BOTTOM));
 			}	
 			Global.vietController.markedForPause = true;
+			
+			
 			//Global.americanController.markedForPause = true;
 			//FP.world.add(new Tutorial(Global.americanController));
 			//FP.world.add(new Tutorial(Global.vietController));
@@ -44,6 +48,21 @@ package
 		override public function update():void
 		{
 		//	trace(Global.phase);
+		
+			// Deal with death
+			if (Global.americanController.dead || Global.vietController.dead)
+			{
+				if (!Global.gameOver)
+				{
+					Global.gameOver = true;
+					if (Global.americanController.dead)
+						add(new GameOverSequence(Global.americanController, Global.vietController));
+					else 
+						add(new GameOverSequence(Global.vietController, Global.americanController));
+				}
+			}
+			
+			// Deal with phases
 			switch (Global.phase)
 			{
 				case 0:

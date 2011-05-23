@@ -24,9 +24,10 @@ package
 		public var pulseSpeed:Number;			// Number of pixels the heartbeat images move forward every frame.
 		public var lastFlatHeartbeat:HeartbeatFlat = null;
 		
-		public var health:Number = 1;							// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
+		public var health:Number = Global.STARTING_HEALTH;							// 0 - 1, determines the amplitude of the heart beats... if 0, heart attack
 		
 		public var hotZone:HotZone;
+		public var flatLine:FlatLine;
 		
 		public var beatAlarm:Alarm = new Alarm(heartRate, beat);
 		
@@ -184,6 +185,7 @@ package
 			// Stop sound
 			//heartSoundController.active = false;
 			heartSoundController.beatLoop.stop();
+			hotZone.active = false;
 			
 			// Stop heartbeats moving
 			var heartBeats:Array = getHeartbeats();
@@ -200,6 +202,7 @@ package
 		{
 			// Activate controller	
 			this.active = true;
+			hotZone.active = true;
 			
 			// Resume sound
 			//heartSoundController.active = true;
@@ -284,14 +287,14 @@ package
 			if (health <= 0.1)
 			{
 				// Add solid white line
-				FP.world.add(new FlatLine(this));
+				FP.world.add(this.flatLine = new FlatLine(this));
 				
 				// Remove everything else
 				for each (var h:Heartbeat in heartbeatList)
 				{
 					FP.world.remove(h);
 				}	
-				FP.world.remove(this);
+				this.personController.dead = true;
 			}
 			// Shrink
 			else

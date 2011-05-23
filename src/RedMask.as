@@ -21,13 +21,15 @@ package
 		public var shouldFadeIn:Boolean;
 		public var fadeInDuration:Number;
 		public var fadeOutDuration:Number;
+		public var liveDuration:Number;
+		public var maxAlpha:Number;
 		
 		public var image:Image = Image.createRect(FP.width, FP.halfHeight, Colors.BLOOD_RED, 1);
 		public var fadeTween:ColorTween;
 		
-		public var stayConstantAlarm:Alarm = new Alarm(LIVE_DURATION, fadeOut);
+		public var stayConstantAlarm:Alarm;
 		
-		public function RedMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 0, fadeOutDuration:Number = 0) 
+		public function RedMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 0, fadeOutDuration:Number = 0, liveDuration:Number = 0, maxAlpha:Number = 0.6) 
 		{
 			super(x, y, image);
 			layer = -100;
@@ -38,12 +40,20 @@ package
 			if (shouldFadeIn)
 				image.alpha = 0;
 			else 
-				image.alpha = MAX_ALPHA;
+				image.alpha = maxAlpha;
 				
 			if (fadeInDuration == 0) this.fadeInDuration = FADE_IN_DURATION;
 			else this.fadeInDuration = fadeInDuration;
+			
 			if (fadeOutDuration == 0) this.fadeOutDuration = FADE_OUT_DURATION;
 			else this.fadeOutDuration = fadeOutDuration;
+			
+			if (liveDuration == 0) this.liveDuration = LIVE_DURATION;
+			else this.liveDuration = liveDuration;
+			
+			stayConstantAlarm = new Alarm(this.liveDuration, fadeOut);
+			
+			this.maxAlpha = maxAlpha;
 		}
 		
 		override public function added():void
@@ -55,7 +65,7 @@ package
 			else
 			{
 				fadeTween = new ColorTween();
-				fadeTween.alpha = MAX_ALPHA;
+				fadeTween.alpha = maxAlpha;
 				addTween(fadeTween);				
 			}
 			
@@ -63,6 +73,7 @@ package
 	
 		override public function update():void
 		{
+			//trace('red mask updating');
 			image.alpha = fadeTween.alpha;
 			super.update();
 		}		
@@ -71,7 +82,7 @@ package
 		{
 			fadeTween = new ColorTween(stayConstant);
 			addTween(fadeTween);		
-			fadeTween.tween(fadeInDuration, Colors.WHITE, Colors.WHITE, 0, MAX_ALPHA);			
+			fadeTween.tween(fadeInDuration, Colors.WHITE, Colors.WHITE, 0, maxAlpha);			
 		}
 		
 		public function stayConstant():void
@@ -81,7 +92,7 @@ package
 		
 		public function fadeOut():void
 		{
-			trace('dark mask fade out');
+			//trace('red mask fade out');
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween);		
 			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as Image).alpha, 0);				
@@ -89,7 +100,7 @@ package
 		
 		public function destroy():void
 		{
-			trace('destroy red mask');
+			//trace('destroy red mask');
 			FP.world.remove(this);
 		}		
 		

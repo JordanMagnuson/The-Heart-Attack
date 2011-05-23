@@ -11,15 +11,9 @@ package
 	public class VietController extends PersonController
 	{
 		// Phase01 timing
-		public const PHASE01_MUSIC_TIME:Number = 40 * FP.assignedFrameRate;
-		public const PHASE01_BOY_TO_MAN_TIME:Number = 90 * FP.assignedFrameRate;
-		
-		// Phase02 timing
-		
-		public var photoArray01:Array;
-		public var photoArray02:Array;
-		public var photoArray03:Array;
-		
+		//public const PHASE01_MUSIC_TIME:Number = 40 * FP.assignedFrameRate;
+		//public const PHASE01_BOY_TO_MAN_TIME:Number = 90 * FP.assignedFrameRate;
+
 		public function VietController(isTop:Boolean, inputKey:int) 
 		{
 			super(isTop, inputKey);
@@ -62,6 +56,7 @@ package
 				case 2:				
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
+					photoArrayNumber = 2;
 					replacePhotoController();
 					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_02, Global.PULSE_SPEED_02);
 					heartController.tweenHeartRate(Global.HEART_RATE_03, heartController.heartRate * photoArray.length);
@@ -71,6 +66,7 @@ package
 				case 4:
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
+					photoArrayNumber = 3;
 					loopPhotos = true;
 					replacePhotoController();
 					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_03, Global.PULSE_SPEED_03);
