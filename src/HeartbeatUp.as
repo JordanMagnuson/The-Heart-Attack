@@ -46,11 +46,16 @@ package
 		
 		override public function missedAction():void
 		{
-			missed = true;
-			image.color = Global.PULSE_COLOR_MISSED;
-			if (Global.soundController.heartbeatFull.playing) Global.soundController.heartbeatFull.stop();
-			Global.soundController.missed.play((1 - heartController.health + 0.1) * 0.2);				
+			missed = true;		
 			heartController.loseHealth();
+			image.color = Global.PULSE_COLOR_MISSED;	
+			
+			// Sound
+			if (Global.soundController.heartbeatFull.playing) Global.soundController.heartbeatFull.stop();
+			Global.soundController.missed.play((1 - heartController.health + 0.1) * 0.2);	
+			
+			// Red mask
+			FP.world.add(new RedMask(this.heartController.x, this.heartController.y));
 			
 			if (Global.COMBINE_UP_DOWN_BEATS)
 				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_MISSED;				
