@@ -31,19 +31,19 @@ package
 		{
 			this.personController = personController;
 			this.direction = personController.direction;
-			text03Alarm = new Alarm(3 * FP.assignedFrameRate, fadeText03);
+			text03Alarm = new Alarm(6 * FP.assignedFrameRate, fadeText03);
 			
 			if (direction)
 			{
-				t01p = new Point(181, 31);
+				t01p = new Point(207, 38);
 				t02p = new Point(161, 147);
-				t03p = new Point(161, 212);
+				t03p = new Point(207, 212);
 			}
 			else
 			{
-				t01p = new Point(199, 274);
+				t01p = new Point(250, 278);
 				t02p = new Point(214, 379);
-				t03p = new Point(214, 455);
+				t03p = new Point(174, 452);
 			}			
 		}
 		
@@ -64,7 +64,7 @@ package
 						FP.world.add(text01 = new EntityFader(t01p.x, t01p.y, new Image(Assets.TUT_TEXT_01b)));
 					text01.fadeIn();
 				}
-				else if (checkTutorialHotzone(h, Global.heartbeatUpWidth) && pauseCounter == 2)
+				else if (!Global.COMBINE_UP_DOWN_BEATS && checkTutorialHotzone(h, Global.heartbeatUpWidth) && pauseCounter == 2)
 				{
 					pauseCounter++;
 					personController.pause();
@@ -82,8 +82,15 @@ package
 				pauseCounter++;
 				personController.unpause();
 				text01.fadeOut();
+				
+				(!Global.COMBINE_UP_DOWN_BEATS)
+				{
+					FP.world.add(text03 = new EntityFader(t03p.x, t03p.y, new Image(Assets.TUT_TEXT_03)));
+					addTween(text03Alarm, true);
+					text03.fadeIn();					
+				}
 			}
-			else if (personController.paused && Input.released(personController.inputKey) && pauseCounter == 3)
+			else if (Global.COMBINE_UP_DOWN_BEATS && personController.paused && Input.released(personController.inputKey) && pauseCounter == 3)
 			{
 				pauseCounter++;
 				personController.unpause();
@@ -100,7 +107,7 @@ package
 		
 		public function fadeText03():void
 		{
-			text03.fadeOut(3 * FP.assignedFrameRate);
+			text03.fadeOut(5 * FP.assignedFrameRate);
 		}
 		
 		public function checkTutorialHotzone(heartbeat:Heartbeat, distance:Number = 0):Boolean
@@ -112,7 +119,7 @@ package
 			}
 			else 
 			{
-				if (heartbeat.x > personController.heartController.hotZone.x - Global.HOT_ZONE_WIDTH + distance)
+				if (heartbeat.x > personController.heartController.hotZone.x + Global.HOT_ZONE_WIDTH - Global.heartbeatUpWidth - distance)
 					return true;
 			}
 			return false;

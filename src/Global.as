@@ -21,14 +21,14 @@ package
 		public static const HOT_ZONE_X:Number = 113;
 		public static const PERSON_IMAGE_X:Number = 200;
 		public static const HOT_ZONE_COLOR_DEFAULT:uint = Colors.BLACK;
-		public static const HOT_ZONE_COLOR_ACTIVE:uint = Colors.PLAINS_GREEN;
+		public static const HOT_ZONE_COLOR_ACTIVE:uint = Colors.WHITE;
 		public static const PULSE_COLOR_DEFAULT:uint = Colors.BLACK;
-		public static const PULSE_COLOR_HIT:uint = Colors.PLAINS_GREEN;
+		public static const PULSE_COLOR_HIT:uint = Colors.WHITE;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		// Constants - heart controller
 		public static const STARTING_HEALTH:Number = 1;
-		public static const HEART_RATE_01:Number = 4 * FRAME_RATE;	// 4
+		public static const HEART_RATE_01:Number = 5 * FRAME_RATE;	// 4
 		public static const PULSE_SPEED_01:Number = 1;					// 1
 		
 		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;		// 3
@@ -37,7 +37,7 @@ package
 		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;		// 2
 		public static const PULSE_SPEED_03:Number = 2;					// 2
 		
-		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 45 * FRAME_RATE;
+		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 90 * FRAME_RATE;
 		public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
 		public static const PULSE_SPEED_04:Number = 8;				
 		

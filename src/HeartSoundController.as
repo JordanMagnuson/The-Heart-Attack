@@ -16,7 +16,12 @@ package
 		public var delayAlarm:Alarm;
 		
 		public var sndMissed:Sfx = new Sfx(Assets.SND_MISSED);
-		public var sndBeat:Sfx = new Sfx(Assets.SND_BEAT_LOOP);
+		
+		// embed multiple times, so that there are no glitches if next beat plays before last one has stopped
+		public var sndBeat01:Sfx = new Sfx(Assets.SND_BEAT_LOOP);
+		public var sndBeat02:Sfx = new Sfx(Assets.SND_BEAT_LOOP);
+		public var sndBeat03:Sfx = new Sfx(Assets.SND_BEAT_LOOP);
+		public var sndBeat04:Sfx = new Sfx(Assets.SND_BEAT_LOOP);
 		
 		public function HeartSoundController(heartController:HeartController) 
 		{
@@ -40,6 +45,30 @@ package
 			//trace('heart sound controller update');
 			super.update();
 		}
+		
+		public function playHeartbeat(volume:Number = 1):void
+		{
+			if (!sndBeat01.playing)
+				sndBeat01.play(volume);
+			else if (!sndBeat02.playing)
+				sndBeat02.play(volume);		
+			else if (!sndBeat03.playing)
+				sndBeat03.play(volume);	
+			else (!sndBeat04.playing)
+				sndBeat04.play(volume);		
+		}
+		
+		public function stopHeartbeat():void
+		{
+			if (sndBeat01.playing)
+				sndBeat01.stop();
+			if (sndBeat02.playing)
+				sndBeat02.stop();		
+			if (sndBeat03.playing)
+				sndBeat03.stop();	
+			if (sndBeat04.playing)
+				sndBeat04.play();		
+		}		
 		
 		public function updateVolume(newVolume:Number = 1):void
 		{

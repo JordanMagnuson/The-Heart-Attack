@@ -37,7 +37,26 @@ package
 		[Embed(source = '../assets/photos/american_02/100_viet61.jpg')] public static const B100:Class;
 		[Embed(source = '../assets/photos/american_02/110_viet100.jpg')] public static const B110:Class;
 		[Embed(source = '../assets/photos/american_02/115_vietnam-1stAC.jpg')] public static const B115:Class;
-		[Embed(source='../assets/photos/american_02/120_viet98.jpg')] public static const B120:Class;
+		[Embed(source = '../assets/photos/american_02/120_viet98.jpg')] public static const B120:Class;
+		
+		// Ameircan final
+		[Embed(source = '../assets/photos/american_final/010_viet48.jpg')] public static const C010:Class;
+		[Embed(source = '../assets/photos/american_final/015_520085780_694028ea10_b.jpg')] public static const C015:Class;
+		[Embed(source = '../assets/photos/american_final/020_100_vcmg.jpg')] public static const C020:Class;
+		[Embed(source = '../assets/photos/american_final/025_viet93.jpg')] public static const C025:Class;
+		[Embed(source = '../assets/photos/american_final/030_viet66.jpg')] public static const C030:Class;
+		[Embed(source = '../assets/photos/american_final/040_atk5.jpg')] public static const C040:Class;
+		[Embed(source = '../assets/photos/american_final/045_DSC00045c.jpg')] public static const C045:Class;
+		[Embed(source = '../assets/photos/american_final/050_viet39.jpg')] public static const C050:Class;
+		[Embed(source = '../assets/photos/american_final/060_viet55.jpg')] public static const C060:Class;
+		[Embed(source = '../assets/photos/american_final/070_alert.jpg')] public static const C070:Class;
+		[Embed(source = '../assets/photos/american_final/090_viet63.jpg')] public static const C090:Class;
+		[Embed(source = '../assets/photos/american_final/100_viet76.jpg')] public static const C100:Class;
+		[Embed(source = '../assets/photos/american_final/110_DSC00042e.jpg')] public static const C110:Class;
+		[Embed(source = '../assets/photos/american_final/115_vcriv.jpg')] public static const C115:Class;
+		[Embed(source = '../assets/photos/american_final/120_viet74.jpg')] public static const C120:Class;
+		[Embed(source = '../assets/photos/american_final/130_DSC00037b.jpg')] public static const C130:Class;
+		[Embed(source='../assets/photos/american_final/140_naked_street.jpg')] public static const C140:Class;		
 		
 		// Viet first set
 		[Embed(source = '../assets/photos/viet_01/001_304334264_8cba67ad75_o.jpg')] public static const X001:Class;
@@ -72,24 +91,24 @@ package
 		[Embed(source = '../assets/photos/viet_02/100_vcmg.jpg')] public static const Y100:Class;
 		[Embed(source = '../assets/photos/viet_02/110_atk5.jpg')] public static const Y110:Class;
 		
-		// Final set for both
-		[Embed(source = '../assets/photos/final/010_viet48.jpg')] public static const Z010:Class;
-		[Embed(source = '../assets/photos/final/015_520085780_694028ea10_b.jpg')] public static const Z015:Class;
-		[Embed(source = '../assets/photos/final/020_100_vcmg.jpg')] public static const Z020:Class;
-		[Embed(source = '../assets/photos/final/025_viet93.jpg')] public static const Z025:Class;
-		[Embed(source = '../assets/photos/final/030_viet66.jpg')] public static const Z030:Class;
-		[Embed(source = '../assets/photos/final/040_atk5.jpg')] public static const Z040:Class;
-		[Embed(source = '../assets/photos/final/045_DSC00045c.jpg')] public static const Z045:Class;
-		[Embed(source = '../assets/photos/final/050_viet39.jpg')] public static const Z050:Class;
-		[Embed(source = '../assets/photos/final/060_viet55.jpg')] public static const Z060:Class;
-		[Embed(source = '../assets/photos/final/070_alert.jpg')] public static const Z070:Class;
-		[Embed(source = '../assets/photos/final/090_viet63.jpg')] public static const Z090:Class;
-		[Embed(source = '../assets/photos/final/100_viet76.jpg')] public static const Z100:Class;
-		[Embed(source = '../assets/photos/final/110_DSC00042e.jpg')] public static const Z110:Class;
-		[Embed(source = '../assets/photos/final/115_vcriv.jpg')] public static const Z115:Class;
-		[Embed(source = '../assets/photos/final/120_viet74.jpg')] public static const Z120:Class;
-		[Embed(source = '../assets/photos/final/130_DSC00037b.jpg')] public static const Z130:Class;
-		[Embed(source='../assets/photos/final/140_naked_street.jpg')] public static const Z140:Class;
+		// Viet final set
+		[Embed(source = '../assets/photos/viet_final/010_viet48.jpg')] public static const Z010:Class;
+		[Embed(source = '../assets/photos/viet_final/015_520085780_694028ea10_b.jpg')] public static const Z015:Class;
+		[Embed(source = '../assets/photos/viet_final/020_100_vcmg.jpg')] public static const Z020:Class;
+		[Embed(source = '../assets/photos/viet_final/025_viet93.jpg')] public static const Z025:Class;
+		[Embed(source = '../assets/photos/viet_final/030_viet66.jpg')] public static const Z030:Class;
+		[Embed(source = '../assets/photos/viet_final/040_atk5.jpg')] public static const Z040:Class;
+		[Embed(source = '../assets/photos/viet_final/045_DSC00045c.jpg')] public static const Z045:Class;
+		[Embed(source = '../assets/photos/viet_final/050_viet39.jpg')] public static const Z050:Class;
+		[Embed(source = '../assets/photos/viet_final/060_viet55.jpg')] public static const Z060:Class;
+		[Embed(source = '../assets/photos/viet_final/070_alert.jpg')] public static const Z070:Class;
+		[Embed(source = '../assets/photos/viet_final/090_viet63.jpg')] public static const Z090:Class;
+		[Embed(source = '../assets/photos/viet_final/100_viet76.jpg')] public static const Z100:Class;
+		[Embed(source = '../assets/photos/viet_final/110_DSC00042e.jpg')] public static const Z110:Class;
+		[Embed(source = '../assets/photos/viet_final/115_vcriv.jpg')] public static const Z115:Class;
+		[Embed(source = '../assets/photos/viet_final/120_viet74.jpg')] public static const Z120:Class;
+		[Embed(source = '../assets/photos/viet_final/130_DSC00037b.jpg')] public static const Z130:Class;
+		[Embed(source='../assets/photos/viet_final/140_naked_street.jpg')] public static const Z140:Class;
 	}
 
 }

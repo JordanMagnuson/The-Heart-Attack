@@ -41,8 +41,8 @@ package
 			
 			
 			//Global.americanController.markedForPause = true;
-			//FP.world.add(new Tutorial(Global.americanController));
-			//FP.world.add(new Tutorial(Global.vietController));
+			FP.world.add(new Tutorial(Global.americanController));
+			FP.world.add(new Tutorial(Global.vietController));
 		}
 		
 		override public function update():void
@@ -69,7 +69,7 @@ package
 				case 2:
 					if (Global.americanController.photoController.finished)
 					{
-						Global.americanController.photoController.finished = false;
+						//Global.americanController.photoController.finished = false;
 						Global.americanController.fadeOut();
 						Global.vietController.fadeIn();
 						Global.phase++;
@@ -79,21 +79,18 @@ package
 				case 3:
 					if (Global.vietController.photoController.finished)
 					{
-						Global.vietController.photoController.finished = false;
+						//Global.vietController.photoController.finished = false;
 						Global.vietController.fadeOut();
 						Global.americanController.fadeIn();
 						Global.phase++;
 					}			
 					break;
 				case 4:
-					if (Global.americanController.photoController.finished)
+					if (Global.americanController.heartController.beatAlarm.percent <= 0.05)
 					{
-						if (Global.americanController.heartController.beatAlarm.percent <= 0.05)
-						{
-							Global.vietController.fadeIn();
-							Global.phase++;
-						}
-					}	
+						Global.vietController.fadeIn();
+						Global.phase++;
+					}
 					//trace(Global.americanController.heartController.beatAlarm.percent);
 					//if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
 					//{

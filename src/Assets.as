@@ -7,7 +7,8 @@ package
 	public class Assets 
 	{
 		// gfx
-		[Embed(source='../assets/white_pixel.png')] public static const WHITE_PIXEL:Class;
+		[Embed(source = '../assets/white_pixel.png')] public static const WHITE_PIXEL:Class;
+		[Embed(source = '../assets/hotzone.png')] public static const HOTZONE:Class;
 		[Embed(source = '../assets/hearbeat_up.png')] public static const HEARTBEAT_UP:Class;
 		[Embed(source = '../assets/heartbeat_down.png')] public static const HEARTBEAT_DOWN:Class;
 		[Embed(source = '../assets/ground.png')] public static const GROUND:Class;
@@ -30,6 +31,7 @@ package
 		//[Embed(source = '../assets/Montego.mp3')] public static const MUS_AMERICAN01:Class;
 		//[Embed(source = '../assets/music.swf', symbol = 'viet01_NgayDoXaRoi')] public static const MUS_VIET01:Class;
 		[Embed(source = '../assets/music.swf', symbol = 'fitzgerald_bones_and_skin.wav')] public static const MUS_BONES_SKIN:Class;
+		[Embed(source='../assets/music.swf', symbol='ngay_do_xa_roi_shorter.wav')] public static const MUS_VIET:Class;
 	}
 
 }

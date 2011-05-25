@@ -37,6 +37,8 @@ package
 		public var fadeInDuration:Number = 120;
 		public var fadeOutDuration:Number = 120;
 		
+		public var pixelateCellSize:int = 1;
+		
 		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 300, startDelay:Number = 0, loop:Boolean = false, fadeIn:Boolean = true) 
 		{
 			super(x, y);

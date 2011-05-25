@@ -67,8 +67,8 @@ package
 			//trace('heart rate: ' + heartRate);
 			//trace('pulse speed: ' + pulseSpeed);
 			heartSoundController.reset();
-			//if (tweeningHeartRate) finishedTweeningHeartRate();
-			//if (tweeningPulseSpeed) finishedTweeningPulseSpeed();
+			if (tweeningHeartRate) finishedTweeningHeartRate();
+			if (tweeningPulseSpeed) finishedTweeningPulseSpeed();
 			beatCount = 0;
 			lastFlatHeartbeat = null;
 		}
@@ -94,9 +94,9 @@ package
 		
 		public function beat():void
 		{
-			trace('heartcontroller beat');
-			trace('heartRate: ' + heartRate);
-			trace('pulseSpeed: ' + pulseSpeed);
+			trace(personController.type + ' heartcontroller beat');
+			trace(personController.type + ' heartRate: ' + heartRate);
+			trace(personController.type + ' pulseSpeed: ' + pulseSpeed);
 
 			// Adjust photo fade in speed to heart rate
 			this.personController.photoController.fadeInDuration = heartRate / 2;

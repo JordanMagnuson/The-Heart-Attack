@@ -14,18 +14,26 @@ package
 		public const FADE_IN_DURATION:Number = 2 * FP.assignedFrameRate;		
 		public const FADE_OUT_DURATION:Number = 2 * FP.assignedFrameRate;
 		public const MAX_ALPHA:Number = 0.5;	
+		public const GLOW_OFFSET:Number = 9;
 		
 		public var fadeTween:ColorTween;
 		public var fading:Boolean = false;
 		
 		public var heartController:HeartController;
 		
-		public var image:Image = Image.createRect(Global.HOT_ZONE_WIDTH, FP.halfHeight, Global.HOT_ZONE_COLOR_DEFAULT, 0.5);
+		//public var image:Image = Image.createRect(Global.HOT_ZONE_WIDTH, FP.halfHeight, Global.HOT_ZONE_COLOR_DEFAULT, 0.5);
+		public var image:Image = new Image(Assets.HOTZONE);
 		
 		public function HotZone(x:Number = 0, y:Number = 0, heartController:HeartController = null) 
 		{
 			super(x, y, image);
 			this.heartController = heartController;
+
+			image.originX = 0;
+			image.originY = 0;
+			image.x = -GLOW_OFFSET;
+			image.y = 0;	
+			setHitbox(image.width - 2*GLOW_OFFSET, image.height, image.originX, image.originY);				
 		}
 		
 		override public function added():void

@@ -34,7 +34,7 @@ package
 		{
 			// Play sound
 			if (!Global.CONSTANT_HEART_SOUND) 
-				this.heartController.heartSoundController.sndBeat.play(heartController.health);
+				this.heartController.heartSoundController.playHeartbeat(heartController.health);
 				//Global.soundController.heartbeatFull.play(heartController.health);
 			
 			// Change beat color
@@ -52,7 +52,7 @@ package
 			image.color = Global.PULSE_COLOR_MISSED;	
 			
 			// Sound
-			if (this.heartController.heartSoundController.sndBeat) this.heartController.heartSoundController.sndBeat.stop();
+			this.heartController.heartSoundController.stopHeartbeat();
 			this.heartController.heartSoundController.sndMissed.play((1 - heartController.health + 0.1) * 0.2);	
 			
 			// Red mask

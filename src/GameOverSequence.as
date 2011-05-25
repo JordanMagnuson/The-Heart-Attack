@@ -15,15 +15,16 @@ package
 	{
 		public const MUSIC_DURATION:Number = 183 * FP.assignedFrameRate;
 		
+		public const DARK_MASK_IN_DURATION:Number = 8 * FP.assignedFrameRate;
 		public const RED_MASK_IN_DURATION:Number = 0.01 * FP.assignedFrameRate;		// 0.1
-		public const RED_MASK_STAY_DURATION:Number = 10 * FP.assignedFrameRate;		// 10
-		public const RED_MASK_OUT_DURATION:Number = 10 * FP.assignedFrameRate;		// 10
+		public const RED_MASK_STAY_DURATION:Number = 15 * FP.assignedFrameRate;		// 10
+		public const RED_MASK_OUT_DURATION:Number = 15 * FP.assignedFrameRate;		// 10
 		public const FLAT_LINE_OUT_DURATION:Number = 5 * FP.assignedFrameRate;		// 5
 		public const HOT_ZONE_OUT_DURATION:Number = 5 * FP.assignedFrameRate;		// 5
 		public const SOUND_OUT_DURATION:Number = 8 * FP.assignedFrameRate;			// 8
 		public const MUSIC_START_TIME:Number = 15 * FP.assignedFrameRate;			// 15
 		public const MUSIC_IN_DURATION:Number = 20 * FP.assignedFrameRate;			// 20
-		//public const SLIDE_SHOW_START_TIME:Number = 20 * FP.assignedFrameRate;		// 30
+		public const SLIDE_SHOW_START_TIME:Number = 20 * FP.assignedFrameRate;		// 30
 		
 		public var dead:PersonController;
 		public var notDead:PersonController;
@@ -31,10 +32,10 @@ package
 		public var sndFlatline:Sfx = new Sfx(Assets.SND_FLATLINE);
 		public var sfxFader:SfxFader = new SfxFader(sndFlatline);
 		
-		//public var startSlideshowAlarm:Alarm = new Alarm(SLIDE_SHOW_START_TIME, startSlideshow);
+		public var startSlideshowAlarm:Alarm = new Alarm(SLIDE_SHOW_START_TIME, startSlideshow);
 		public var startMusicAlarm:Alarm = new Alarm(MUSIC_START_TIME, startMusic);
-		public var music:Sfx = new Sfx(Assets.MUS_BONES_SKIN);
-		public var musicFader:SfxFader = new SfxFader(music);
+		public var music:Sfx;
+		public var musicFader:SfxFader;
 		
 		public var photoArray:Array;
 		public var photoController:TimedPhotoController;
@@ -47,7 +48,6 @@ package
 		
 		override public function added():void
 		{
-			FP.frameRate = 10;
 			// Pause everything
 			//Global.americanController.pause();
 			//Global.vietController.pause();
@@ -57,16 +57,18 @@ package
 			sfxFader.fadeTo(0, SOUND_OUT_DURATION);
 			addTween(sfxFader, true);
 			
-			// cue alarms
+			// Music
+			if (dead.type == 'american')
+				music = new Sfx(Assets.MUS_BONES_SKIN);
+			else
+				music = new Sfx(Assets.MUS_VIET);
+			musicFader = new SfxFader(music);
 			addTween(startMusicAlarm, true);
-			//addTween(startSlideshowAlarm, true);
 			
-			// generate slideshow
+			// Generate slideshow
 			generateSlideshow();
-			if (dead.photoController) dead.photoController.destroy();
-			if (dead.oldPhotoController) dead.oldPhotoController.destroy();
-			FP.world.add(photoController);
-			trace('slideshow added');
+			addTween(startSlideshowAlarm, true);
+			//FP.world.add(photoController);
 			
 			// Fade everything in/out
 			notDead.fadeOut();
@@ -75,7 +77,7 @@ package
 			dead.heartController.hotZone.fadeOut();
 			dead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);
 			FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
-			
+			FP.world.add(new DarkMask(notDead.x, notDead.y, true, DARK_MASK_IN_DURATION, 0, 1));
 		}
 		
 		public function startMusic():void
@@ -121,21 +123,28 @@ package
 				photoArray = dead.photoArray01.concat(dead.photoArray02)
 				
 				// Check for looping
-				if (true)
+				if (dead.photoController.finished)
 				{
-					for (i = 0; i < dead.photoController.currentIndex; i++)
+					for (i = dead.photoController.currentIndex; i < dead.photoArray03.length; i++)
 					{
 						trace('phot: ' + dead.photoArray03[i]);
 						photoArray.push(dead.photoArray03[i]);
-					}	
+					}						
 				}
+				
+				// Push photos up to index
+				for (i = 0; i < dead.photoController.currentIndex; i++)
+				{
+					trace('phot: ' + dead.photoArray03[i]);
+					photoArray.push(dead.photoArray03[i]);
+				}					
 			}			
 			
 			// Reverse the array
 			photoArray.reverse();
 			
 			// Determine timing
-			var displayTime:Number = (MUSIC_DURATION + MUSIC_START_TIME) / (photoArray.length);
+			var displayTime:Number = (MUSIC_DURATION + MUSIC_START_TIME - SLIDE_SHOW_START_TIME) / (photoArray.length);
 			var fadeDuratoin:Number = displayTime / 2;
 			
 			// Create controller
@@ -146,9 +155,9 @@ package
 		public function startSlideshow():void
 		{
 			trace('start slideshow');
-			//dead.photoController.unpause();
-			//if (dead.oldPhotoController) dead.oldPhotoController.fadeOut();
-			//FP.world.add(photoController);
+			if (dead.photoController) dead.photoController.destroy();
+			if (dead.oldPhotoController) dead.oldPhotoController.destroy();			
+			FP.world.add(photoController);
 		}
 		
 	}

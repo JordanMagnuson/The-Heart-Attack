@@ -19,11 +19,13 @@ package
 			super(isTop, inputKey);
 			photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
 			photoArray02 = new Array(Photos.B010, Photos.B020, Photos.B030, Photos.B040, Photos.B045, Photos.B050, Photos.B060, Photos.B070, Photos.B080, Photos.B090, Photos.B100, Photos.B110, Photos.B115, Photos.B120);
-			photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020, Photos.Z025, Photos.Z030, Photos.Z040, Photos.Z045, Photos.Z050, Photos.Z060, Photos.Z070, Photos.Z090, Photos.Z100, Photos.Z110, Photos.Z115, Photos.Z120, Photos.Z130, Photos.Z140);
+			photoArray03 = new Array(Photos.C010, Photos.C015, Photos.C020, Photos.C025, Photos.C030, Photos.C040, Photos.C045, Photos.C050, Photos.C060, Photos.C070, Photos.C090, Photos.C100, Photos.C110, Photos.C115, Photos.C120, Photos.C130, Photos.C140);
 			
 			//photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03);		// FIX ME - DELETE
 			//photoArray02 = new Array(Photos.B010, Photos.B020, Photos.B030);		// FIX ME - DELETE
 			//photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020);	// FIX ME - DELETE
+			
+			this.type = 'american';
 		}
 		
 		override public function added():void
@@ -46,6 +48,7 @@ package
 		{
 			//trace('AmericanController');
 			//trace('American beat alarm percent: ' + heartController.beatAlarm.percent);
+			//trace('american heart rate: ' + this.heartController.heartRate);
 			super.update();
 		}
 		
@@ -71,17 +74,14 @@ package
 					photoArrayNumber = 3;
 					loopPhotos = true;
 					replacePhotoController();				
+					this.heartController.setHeartRatePulseSpeed(Global.HEART_RATE_03, Global.PULSE_SPEED_03);
+					trace('heart rate: ' + heartController.heartRate);
+					trace('pulse speed: ' + heartController.pulseSpeed);
 					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
 				default:
 					break;
 			}
-		}
-		
-		override public function fadeOut():void
-		{
-			trace('american ending phase');
-			super.fadeOut();
 		}
 		
 		/**

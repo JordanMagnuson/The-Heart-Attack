@@ -83,10 +83,10 @@ package
 						Global.americanController.fadeIn();
 						Global.phase++;		
 						break;
-					case 4:
-						Global.vietController.fadeIn();
-						Global.phase++;
-						break;
+					//case 4:
+						//Global.vietController.fadeIn();
+						//Global.phase++;
+						//break;
 					default:
 						break;
 				}					

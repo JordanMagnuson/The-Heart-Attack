@@ -117,15 +117,15 @@ package
 			}
 		}
 		
-		public function fadeOut():void
+		public function fadeOut(duration:Number = 180):void
 		{
 			trace('person controller fading out');
 			inputController.active = false;
-			heartController.fadeOut(DEACTIVATE_DURATION);
+			heartController.fadeOut(duration);
 			if (personImage) personImage.pause();
-			FP.world.add(darkMask = new DarkMask(x, y, true, DEACTIVATE_DURATION, ACTIVATE_DURATION));
-			this.heartController.hotZone.fadeOut(DEACTIVATE_DURATION);
-			var fadeOutCompleteAlarm:Alarm = new Alarm(DEACTIVATE_DURATION, fadeOutComplete);
+			FP.world.add(darkMask = new DarkMask(x, y, true, duration, duration));
+			this.heartController.hotZone.fadeOut(duration);
+			var fadeOutCompleteAlarm:Alarm = new Alarm(duration, fadeOutComplete);
 			addTween(fadeOutCompleteAlarm, true);			
 		}		
 		
