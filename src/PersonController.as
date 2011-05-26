@@ -17,6 +17,7 @@ package
 	
 		// Whether the person should be on top or bottom
 		public var isTop:Boolean;
+		public var photoFlipped:Boolean;
 		public var direction:Boolean;
 		public var dead:Boolean = false;
 		
@@ -55,6 +56,7 @@ package
 		{
 			this.inputKey = inputKey;
 			this.isTop = isTop;
+			this.photoFlipped = !isTop;
 			this.direction = isTop;
 			if (!isTop) y = FP.halfHeight;
 			if (isTop) hotZoneX = Global.HOT_ZONE_X;
@@ -165,7 +167,7 @@ package
 		public function replacePhotoController():void
 		{
 				oldPhotoController = photoController;
-				FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, loopPhotos));			
+				FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, loopPhotos, true, Global.PHOTO_MAX_ALPHA, photoFlipped));			
 		}
 		
 	}

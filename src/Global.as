@@ -26,6 +26,8 @@ package
 		public static const PULSE_COLOR_HIT:uint = Colors.WHITE;
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
+		public static const PHOTO_MAX_ALPHA = 0.5;
+		
 		// Constants - heart controller
 		public static const STARTING_HEALTH:Number = 1;
 		public static const HEALTH_DIF_TO_DIE_TOGETHER:Number = 0.2;

@@ -1,8 +1,8 @@
 package 
 {
 	import net.flashpunk.Entity;
-	import net.flashpunk.graphics.Backdrop;
 	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.tweens.misc.Alarm;
 	import net.flashpunk.tweens.misc.ColorTween;
 	import Colors;
@@ -22,17 +22,19 @@ package
 		public var maxAlpha:Number;
 		
 		public var shouldFadeIn:Boolean;
-		public var backdrop:Backdrop;
+		public var backdrop:Image;
 		public var fadeTween:ColorTween;
 		
-		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5) 
+		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5, flipped:Boolean = false) 
 		{
 			super(x, y);
 			this.shouldFadeIn = shouldFadeIn;
 			this.fadeInDuration = fadeInDuration;
 			this.fadeOutDuration = fadeOutDuration;
 			this.maxAlpha = maxAlpha;
-			backdrop = new Backdrop(source, false, false);
+			backdrop = new Image(source);
+			if (flipped)
+				backdrop.flipped = true;
 			graphic = backdrop;
 			layer = 100;
 			graphic.scrollX = 0;
@@ -56,7 +58,7 @@ package
 		
 		public function reset(source:*):void
 		{
-			backdrop = new Backdrop(source);
+			backdrop = new Image(source);
 			backdrop.alpha = 0;		
 			fadeIn();
 		}
@@ -78,7 +80,7 @@ package
 		{
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween);		
-			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as Backdrop).alpha, 0);				
+			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as Image).alpha, 0);				
 		}
 		
 		public function destroy():void
