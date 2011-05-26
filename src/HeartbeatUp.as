@@ -59,7 +59,16 @@ package
 			FP.world.add(new RedMask(this.heartController.x, this.heartController.y));
 			
 			if (Global.COMBINE_UP_DOWN_BEATS)
-				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_MISSED;				
+				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_MISSED;	
+				
+			// Die together?
+			if (Global.dieTogether)
+			{
+				if (this.heartController.personController.type == 'american')
+					Global.vietController.heartController.loseHealth();
+				else
+					Global.americanController.heartController.loseHealth();
+			}
 		}
 		
 		override public function reset():void

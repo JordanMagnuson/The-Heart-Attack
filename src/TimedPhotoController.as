@@ -36,8 +36,9 @@ package
 		
 		public var fadeInDuration:Number = 120;
 		public var fadeOutDuration:Number = 120;
+		public var maxAlpha:Number;
 		
-		public function TimedPhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 300, startDelay:Number = 300, fadeDuration:Number = 120) 
+		public function TimedPhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 300, startDelay:Number = 300, fadeDuration:Number = 120, maxAlpha:Number = 1) 
 		{
 			super(x, y);
 			this.fadeIn = fadeIn;
@@ -46,6 +47,7 @@ package
 			this.displayTime = displayTime;
 			this.fadeInDuration = fadeDuration;
 			this.fadeOutDuration = fadeDuration;
+			this.maxAlpha = maxAlpha;
 			this.loop = loop;
 			currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, false, fadeInDuration, fadeOutDuration);
 			startAlarm = new Alarm(startDelay, start);
@@ -106,7 +108,7 @@ package
 			{
 				lastPhoto = currentPhoto;
 				lastPhoto.fadeOut();
-				FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration));
+				FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha));
 			}
 			else
 			{
@@ -116,7 +118,7 @@ package
 				{
 					lastPhoto = currentPhoto;
 					lastPhoto.fadeOut();
-					FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration));
+					FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha));
 					//nextPhotoAlarm.reset(displayTime);
 				}				
 			}

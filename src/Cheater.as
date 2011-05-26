@@ -59,7 +59,8 @@ package
 			
 			if (Input.pressed(Key.F11))
 			{
-				Global.phase = 4;
+				Global.phase = 2;
+				Global.americanController.fadeOut();
 				Global.vietController.fadeIn();
 				Global.phase++;						
 			}

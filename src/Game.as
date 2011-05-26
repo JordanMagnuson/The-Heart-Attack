@@ -55,6 +55,8 @@ package
 				if (!Global.gameOver)
 				{
 					Global.gameOver = true;
+					if (Global.dieTogether && Math.abs(Global.americanController.heartController.health - Global.vietController.heartController.health) <= Global.HEALTH_DIF_TO_DIE_TOGETHER)
+						Global.bothDead = true;
 					if (Global.americanController.dead)
 						add(new GameOverSequence(Global.americanController, Global.vietController));
 					else 
@@ -90,6 +92,7 @@ package
 					{
 						Global.vietController.fadeIn();
 						Global.phase++;
+						Global.dieTogether = true;
 					}
 					//trace(Global.americanController.heartController.beatAlarm.percent);
 					//if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
