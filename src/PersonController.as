@@ -144,12 +144,9 @@ package
 			this.heartController.hotZone.fadeIn(ACTIVATE_DURATION);
 			if (darkMask)
 			{	
-				if (!darkMask.fadeTween.active)
-				{
-					var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, fadeInComplete);
-					addTween(newPhaseReadyAlarm, true);
-					darkMask.fadeOut(ACTIVATE_DURATION);
-				}
+				var newPhaseReadyAlarm:Alarm = new Alarm(ACTIVATE_DURATION, fadeInComplete);
+				addTween(newPhaseReadyAlarm, true);
+				darkMask.fadeOut(ACTIVATE_DURATION);
 			}
 			else
 			{

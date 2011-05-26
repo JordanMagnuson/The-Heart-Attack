@@ -112,6 +112,9 @@ package
 		
 		public function checkTutorialHotzone(heartbeat:Heartbeat, distance:Number = 0):Boolean
 		{
+			//if (heartbeat.checkOverlapHotZone())
+					//return true;
+			//return false;
 			if (direction)
 			{
 				if (heartbeat.x < personController.heartController.hotZone.x - distance)
@@ -119,6 +122,7 @@ package
 			}
 			else 
 			{
+				if (heartbeat.x > personController.heartController.hotZone.x + Global.HOT_ZONE_WIDTH - Global.heartbeatUpWidth - distance)
 				if (heartbeat.x > personController.heartController.hotZone.x + Global.HOT_ZONE_WIDTH - Global.heartbeatUpWidth - distance)
 					return true;
 			}

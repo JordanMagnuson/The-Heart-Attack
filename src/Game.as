@@ -47,7 +47,7 @@ package
 		
 		override public function update():void
 		{
-		//	trace(Global.phase);
+			//trace(Global.phase);
 		
 			// Deal with death
 			if (Global.americanController.dead || Global.vietController.dead)

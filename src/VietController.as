@@ -57,7 +57,7 @@ package
 					heartController.tweenHeartRate(Global.HEART_RATE_02, heartController.heartRate * photoArray.length);
 					heartController.tweenPulseSpeed(Global.PULSE_SPEED_02, heartController.heartRate * photoArray.length);	
 					break;
-				case 2:				
+				case 2:			
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_02;
 					photoArray = photoArray02;
 					photoArrayNumber = 2;
