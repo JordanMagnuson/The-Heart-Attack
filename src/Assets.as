@@ -19,6 +19,8 @@ package
 		[Embed(source = '../assets/tutorial_text_03.png')] public static const TUT_TEXT_03:Class;
 		[Embed(source = '../assets/man_walking.png')] public static const MAN_WALKING:Class;
 		[Embed(source = '../assets/boy_walking.png')] public static const BOY_WALKING:Class;
+		[Embed(source = '../assets/clouds.jpg')] public static const CLOUDS:Class;
+		[Embed(source = '../assets/block_mask.jpg')] public static const BLOCK_MASK:Class;
 		
 		// sfx
 		[Embed(source = '../assets/sfx01.swf', symbol = 'heartbeat_up.wav')] public static const SND_HEARTBEAT_UP:Class;

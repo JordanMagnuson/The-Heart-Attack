@@ -27,9 +27,12 @@ package
 		public static const PULSE_COLOR_MISSED:uint = Colors.BLOOD_RED;
 		
 		public static const PHOTO_MAX_ALPHA = 0.5;
+		public static const PHOTO_MAX_ALPHA_END_SLIDESHOW = 1;
+		
 		
 		// Constants - heart controller
 		public static const STARTING_HEALTH:Number = 1;
+		public static const LOSE_HEALTH_AMOUNT:Number = 0.5;			// 0.1
 		public static const HEALTH_DIF_TO_DIE_TOGETHER:Number = 0.2;
 		public static const HEART_RATE_01:Number = 5 * FRAME_RATE;	// 5
 		public static const PULSE_SPEED_01:Number = 1;					// 1
@@ -42,19 +45,13 @@ package
 		
 		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 90 * FRAME_RATE;
 		public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
-		public static const PULSE_SPEED_04:Number = 8;				
+		public static const PULSE_SPEED_04:Number = 8;			
 		
-		// Constants - photo controller
+		// Photo display times - no longer used.
 		public static const PHOTO_DISPLAY_TIME_01:Number = 3 * FRAME_RATE;	// 7
 		public static const PHOTO_DISPLAY_TIME_02:Number = 3 * FRAME_RATE; 	// 5
-		public static const PHOTO_DISPLAY_TIME_03:Number = 3 * FRAME_RATE; 	// 3
+		public static const PHOTO_DISPLAY_TIME_03:Number = 3 * FRAME_RATE; 	// 3		
 		
-		
-		
-		
-
-		//public static const HEART_RATE_01B:Number = 61;	//184	//123	61
-		//public static const PULSE_SPEED_01B:Number = 2;	//2	
 		
 		// Variables
 		public static var heartbeatUpWidth;
@@ -63,6 +60,13 @@ package
 		public static var gameOver:Boolean = false;
 		public static var dieTogether:Boolean = false;
 		public static var bothDead:Boolean = false;
+		public static var startPixelating:Boolean = false;
+		public static var startDepixelating:Boolean = false;
+		public static var pixelatePerPhoto:Number = 1;	// Once startPixelating is true, how much to increase pixelation with each photo?
+		public static var depixelatePerPhoto:Number = 0.5;
+		public static var photoCellSize:Number = 1;
+		public static var alphaIncreasing:Boolean = false;
+		public static var increaseAlphaAmount:Number = 0.1;
 		
 		// Global entities
 		public static var cheater:Cheater;

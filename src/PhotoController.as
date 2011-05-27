@@ -39,7 +39,7 @@ package
 		public var maxAlpha:Number;
 		public var flipped:Boolean;
 		
-		public var pixelateCellSize:int = 1;
+		public var pixelateCellSize:Number = 1;
 		
 		public function PhotoController(photoArray:Array, x:Number = 0, y:Number = 0, displayTime:Number = 300, startDelay:Number = 0, loop:Boolean = false, fadeIn:Boolean = true, maxAlpha:Number = 0.5, flipped:Boolean = false) 
 		{
@@ -100,12 +100,17 @@ package
 			{
 				return;
 			}
+			
+			if (Global.startPixelating)
+			{
+				pixelateCellSize += Global.pixelatePerPhoto;
+			}
 				
 			if (currentIndex < photoArray.length)
 			{
 				lastPhoto = currentPhoto;
 				lastPhoto.fadeOut();
-				FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped));
+				FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize)));
 			}
 			else
 			{
@@ -115,7 +120,7 @@ package
 				{
 					lastPhoto = currentPhoto;
 					lastPhoto.fadeOut();
-					FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped));
+					FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize)));
 					//nextPhotoAlarm.reset(displayTime);
 				}				
 			}

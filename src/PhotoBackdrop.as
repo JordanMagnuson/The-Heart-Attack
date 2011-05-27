@@ -22,17 +22,17 @@ package
 		public var maxAlpha:Number;
 		
 		public var shouldFadeIn:Boolean;
-		public var backdrop:Image;
+		public var backdrop:MosaicImage;
 		public var fadeTween:ColorTween;
 		
-		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5, flipped:Boolean = false) 
+		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5, flipped:Boolean = false, cellSize:int = 1) 
 		{
 			super(x, y);
 			this.shouldFadeIn = shouldFadeIn;
 			this.fadeInDuration = fadeInDuration;
 			this.fadeOutDuration = fadeOutDuration;
 			this.maxAlpha = maxAlpha;
-			backdrop = new Image(source);
+			backdrop = new MosaicImage(source, null, cellSize);
 			if (flipped)
 				backdrop.flipped = true;
 			graphic = backdrop;
@@ -58,9 +58,9 @@ package
 		
 		public function reset(source:*):void
 		{
-			backdrop = new Image(source);
-			backdrop.alpha = 0;		
-			fadeIn();
+			//backdrop = new Image(source);
+			//backdrop.alpha = 0;		
+			//fadeIn();
 		}
 		
 		override public function update():void
@@ -80,7 +80,7 @@ package
 		{
 			fadeTween = new ColorTween(destroy);
 			addTween(fadeTween);		
-			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as Image).alpha, 0);				
+			fadeTween.tween(fadeOutDuration, Colors.WHITE, Colors.WHITE, (graphic as MosaicImage).alpha, 0);				
 		}
 		
 		public function destroy():void

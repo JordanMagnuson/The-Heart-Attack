@@ -277,7 +277,7 @@ package
 		
 		public function loseHealth():void
 		{
-			health -= 0.1;
+			health -= Global.LOSE_HEALTH_AMOUNT;
 			
 			// Update sound volume
 			heartSoundController.updateVolume(health);

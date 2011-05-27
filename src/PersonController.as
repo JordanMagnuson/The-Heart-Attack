@@ -160,6 +160,7 @@ package
 		public function fadeInComplete():void
 		{
 			trace('fade in complete');
+			//if (oldPhotoController) oldPhotoController.destroy();
 			unpause();
 			heartController.beat();
 		}

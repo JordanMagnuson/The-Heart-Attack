@@ -19,16 +19,16 @@ package
 		public const MAX_WAR_PHOTOS_TO_SHOW:Number = 3;
 		public const SKIP_EVERY_OTHER_BOOTCAMP_PHOTO:Boolean = true;
 		
-		public const DARK_MASK_IN_DURATION:Number = 8 * FP.assignedFrameRate;
-		public const RED_MASK_IN_DURATION:Number = 0.01 * FP.assignedFrameRate;		// 0.1
-		public const RED_MASK_STAY_DURATION:Number = 15 * FP.assignedFrameRate;		// 10
-		public const RED_MASK_OUT_DURATION:Number = 15 * FP.assignedFrameRate;		// 10
+		public const DARK_MASK_IN_DURATION:Number = 8 * FP.assignedFrameRate;		
+		public const RED_MASK_IN_DURATION:Number = 1 * FP.assignedFrameRate;		// 1
+		public const RED_MASK_STAY_DURATION:Number = 14 * FP.assignedFrameRate;		// 14
+		public const RED_MASK_OUT_DURATION:Number = 15 * FP.assignedFrameRate;		// 15
 		public const FLAT_LINE_OUT_DURATION:Number = 5 * FP.assignedFrameRate;		// 5
 		public const HOT_ZONE_OUT_DURATION:Number = 5 * FP.assignedFrameRate;		// 5
 		public const SOUND_OUT_DURATION:Number = 8 * FP.assignedFrameRate;			// 8
 		public const MUSIC_START_TIME:Number = 15 * FP.assignedFrameRate;			// 15
 		public const MUSIC_IN_DURATION:Number = 20 * FP.assignedFrameRate;			// 20
-		public const SLIDE_SHOW_START_TIME:Number = 20 * FP.assignedFrameRate;		// 30
+		public const SLIDE_SHOW_START_TIME:Number = 2 * FP.assignedFrameRate;		// 20
 		
 		public var dead:PersonController;
 		public var notDead:PersonController;
@@ -49,6 +49,8 @@ package
 		{
 			this.dead = dead;
 			this.notDead = notDead;
+			trace('dead: ' + this.dead.type);
+			trace('notdead: ' + this.notDead.type);
 		}
 		
 		override public function added():void
@@ -56,6 +58,9 @@ package
 			// Pause everything
 			//Global.americanController.pause();
 			//Global.vietController.pause();
+			Global.photoCellSize = dead.photoController.pixelateCellSize;
+			Global.depixelatePerPhoto = Global.photoCellSize / 10;
+			Global.startDepixelating = true;
 			
 			// Play flatline sound
 			sndFlatline.play(0.2);
@@ -81,13 +86,14 @@ package
 			
 			// Fade everything in/out
 			// Die together
-			if (Global.bothDead)
+			//if (Global.bothDead)
+			if (true)
 			{
 				notDead.pause();
 				notDead.heartController.hotZone.active = true;
 				notDead.heartController.hotZone.fadeOut();
-				notDead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);	
-				FP.world.add(new RedMask(notDead.x, notDead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
+				if (notDead.heartController.flatLine) notDead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);	
+				//FP.world.add(new RedMask(notDead.x, notDead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
 				notDeadPhotocontroller = generateSlideshow(notDead);
 			}
 			else
@@ -98,8 +104,8 @@ package
 			dead.pause();
 			dead.heartController.hotZone.active = true;
 			dead.heartController.hotZone.fadeOut();
-			dead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);
-			FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
+			if (dead.heartController.flatLine) dead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);
+			//FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
 			deadPhotocontroller = generateSlideshow(dead);
 			
 		}
@@ -155,6 +161,12 @@ package
 				}				
 			}
 			
+			//else if (person.photoArrayNumber == 3)
+			//{
+				//trace('stuff one image');
+				//photoArray.push(person.photoArray03[5]);
+			//}
+			
 			// Photo array 3
 			else if (person.photoArrayNumber == 3)
 			{
@@ -206,10 +218,10 @@ package
 			
 			// Determine timing
 			var displayTime:Number = (musicDuration + MUSIC_START_TIME - SLIDE_SHOW_START_TIME) / (photoArray.length);
-			var fadeDuratoin:Number = displayTime / 2;
+			var fadeDuration:Number = displayTime / 2;
 			
 			// Create controller
-			return new TimedPhotoController(photoArray, person.x, person.y, displayTime, displayTime, fadeDuratoin);
+			return new TimedPhotoController(photoArray, person.x, person.y, displayTime, displayTime, fadeDuration, 0.5, person.photoFlipped, person.photoController.pixelateCellSize);
 		
 		}
 		
