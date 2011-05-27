@@ -18,8 +18,11 @@ package
 		override public function begin():void
 		{
 			add(new Ground);
+			add(Global.quake = new Quake);
 			add(Global.cheater = new Cheater);
 			add(Global.soundController = new SoundController);
+			
+			Global.quake.start();
 			
 			//Global.soundController.flatline.loop(0.5);
 			

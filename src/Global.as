@@ -70,6 +70,7 @@ package
 		
 		// Global entities
 		public static var cheater:Cheater;
+		public static var quake:Quake;
 		public static var americanController:AmericanController;
 		public static var vietController:VietController;
 		public static var soundController:SoundController;
