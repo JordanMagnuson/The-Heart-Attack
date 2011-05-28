@@ -25,15 +25,26 @@ package
 		public var maxAlpha:Number;
 		
 		//public var image:Image = Image.createRect(FP.width, FP.halfHeight, Colors.BLOOD_RED, 1);
-		public var image:MosaicImage;
+		public var image:Image;
 		public var fadeTween:ColorTween;
 		
 		public var stayConstantAlarm:Alarm;
 		
-		public function RedMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 0, fadeOutDuration:Number = 0, liveDuration:Number = 0, maxAlpha:Number = 0.6) 
+		public function RedMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 0, fadeOutDuration:Number = 0, liveDuration:Number = 0, maxAlpha:Number = 0.6, pixelated:Boolean = false, color:uint = Colors.BLOOD_RED) 
 		{
-			image = new MosaicImage(Assets.BLOCK_MASK);
-			image.color = Colors.BLOOD_RED;
+			if (color == Colors.BLACK)
+			{
+				image = new Image(Assets.BLOCK_MASK_BLACK);
+			}
+			else if (!pixelated)
+			{
+				image = Image.createRect(FP.width, FP.halfHeight, Colors.BLOOD_RED, 1);
+			}
+			else
+			{
+				image = new Image(Assets.BLOCK_MASK);
+				image.color = Colors.BLOOD_RED;
+			}
 			super(x, y, image);
 			layer = -100;
 			graphic.scrollX = 0;

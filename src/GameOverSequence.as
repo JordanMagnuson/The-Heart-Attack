@@ -16,19 +16,19 @@ package
 		public const AMERICAN_MUSIC_DURATION:Number = 183 * FP.assignedFrameRate;
 		public const VIET_MUSIC_DURATION:Number = 187 * FP.assignedFrameRate;
 
-		public const MAX_WAR_PHOTOS_TO_SHOW:Number = 3;
+		public const MAX_WAR_PHOTOS_TO_SHOW:Number = 7;
 		public const SKIP_EVERY_OTHER_BOOTCAMP_PHOTO:Boolean = true;
 		
 		public const DARK_MASK_IN_DURATION:Number = 8 * FP.assignedFrameRate;		
-		public const RED_MASK_IN_DURATION:Number = 1 * FP.assignedFrameRate;		// 1
-		public const RED_MASK_STAY_DURATION:Number = 14 * FP.assignedFrameRate;		// 14
+		public const RED_MASK_IN_DURATION:Number = 3 * FP.assignedFrameRate;		// 1
+		public const RED_MASK_STAY_DURATION:Number = 12 * FP.assignedFrameRate;		// 14
 		public const RED_MASK_OUT_DURATION:Number = 15 * FP.assignedFrameRate;		// 15
 		public const FLAT_LINE_OUT_DURATION:Number = 5 * FP.assignedFrameRate;		// 5
 		public const HOT_ZONE_OUT_DURATION:Number = 5 * FP.assignedFrameRate;		// 5
 		public const SOUND_OUT_DURATION:Number = 8 * FP.assignedFrameRate;			// 8
 		public const MUSIC_START_TIME:Number = 15 * FP.assignedFrameRate;			// 15
 		public const MUSIC_IN_DURATION:Number = 20 * FP.assignedFrameRate;			// 20
-		public const SLIDE_SHOW_START_TIME:Number = 2 * FP.assignedFrameRate;		// 20
+		public const SLIDE_SHOW_START_TIME:Number = 20 * FP.assignedFrameRate;		// 20
 		
 		public var dead:PersonController;
 		public var notDead:PersonController;
@@ -41,6 +41,8 @@ package
 		public var music:Sfx;
 		public var musicDuration:Number;
 		public var musicFader:SfxFader;
+		
+		public var photoIndex:int;
 		
 		public var deadPhotocontroller:TimedPhotoController;
 		public var notDeadPhotocontroller:TimedPhotoController;
@@ -58,9 +60,11 @@ package
 			// Pause everything
 			//Global.americanController.pause();
 			//Global.vietController.pause();
+			photoIndex = dead.photoController.currentIndex;
 			Global.photoCellSize = dead.photoController.pixelateCellSize;
 			Global.depixelatePerPhoto = Global.photoCellSize / 10;
 			Global.startDepixelating = true;
+			Global.quake.stop();
 			
 			// Play flatline sound
 			sndFlatline.play(0.2);
@@ -68,7 +72,7 @@ package
 			addTween(sfxFader, true);
 			
 			// Music
-			if (dead.type == 'american' || (Global.bothDead && FP.random > 0.5))
+			if ((!Global.bothDead && dead.type == 'american') || (Global.bothDead && FP.random > 0.9))
 			{
 				music = new Sfx(Assets.MUS_BONES_SKIN);
 				musicDuration = AMERICAN_MUSIC_DURATION;
@@ -86,26 +90,43 @@ package
 			
 			// Fade everything in/out
 			// Die together
-			//if (Global.bothDead)
-			if (true)
+			if (Global.bothDead)
+			//if (true)
 			{
 				notDead.pause();
 				notDead.heartController.hotZone.active = true;
 				notDead.heartController.hotZone.fadeOut();
 				if (notDead.heartController.flatLine) notDead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);	
-				//FP.world.add(new RedMask(notDead.x, notDead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
+				FP.world.add(new RedMask(notDead.x, notDead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1, true));
 				notDeadPhotocontroller = generateSlideshow(notDead);
+			}
+			else if (dead.photoArrayNumber == 3)
+			{
+				notDead.pause();
+				if (notDead.darkMask) notDead.darkMask.fadeOut(RED_MASK_IN_DURATION);
+				notDead.heartController.hotZone.active = true;
+				notDead.heartController.hotZone.fadeOut();
+				if (notDead.heartController.flatLine) notDead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);	
+				FP.world.add(new RedMask(notDead.x, notDead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1, true, Colors.BLACK));
+				notDeadPhotocontroller = generateSlideshow(notDead);
+				notDead.heartController.fadeOut(RED_MASK_IN_DURATION);
 			}
 			else
 			{
-				notDead.fadeOut();
-				FP.world.add(new DarkMask(notDead.x, notDead.y, true, DARK_MASK_IN_DURATION, 0, 1));
+				notDead.pause();
+				notDead.darkMask.fadeOut(RED_MASK_IN_DURATION);
+				notDead.heartController.hotZone.active = true;
+				notDead.heartController.hotZone.fadeOut();
+				if (notDead.heartController.flatLine) notDead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);	
+				FP.world.add(new DarkMask(notDead.x, notDead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, 1, true));
+				//notDeadPhotocontroller = generateSlideshow(notDead);
+				notDead.heartController.fadeOut(RED_MASK_IN_DURATION);				
 			}
 			dead.pause();
 			dead.heartController.hotZone.active = true;
 			dead.heartController.hotZone.fadeOut();
 			if (dead.heartController.flatLine) dead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);
-			//FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1));
+			FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1, true));
 			deadPhotocontroller = generateSlideshow(dead);
 			
 		}
@@ -122,7 +143,7 @@ package
 		{
 			var photoArray:Array = [];
 			trace('global phase: ' + Global.phase);
-			trace('current index: ' + person.photoController.currentIndex);
+			trace('current index: ' + photoIndex);
 			trace('finished: ' + person.photoController.finished);
 			
 			// Pack first array
@@ -134,7 +155,7 @@ package
 			if (person.photoArrayNumber == 1)
 			{
 				trace('yes array = 1');
-				for (i = 0; i < person.photoController.currentIndex; i++)
+				for (i = 0; i < photoIndex; i++)
 				{
 					trace('phot: ' + person.photoArray01[i]);
 					photoArray.push(person.photoArray01[i]);
@@ -145,7 +166,7 @@ package
 			else if (person.photoArrayNumber == 2)
 			{
 				photoArray = person.photoArray01;
-				for (i = 0; i < person.photoController.currentIndex; i++)
+				for (i = 0; i < photoIndex; i++)
 				{
 					trace('phot: ' + person.photoArray02[i]);
 					if (SKIP_EVERY_OTHER_BOOTCAMP_PHOTO)
@@ -189,10 +210,10 @@ package
 				// Check for looping
 				if (person.photoController.finished)
 				{
-					for (i = person.photoController.currentIndex; i < person.photoArray03.length; i++)
+					for (i = photoIndex; i < person.photoArray03.length; i++)
 					{
 						trace('phot: ' + person.photoArray03[i]);
-						if (person.photoController.currentIndex + i < MAX_WAR_PHOTOS_TO_SHOW)
+						if (photoIndex + i < MAX_WAR_PHOTOS_TO_SHOW)
 							photoArray.push(person.photoArray03[i]);
 						else	
 							break;
@@ -200,7 +221,7 @@ package
 				}
 				
 				// Push photos up to index
-				for (i = 0; i < person.photoController.currentIndex - 1; i++)
+				for (i = 0; i < photoIndex - 1; i++)
 				{
 					trace('phot: ' + person.photoArray03[i]);
 					if (i < MAX_WAR_PHOTOS_TO_SHOW - 1)
@@ -221,7 +242,7 @@ package
 			var fadeDuration:Number = displayTime / 2;
 			
 			// Create controller
-			return new TimedPhotoController(photoArray, person.x, person.y, displayTime, displayTime, fadeDuration, 0.5, person.photoFlipped, person.photoController.pixelateCellSize);
+			return new TimedPhotoController(photoArray, person.x, person.y, displayTime, displayTime, fadeDuration, 0.5, person.photoFlipped, Global.photoCellSize);
 		
 		}
 		

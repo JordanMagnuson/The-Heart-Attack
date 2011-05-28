@@ -20,12 +20,25 @@ package
 			super(source, clipRect);
 			this.cellSize = cellSize;
 			smooth = false;
-			if (cellSize > 1)
+			//this.cellSize = 2.5;
+			
+			if (this.cellSize > 1)
 			{
+				fitCellSize();
 				downScale();
 				upScale();
 			}
 			updateBuffer();
+		}
+		
+		public function fitCellSize():void
+		{
+			while (width % cellSize != 0 || height % cellSize != 0)
+			{
+				cellSize -= 1;
+				if (cellSize == 2)
+					return;
+			}
 		}
 		
 		public function downScale():void

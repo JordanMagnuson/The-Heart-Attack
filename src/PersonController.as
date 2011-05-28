@@ -167,8 +167,8 @@ package
 		
 		public function replacePhotoController():void
 		{
-				oldPhotoController = photoController;
-				FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, loopPhotos, true, Global.PHOTO_MAX_ALPHA, photoFlipped));			
+			oldPhotoController = photoController;
+			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, loopPhotos, true, Global.PHOTO_MAX_ALPHA, photoFlipped));			
 		}
 		
 	}

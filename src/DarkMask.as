@@ -21,11 +21,16 @@ package
 		public var fadeOutDuration:Number;
 		public var maxAlpha:Number;
 		
-		public var image:Image = Image.createRect(FP.width, FP.halfHeight, Colors.BLACK, 1);
+		public var image:Image;
 		public var fadeTween:ColorTween;
 		
-		public function DarkMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 2, fadeOutDuration:Number = 2, maxAlpha:Number = 0.8) 
+		public function DarkMask(x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 2, fadeOutDuration:Number = 2, maxAlpha:Number = 0.8, pixelated:Boolean = false) 
 		{
+			if (!pixelated)
+				image = Image.createRect(FP.width, FP.halfHeight, Colors.BLACK, 1);
+			else
+				image = new Image(Assets.BLOCK_MASK_BLACK);
+			
 			super(x, y, image);
 			layer = -100;
 			graphic.scrollX = 0;

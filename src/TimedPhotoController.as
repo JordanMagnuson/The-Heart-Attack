@@ -57,6 +57,7 @@ package
 				
 			if (maxAlpha < 1)
 				maxAlpha += Global.increaseAlphaAmount;
+			trace('timedphoto max aplha: ' + maxAlpha);
 			
 			if (finished && !loop)
 			{

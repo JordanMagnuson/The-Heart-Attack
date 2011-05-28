@@ -42,7 +42,14 @@ package
 			image.color = Global.PULSE_COLOR_HIT;
 									
 			if (Global.COMBINE_UP_DOWN_BEATS)
-				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_HIT;				
+				pairedHeartbeatDown.image.color = Global.PULSE_COLOR_HIT;	
+				
+			if (Global.quakeScreenOnBeat)
+			{
+				Global.quake.start(Global.quakeIntensity, Global.quakeDuration);
+				Global.quakeIntensity += Global.quakeIntensityIncreaseBy;
+				Global.quakeDuration += Global.quakeDurationIncreaseBy;
+			}
 		}
 		
 		override public function missedAction():void

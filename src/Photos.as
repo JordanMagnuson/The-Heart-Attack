@@ -35,9 +35,9 @@ package
 		[Embed(source = '../assets/photos/american_02/090_viet67.jpg')] public static const B09:Class;
 		[Embed(source = '../assets/photos/american_02/095_viet100.jpg')] public static const B10:Class;
 		[Embed(source = '../assets/photos/american_02/100_viet61.jpg')] public static const B11:Class;
-		[Embed(source = '../assets/photos/american_02/110_hill_gun.jpg')] public static const B12:Class;
-		[Embed(source = '../assets/photos/american_02/115_vietnam-1stAC.jpg')] public static const B13:Class;
-		[Embed(source='../assets/photos/american_02/120_viet98.jpg')] public static const B14:Class;
+		[Embed(source = '../assets/photos/american_02/115_vietnam-1stAC.jpg')] public static const B12:Class;
+		[Embed(source = '../assets/photos/american_02/120_viet98.jpg')] public static const B13:Class;
+		[Embed(source = '../assets/photos/american_02/130_hill_gun.jpg')] public static const B14:Class;
 		
 		// Ameircan final
 		//[Embed(source = '../assets/photos/american_final/010_viet48.jpg')] public static const C010:Class;
@@ -86,10 +86,10 @@ package
 		[Embed(source = '../assets/photos/viet_02/050_vccg.jpg')] public static const Y08:Class;
 		[Embed(source = '../assets/photos/viet_02/060_north_vietnamese_soldiers.jpg')] public static const Y09:Class;
 		[Embed(source = '../assets/photos/viet_02/070_mortar.jpg')] public static const Y10:Class;
-		[Embed(source = '../assets/photos/viet_02/100_alert.jpg')] public static const Y11:Class;
-		[Embed(source = '../assets/photos/viet_02/110_vcriv.jpg')] public static const Y12:Class;
-		[Embed(source = '../assets/photos/viet_02/80_atk5.jpg')] public static const Y13:Class;
-		[Embed(source = '../assets/photos/viet_02/90_vcmg.jpg')] public static const Y14:Class;
+		[Embed(source = '../assets/photos/viet_02/80_atk5.jpg')] public static const Y11:Class;
+		[Embed(source = '../assets/photos/viet_02/100_alert.jpg')] public static const Y12:Class;
+		[Embed(source = '../assets/photos/viet_02/110_vcriv.jpg')] public static const Y13:Class;
+		[Embed(source = '../assets/photos/viet_02/130_vcmg.jpg')] public static const Y14:Class;	
 		
 		// Both final set
 		[Embed(source = '../assets/photos/both_final/010_viet48.jpg')] public static const Z010:Class;
@@ -105,7 +105,7 @@ package
 		[Embed(source = '../assets/photos/both_final/090_viet63.jpg')] public static const Z090:Class;
 		[Embed(source = '../assets/photos/both_final/100_viet76.jpg')] public static const Z100:Class;
 		[Embed(source = '../assets/photos/both_final/110_DSC00042e.jpg')] public static const Z110:Class;
-		[Embed(source = '../assets/photos/both_final/115_vcriv.jpg')] public static const Z115:Class;
+		[Embed(source = '../assets/photos/both_final/020_100_vcmg.jpg')] public static const Z115:Class;
 		[Embed(source = '../assets/photos/both_final/120_viet74.jpg')] public static const Z120:Class;
 		[Embed(source = '../assets/photos/both_final/130_DSC00037b.jpg')] public static const Z130:Class;
 		[Embed(source='../assets/photos/both_final/140_naked_street.jpg')] public static const Z140:Class;
