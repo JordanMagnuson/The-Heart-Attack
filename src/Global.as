@@ -9,6 +9,10 @@ package
 	 */
 	public class Global 
 	{
+		public static const TEST_MODE:Boolean = false;
+		public static var SUCCESS_COUNT:int = 0;
+		public static var FAILURE_COUNT:int = 0;
+		
 		// Gameplay Settings
 		public static const CONSTANT_HEART_SOUND:Boolean = false;	// FIX ME - get rid of before release
 		public static const COMBINE_UP_DOWN_BEATS:Boolean = true;
@@ -35,14 +39,14 @@ package
 		public static const LOSE_HEALTH_AMOUNT:Number = 0.1;			// 0.1
 		public static const HEALTH_DIF_TO_DIE_TOGETHER:Number = 0.3;
 		
-		public static const HEART_RATE_01:Number = 1 * FRAME_RATE;	// 5
-		public static const PULSE_SPEED_01:Number = 3;					// 1
+		public static const HEART_RATE_01:Number = 5 * FRAME_RATE;	// 5
+		public static const PULSE_SPEED_01:Number = 1;					// 1
 		
-		public static const HEART_RATE_02:Number = 1 * FRAME_RATE;		// 3
-		public static const PULSE_SPEED_02:Number = 3;				// 1.5
+		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;		// 3
+		public static const PULSE_SPEED_02:Number = 1.5;				// 1.5
 		
-		public static const HEART_RATE_03:Number = 1 * FRAME_RATE;		// 2
-		public static const PULSE_SPEED_03:Number = 3;					// 2
+		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;		// 2
+		public static const PULSE_SPEED_03:Number = 2;					// 2
 		
 		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 60 * FRAME_RATE;
 		public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;

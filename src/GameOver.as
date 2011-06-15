@@ -30,10 +30,13 @@ package
 		
 		override public function begin():void
 		{
+			FP.alarm(2 * FP.assignedFrameRate, fadeIn);
+		}
+		
+		public function fadeIn():void
+		{
 			add(gameOverText);
-			gameOverText.fadeIn(5 * FP.assignedFrameRate);
-			
-			trace('game over begin');
+			gameOverText.fadeIn(10 * FP.assignedFrameRate);			
 		}
 		
 		override public function update():void
@@ -47,15 +50,15 @@ package
 				  trace("Error occurred!");
 				}
 			}
-			if (Input.pressed(Key.X))
-			{
-				request = new URLRequest(leaveCommentURL);
-				try {
-				  navigateToURL(request, '_blank'); // second argument is target
-				} catch (e:Error) {
-				  trace("Error occurred!");
-				}
-			}
+			//if (Input.pressed(Key.X))
+			//{
+				//request = new URLRequest(leaveCommentURL);
+				//try {
+				  //navigateToURL(request, '_blank'); // second argument is target
+				//} catch (e:Error) {
+				  //trace("Error occurred!");
+				//}
+			//}
 			super.update();
 		}				
 		

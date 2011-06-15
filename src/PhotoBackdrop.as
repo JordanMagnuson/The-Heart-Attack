@@ -88,13 +88,12 @@ package
 		{
 			trace('photobackdrop destroy');
 			//this.active = false;
-			this.backdrop = null;
 			FP.world.remove(this);
 		}
 		
 		override public function removed():void
 		{
-			
+			this.backdrop = null;
 		}
 		
 		override public function render():void

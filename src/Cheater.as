@@ -29,10 +29,7 @@ package
 			else if (Input.pressed(Key.O))
 				Global.americanController.fadeOut();				
 			else if (Input.pressed(Key.Y))
-				Global.americanController.heartController.heartSoundController.fadeOut();
-				
-			if (Input.pressed(Key.F1))
-				//Global.americanController.heartController.setHeartRate(Global.HEART_RATE_01B);		
+				Global.americanController.heartController.heartSoundController.fadeOut();	
 				
 			if (Input.pressed(Key.F2))
 			{
@@ -51,6 +48,11 @@ package
 			//{
 				//Global.americanController.photoArray01 = new Array(Photos.A04, Photos.A05);		
 			//}
+			if (Input.pressed(Key.F1))
+			{
+				FP.world = new Game;
+			}			
+			
 			if (Input.pressed(Key.F10))
 			{
 				Global.americanController.heartController.health = 0.2

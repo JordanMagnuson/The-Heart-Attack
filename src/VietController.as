@@ -86,8 +86,8 @@ package
 			trace('vietcontroller fade in phase: ' + Global.phase);
 			switch (Global.phase)
 			{
-				case 5:
-					trace('yeppers');
+				case 6:
+					trace('vietcontroller final fade in complete');
 					this.heartController.tweenHeartRate(Global.HEART_RATE_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);
 					this.heartController.tweenPulseSpeed(Global.PULSE_SPEED_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);	
 					Global.americanController.heartController.tweenHeartRate(Global.HEART_RATE_04, Global.FINAL_HEART_RATE_TWEEN_DURATION);
@@ -96,7 +96,22 @@ package
 					Global.phase++;
 					break;		
 			}
-		}		
+		}	
+		
+		override public function fadeOutComplete():void
+		{
+			super.fadeOutComplete();
+			trace('vietcontroller fade out complete phase: ' + Global.phase);
+			switch (Global.phase)
+			{
+				case 4:
+					trace('phase 4 vietcontroller fade out complete');
+					Global.phase++;
+					break;
+				default:
+					break;
+			}
+		}			
 		
 		/**
 		 * Phase control alarm functions

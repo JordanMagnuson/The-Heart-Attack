@@ -56,7 +56,7 @@ package
 		{
 			missed = true;	
 			image.color = Global.PULSE_COLOR_MISSED;	
-			if (Global.phase >= 4)						// Don't lose health until last phase
+			if (Global.phase > 2)						// Don't lose health at first
 				heartController.loseHealth();
 			
 			// Sound

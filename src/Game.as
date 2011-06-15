@@ -18,6 +18,18 @@ package
 		
 		public function Game() 
 		{
+			if (Global.TEST_MODE)
+			{
+				Global.phase = 0;
+				Global.dieTogether = false;
+				Global.bothDead = false;
+				Global.startPixelating = false;
+				Global.startDepixelating = false;
+				Global.alphaIncreasing = false;
+				Global.quakeScreenOnBeat = false;
+				Global.quakeDuration = 0.01;
+				Global.quakeIntensity = 0.01;
+			}
 		}
 		
 		override public function begin():void
@@ -33,7 +45,7 @@ package
 			
 			// Choose randomly who to put on top
 			if (FP.random > 0.5)
-			//if (true)
+			//if (false)
 			{
 				trace('American on top');
 				add(Global.americanController = new AmericanController(true, Global.INPUT_KEY_TOP));
@@ -49,8 +61,11 @@ package
 			
 			
 			//Global.americanController.markedForPause = true;
-			FP.world.add(new Tutorial(Global.americanController));
-			FP.world.add(new Tutorial(Global.vietController));
+			//if (!Global.TEST_MODE)
+			//{
+				//FP.world.add(new Tutorial(Global.americanController));
+				//FP.world.add(new Tutorial(Global.vietController));
+			//}
 		}
 		
 		override public function update():void
@@ -95,7 +110,7 @@ package
 						Global.phase++;
 					}			
 					break;
-				case 4:
+				case 5:
 					if (Global.americanController.heartController.beatAlarm.percent <= 0.05)
 					{
 						Global.vietController.fadeIn();
@@ -105,11 +120,11 @@ package
 						Global.phase++;
 					}
 					//trace(Global.americanController.heartController.beatAlarm.percent);
-					//if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
-					//{
-						//Global.vietController.fadeIn();
-						//Global.phase++;
-					//}					
+					if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
+					{
+						Global.vietController.fadeIn();
+						Global.phase++;
+					}					
 					break;
 					
 				default:
@@ -118,11 +133,11 @@ package
 			super.update();
 		}
 		
-			public function quakeScreen():void
-			{
-				Global.quake.start(quakeIntensity, quakeDuration);
-				quakeAlarm.reset(quakeInterval);
-			}		
+		public function quakeScreen():void
+		{
+			Global.quake.start(quakeIntensity, quakeDuration);
+			quakeAlarm.reset(quakeInterval);
+		}		
 		
 	}
 

@@ -45,6 +45,10 @@ package
 		
 		public var personImage:PersonImage;
 		
+		public var fadingOut:Boolean = false;
+		public var fadingIn:Boolean = false;
+		public var markedForFadeIn:Boolean = false;
+		
 		
 		// When not active, the person's hearbeat etc. is paused
 		public var paused:Boolean = false;
@@ -94,7 +98,7 @@ package
 					FP.world.add(darkMask = new DarkMask(x, y, false));
 				}
 				heartController.pause();
-				photoController.pause();
+				//photoController.pause();
 				if (personImage) personImage.pause();	
 				paused = true;
 				active = false;
@@ -122,6 +126,7 @@ package
 		public function fadeOut(duration:Number = 180):void
 		{
 			trace('person controller fading out');
+			fadingOut = true;
 			inputController.active = false;
 			heartController.fadeOut(duration);
 			if (personImage) personImage.pause();
@@ -134,12 +139,24 @@ package
 		public function fadeOutComplete():void
 		{
 			trace('fade out complete');
+			fadingOut = false;
 			pause();
 			heartController.reset();
+			if (markedForFadeIn)
+			{
+				markedForFadeIn = false;
+				fadeIn();
+			}
 		}
 		
 		public function fadeIn():void
 		{
+			//if (fadingOut)
+			//{
+				//markedForFadeIn = true;
+				//return;
+			//}
+			fadingIn = true;
 			trace('person controller fade in');
 			active = true; 									// Need to set active to true here, otherwise newPhaseAlarm won't update to unpause
 			inputController.active = true;
@@ -159,6 +176,7 @@ package
 		
 		public function fadeInComplete():void
 		{
+			fadingIn = false;
 			trace('fade in complete');
 			//if (oldPhotoController) oldPhotoController.destroy();
 			unpause();

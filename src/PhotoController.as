@@ -110,15 +110,10 @@ package
 			{
 				lastPhoto = currentPhoto;
 				lastPhoto.fadeOut();
-				//FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize)));
+				FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize)));
 				// Recycle photobadrop
-				currentPhoto = FP.world.create(PhotoBackdrop, true) as PhotoBackdrop;
-				currentPhoto.reset(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize));
-				//pb.x = x;
-				//pb.y = y;
-				//pb.shouldFadeIn = fadeIn;
-				//pb.fadeInDuration = fadeInDuration;
-				//pb.fadeOutDuration = fadeOutDuration;
+				//currentPhoto = FP.world.create(PhotoBackdrop, true) as PhotoBackdrop;
+				//currentPhoto.reset(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize));
 			}
 			else
 			{
@@ -128,12 +123,11 @@ package
 				{
 					lastPhoto = currentPhoto;
 					lastPhoto.fadeOut();
-					//FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize)));
+					FP.world.add(currentPhoto = new PhotoBackdrop(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize)));
 					
 					// Recycle photo backdrop
-					currentPhoto = FP.world.create(PhotoBackdrop) as PhotoBackdrop;
-					currentPhoto.reset(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize));					
-					//nextPhotoAlarm.reset(displayTime);
+					//currentPhoto = FP.world.create(PhotoBackdrop) as PhotoBackdrop;
+					//currentPhoto.reset(photoArray[currentIndex], x, y, fadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, Math.floor(pixelateCellSize));					
 				}				
 			}
 			currentIndex++;

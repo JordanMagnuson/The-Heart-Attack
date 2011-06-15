@@ -15,18 +15,14 @@ package
 	{
 		public var cellSize:int;
 		
-		public function MosaicImage(source:*, clipRect:Rectangle = null, cellSize:int = 1, cache = false) 
+		public function MosaicImage(source:*, clipRect:Rectangle = null, cellSize:int = 1, cache:Boolean = false) 
 		{
-			if (cache) 
-			{
-				super(source, clipRect);
-			}
-			else
+			if (!cache) 
 			{
 				// Override FP's default caching, by getting the bitmap data ourselves, rather than relying on FP.getBitmap
-				var bitmapData:BitmapData = getBitmap(source);
-				super(source, clipRect);
+				source = getBitmap(source);
 			}
+			super(source, clipRect);
 			this.cellSize = cellSize;
 			smooth = false;
 			//this.cellSize = 2.5;
