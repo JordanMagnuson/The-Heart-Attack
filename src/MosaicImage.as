@@ -15,9 +15,18 @@ package
 	{
 		public var cellSize:int;
 		
-		public function MosaicImage(source:*, clipRect:Rectangle = null, cellSize:int = 1) 
+		public function MosaicImage(source:*, clipRect:Rectangle = null, cellSize:int = 1, cache = false) 
 		{
-			super(source, clipRect);
+			if (cache) 
+			{
+				super(source, clipRect);
+			}
+			else
+			{
+				// Override FP's default caching, by getting the bitmap data ourselves, rather than relying on FP.getBitmap
+				var bitmapData:BitmapData = getBitmap(source);
+				super(source, clipRect);
+			}
 			this.cellSize = cellSize;
 			smooth = false;
 			//this.cellSize = 2.5;
@@ -30,6 +39,11 @@ package
 			}
 			updateBuffer();
 		}
+
+		public static function getBitmap(source:Class):BitmapData
+		{
+			return (new source).bitmapData;
+		}		
 		
 		public function fitCellSize():void
 		{

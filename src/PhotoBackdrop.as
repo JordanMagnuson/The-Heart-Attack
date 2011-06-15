@@ -25,9 +25,27 @@ package
 		public var backdrop:MosaicImage;
 		public var fadeTween:ColorTween;
 		
-		public function PhotoBackdrop(source:*, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5, flipped:Boolean = false, cellSize:int = 1) 
+		public function PhotoBackdrop(source:* = null, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5, flipped:Boolean = false, cellSize:int = 1) 
 		{
-			super(x, y);
+			if (source)
+				reset(source, x, y, shouldFadeIn, fadeInDuration, fadeOutDuration, maxAlpha, flipped, cellSize);
+		}
+		
+		override public function added():void
+		{
+			if (shouldFadeIn)
+				fadeIn();
+			else
+			{
+				fadeTween = new ColorTween();
+				fadeTween.alpha = maxAlpha;
+			}
+		}
+		
+		public function reset(source:* = null, x:Number = 0, y:Number = 0, shouldFadeIn:Boolean = true, fadeInDuration:Number = 120, fadeOutDuration:Number = 120, maxAlpha:Number = 0.5, flipped:Boolean = false, cellSize:int = 1):void
+		{
+			this.x = x;
+			this.y = y;
 			this.shouldFadeIn = shouldFadeIn;
 			this.fadeInDuration = fadeInDuration;
 			this.fadeOutDuration = fadeOutDuration;
@@ -43,29 +61,12 @@ package
 				backdrop.alpha = 0;	
 			else
 				backdrop.alpha = maxAlpha;
-		}
-		
-		override public function added():void
-		{
-			if (shouldFadeIn)
-				fadeIn();
-			else
-			{
-				fadeTween = new ColorTween();
-				fadeTween.alpha = maxAlpha;
-			}
-		}
-		
-		public function reset(source:*):void
-		{
-			//backdrop = new Image(source);
-			//backdrop.alpha = 0;		
-			//fadeIn();
+			//this.active = true;
 		}
 		
 		override public function update():void
 		{
-			backdrop.alpha = fadeTween.alpha;
+			if (backdrop) backdrop.alpha = fadeTween.alpha;
 			super.update();
 		}
 		
@@ -85,7 +86,15 @@ package
 		
 		public function destroy():void
 		{
+			trace('photobackdrop destroy');
+			//this.active = false;
+			this.backdrop = null;
 			FP.world.remove(this);
+		}
+		
+		override public function removed():void
+		{
+			
 		}
 		
 		override public function render():void
