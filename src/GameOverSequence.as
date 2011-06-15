@@ -72,7 +72,7 @@ package
 			addTween(sfxFader, true);
 			
 			// Music
-			if ((!Global.bothDead && dead.type == 'american') || (Global.bothDead && FP.random > 0.9))
+			if ((!Global.bothDead && dead.type == 'american') || (Global.bothDead && FP.random > 0.5))
 			{
 				music = new Sfx(Assets.MUS_BONES_SKIN);
 				musicDuration = AMERICAN_MUSIC_DURATION;
@@ -93,6 +93,16 @@ package
 			if (Global.bothDead)
 			//if (true)
 			{
+				// Make notdead flatline
+				var heartBeats:Array = notDead.heartController.getHeartbeats();
+				for each (var h:Heartbeat in heartBeats)
+				{
+					FP.world.remove(h);
+				}					
+				FP.world.add(notDead.heartController.flatLine = new FlatLine(notDead.heartController));
+				notDead.heartController.flatLine.fadeTween.alpha = 1;
+				notDead.heartController.flatLine.image.alpha = 1;
+				
 				notDead.pause();
 				notDead.heartController.hotZone.active = true;
 				notDead.heartController.hotZone.fadeOut();
@@ -127,14 +137,14 @@ package
 			dead.heartController.hotZone.fadeOut();
 			if (dead.heartController.flatLine) dead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);
 			FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1, true));
-			deadPhotocontroller = generateSlideshow(dead);
-			
+			deadPhotocontroller = generateSlideshow(dead);		
 		}
 		
 		public function startMusic():void
 		{
 			trace('start music');
 			music.play(0);
+			music.complete = goToGameOver;
 			addTween(musicFader, true);
 			musicFader.fadeTo(0.75, MUSIC_IN_DURATION);
 		}
@@ -244,6 +254,11 @@ package
 			// Create controller
 			return new TimedPhotoController(photoArray, person.x, person.y, displayTime, displayTime, fadeDuration, 0.5, person.photoFlipped, Global.photoCellSize);
 		
+		}
+		
+		public function goToGameOver():void
+		{
+			FP.world = new GameOver;
 		}
 		
 		public function startSlideshow():void

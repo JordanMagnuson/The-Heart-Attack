@@ -14,7 +14,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="flashpunk\Draknek-FlashPunk-cc4d2a3" />
+    <class path="flashpunk\Draknek-FlashPunk-e0c3a8a" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -38,7 +38,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-frame start Main" />
     <option compilerConstants="" />
     <option customSDK="" />
   </build>
@@ -68,7 +68,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\Main.as" />
+    <compile path="src\Preloader.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

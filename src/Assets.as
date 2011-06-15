@@ -23,6 +23,8 @@ package
 		[Embed(source = '../assets/block_mask.jpg')] public static const BLOCK_MASK:Class;
 		[Embed(source = '../assets/block_mask_black.jpg')] public static const BLOCK_MASK_BLACK:Class;
 		
+		[Embed(source = '../assets/end_screen.png')] public static const END_SCREEN:Class;
+		
 		// sfx
 		[Embed(source = '../assets/sfx01.swf', symbol = 'heartbeat_up.wav')] public static const SND_HEARTBEAT_UP:Class;
 		[Embed(source = '../assets/sfx01.swf', symbol = 'heartbeat_down.wav')] public static const SND_HEARTBEAT_DOWN:Class;

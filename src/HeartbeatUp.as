@@ -54,9 +54,10 @@ package
 		
 		override public function missedAction():void
 		{
-			missed = true;		
-			heartController.loseHealth();
+			missed = true;	
 			image.color = Global.PULSE_COLOR_MISSED;	
+			if (Global.phase >= 4)						// Don't lose health until last phase
+				heartController.loseHealth();
 			
 			// Sound
 			this.heartController.heartSoundController.stopHeartbeat();

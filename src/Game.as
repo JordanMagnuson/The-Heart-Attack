@@ -49,8 +49,8 @@ package
 			
 			
 			//Global.americanController.markedForPause = true;
-			//FP.world.add(new Tutorial(Global.americanController));
-			//FP.world.add(new Tutorial(Global.vietController));
+			FP.world.add(new Tutorial(Global.americanController));
+			FP.world.add(new Tutorial(Global.vietController));
 		}
 		
 		override public function update():void

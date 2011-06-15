@@ -17,7 +17,7 @@ package
 		public function AmericanController(isTop:Boolean, inputKey:int) 
 		{
 			super(isTop, inputKey);
-			photoArray01 = new Array(Photos.A01, Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
+			photoArray01 = new Array(Photos.A02, Photos.A03, Photos.A04, Photos.A05, Photos.A06, Photos.A07, Photos.A08, Photos.A09, Photos.A10, Photos.A11, Photos.A12, Photos.A13, Photos.A14, Photos.A15);
 			photoArray02 = new Array(Photos.B01, Photos.B02, Photos.B03, Photos.B04, Photos.B05, Photos.B06, Photos.B07, Photos.B08, Photos.B09, Photos.B10, Photos.B11, Photos.B12, Photos.B13, Photos.B14);
 			photoArray03 = new Array(Photos.Z010, Photos.Z015, Photos.Z020, Photos.Z025, Photos.Z030, Photos.Z040, Photos.Z045, Photos.Z050, Photos.Z060, Photos.Z070, Photos.Z090, Photos.Z100, Photos.Z110, Photos.Z115, Photos.Z120, Photos.Z130, Photos.Z140);
 			

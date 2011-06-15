@@ -35,11 +35,11 @@ package
 		public static const LOSE_HEALTH_AMOUNT:Number = 0.1;			// 0.1
 		public static const HEALTH_DIF_TO_DIE_TOGETHER:Number = 0.3;
 		
-		public static const HEART_RATE_01:Number = 2 * FRAME_RATE;	// 5
-		public static const PULSE_SPEED_01:Number = 2;					// 1
+		public static const HEART_RATE_01:Number = 5 * FRAME_RATE;	// 5
+		public static const PULSE_SPEED_01:Number = 1;					// 1
 		
-		public static const HEART_RATE_02:Number = 2 * FRAME_RATE;		// 3
-		public static const PULSE_SPEED_02:Number = 2;				// 1.5
+		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;		// 3
+		public static const PULSE_SPEED_02:Number = 1.5;				// 1.5
 		
 		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;		// 2
 		public static const PULSE_SPEED_03:Number = 2;					// 2
