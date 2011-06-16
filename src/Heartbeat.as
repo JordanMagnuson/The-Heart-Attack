@@ -136,7 +136,7 @@ package
 		
 		public function checkOverlapHotZone():Boolean
 		{
-			if (x > heartController.hotZone.x + Global.HOT_ZONE_WIDTH - halfWidth)
+			if (x > heartController.hotZone.x + Global.HOT_ZONE_WIDTH)
 				return false;
 			else if (x + width < heartController.hotZone.x)
 				return false;

@@ -67,7 +67,7 @@ package
 					heartController.tweenPulseSpeed(Global.PULSE_SPEED_03, heartController.heartRate * photoArray.length);					
 					//addTween(newPhotoControllerAlarm = new Alarm(photoDisplayTime, replacePhotoController), true);
 					break;
-				case 4:
+				case 5:
 					photoDisplayTime = Global.PHOTO_DISPLAY_TIME_03;
 					photoArray = photoArray03;
 					photoArrayNumber = 3;

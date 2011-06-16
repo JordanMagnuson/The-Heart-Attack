@@ -61,11 +61,11 @@ package
 			
 			
 			//Global.americanController.markedForPause = true;
-			//if (!Global.TEST_MODE)
-			//{
-				//FP.world.add(new Tutorial(Global.americanController));
-				//FP.world.add(new Tutorial(Global.vietController));
-			//}
+			if (!Global.TEST_MODE)
+			{
+				FP.world.add(new Tutorial(Global.americanController));
+				FP.world.add(new Tutorial(Global.vietController));
+			}
 		}
 		
 		override public function update():void
@@ -119,13 +119,13 @@ package
 						Global.quakeScreenOnBeat = true;
 						Global.phase++;
 					}
-					//trace(Global.americanController.heartController.beatAlarm.percent);
-					if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
-					{
-						Global.vietController.fadeIn();
-						Global.phase++;
-					}					
 					break;
+					//trace(Global.americanController.heartController.beatAlarm.percent);
+					//if (Global.americanController.heartController.beatAlarm.percent <= 0.10)
+					//{
+						//Global.vietController.fadeIn();
+						//Global.phase++;
+					//}					
 					
 				default:
 					break;

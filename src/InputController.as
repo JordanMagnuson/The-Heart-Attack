@@ -38,11 +38,11 @@ package
 			{
 				checkOverlapUpBeat();
 			}
-			else if (Input.released(inputKeyString))
-			{
-				if (!Global.COMBINE_UP_DOWN_BEATS)
-					checkOverlapDownBeat();
-			}
+			//else if (Input.released(inputKeyString))
+			//{
+				//if (!Global.COMBINE_UP_DOWN_BEATS)
+					//checkOverlapDownBeat();
+			//}
 			
 			super.update();
 		}
@@ -93,7 +93,7 @@ package
 					else
 					{
 						// Double presses on one heartbeat count as miss, so that you can't just pound keys
-						if (!Global.TEST_MODE) u.missedAction();
+						if (!Global.TEST_MODE && Global.phase > 4) u.missedAction();
 					}
 				}
 			}		

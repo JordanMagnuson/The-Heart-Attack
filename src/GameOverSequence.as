@@ -137,7 +137,11 @@ package
 			dead.heartController.hotZone.fadeOut();
 			if (dead.heartController.flatLine) dead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);
 			FP.world.add(new RedMask(dead.x, dead.y, true, RED_MASK_IN_DURATION, RED_MASK_OUT_DURATION, RED_MASK_STAY_DURATION, 1, true));
-			deadPhotocontroller = generateSlideshow(dead);		
+			deadPhotocontroller = generateSlideshow(dead);	
+			
+			// Prime slideshow
+			primeSlideshow();
+			
 		}
 		
 		public function startMusic():void
@@ -253,7 +257,7 @@ package
 			
 			// Create controller
 			return new TimedPhotoController(photoArray, person.x, person.y, displayTime, displayTime, fadeDuration, 0.5, person.photoFlipped, Global.photoCellSize);
-		
+			
 		}
 		
 		public function goToGameOver():void
@@ -261,7 +265,7 @@ package
 			FP.world = new GameOver;
 		}
 		
-		public function startSlideshow():void
+		public function primeSlideshow():void
 		{
 			trace('start slideshow');
 			if (notDeadPhotocontroller)
@@ -269,10 +273,19 @@ package
 				if (notDead.photoController) notDead.photoController.destroy();
 				if (notDead.oldPhotoController) notDead.oldPhotoController.destroy();	
 				FP.world.add(notDeadPhotocontroller);
+				notDeadPhotocontroller.pause();
 			}
 			if (dead.photoController) dead.photoController.destroy();
 			if (dead.oldPhotoController) dead.oldPhotoController.destroy();			
 			FP.world.add(deadPhotocontroller);
+			
+			deadPhotocontroller.pause();
+		}
+		
+		public function startSlideshow():void
+		{
+			if (notDeadPhotocontroller) notDeadPhotocontroller.unpause();
+			deadPhotocontroller.unpause();
 		}
 		
 	}
