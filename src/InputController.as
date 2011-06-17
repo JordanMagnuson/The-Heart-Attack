@@ -56,7 +56,7 @@ package
 			world.getClass(HeartbeatUp, heartbeatUpList);
 			for each (var u:HeartbeatUp in heartbeatUpList)
 			{
-				if (u.heartController == this.heartController && u.checkOverlapHotZone())
+				if (u.heartController == this.heartController && u.checkOverlapForgivingHotZone())
 				{
 					if (u.missed)
 					{

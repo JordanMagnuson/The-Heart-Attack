@@ -144,6 +144,16 @@ package
 				return true;
 		}
 		
+		public function checkOverlapForgivingHotZone():Boolean
+		{
+			if (x > heartController.hotZone.x + Global.HOT_ZONE_WIDTH + Global.HOT_ZONE_WIDTH * 0.4)
+				return false;
+			else if (x + width < heartController.hotZone.x - Global.HOT_ZONE_WIDTH * 0.4)
+				return false;
+			else
+				return true;
+		}		
+		
 		public function offscreenAction():void
 		{
 			//trace('heart beat offscreen action');

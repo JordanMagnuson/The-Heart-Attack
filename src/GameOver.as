@@ -30,7 +30,7 @@ package
 		
 		override public function begin():void
 		{
-			FP.alarm(2 * FP.assignedFrameRate, fadeIn);
+			FP.alarm(3 * FP.assignedFrameRate, fadeIn);
 		}
 		
 		public function fadeIn():void

@@ -16,7 +16,7 @@ package
 		public const AMERICAN_MUSIC_DURATION:Number = 183 * FP.assignedFrameRate;
 		public const VIET_MUSIC_DURATION:Number = 187 * FP.assignedFrameRate;
 
-		public const MAX_WAR_PHOTOS_TO_SHOW:Number = 7;
+		public const MAX_WAR_PHOTOS_TO_SHOW:Number = 5;
 		public const SKIP_EVERY_OTHER_BOOTCAMP_PHOTO:Boolean = true;
 		
 		public const DARK_MASK_IN_DURATION:Number = 8 * FP.assignedFrameRate;		
