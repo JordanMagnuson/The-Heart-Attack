@@ -19,8 +19,8 @@ package
 		public var gameOverText:EntityFader;
 		
 		public var request:URLRequest;
-		public var learnMoreURL:String = "http://www.gametrekking.com/blog/vietnam-yin-and-yang";
-		public var leaveCommentURL:String = "";		
+		public var learnMoreURL:String = "http://www.gametrekking.com/category/tags/vietnam";
+		public var leaveCommentURL:String = "http://www.gametrekking.com/comment/reply/65#comment-form";		
 		
 		public function GameOver() 
 		{
@@ -50,15 +50,15 @@ package
 				  trace("Error occurred!");
 				}
 			}
-			//if (Input.pressed(Key.X))
-			//{
-				//request = new URLRequest(leaveCommentURL);
-				//try {
-				  //navigateToURL(request, '_blank'); // second argument is target
-				//} catch (e:Error) {
-				  //trace("Error occurred!");
-				//}
-			//}
+			if (Input.pressed(Key.X))
+			{
+				request = new URLRequest(leaveCommentURL);
+				try {
+				  navigateToURL(request, '_blank'); // second argument is target
+				} catch (e:Error) {
+				  trace("Error occurred!");
+				}
+			}
 			super.update();
 		}				
 		

@@ -36,7 +36,7 @@ package
 		{
 			add(new Ground);
 			add(Global.quake = new Quake);
-			add(Global.cheater = new Cheater);
+			//add(Global.cheater = new Cheater);
 			add(Global.soundController = new SoundController);
 			
 			//addTween(quakeAlarm, true);
