@@ -10,6 +10,7 @@ package
 	public class Global 
 	{
 		public static const TEST_MODE:Boolean = false;
+		public static const TEST_END_SEQUENCE:Boolean = true;	// Immediately jump to end sequence at game start.
 		public static var SUCCESS_COUNT:int = 0;
 		public static var FAILURE_COUNT:int = 0;
 		

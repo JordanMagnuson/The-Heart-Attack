@@ -57,8 +57,9 @@ package
 				add(Global.vietController = new VietController(true, Global.INPUT_KEY_TOP));
 				add(Global.americanController = new AmericanController(false, Global.INPUT_KEY_BOTTOM));
 			}	
-			Global.vietController.markedForPause = true;
-			
+			if (!Global.TEST_END_SEQUENCE) {
+				Global.vietController.markedForPause = true;
+			}
 			
 			//Global.americanController.markedForPause = true;
 			if (!Global.TEST_MODE)

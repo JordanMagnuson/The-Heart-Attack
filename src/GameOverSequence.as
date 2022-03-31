@@ -93,6 +93,7 @@ package
 			if (Global.bothDead)
 			//if (true)
 			{
+				trace('both are dead');
 				// Make notdead flatline
 				var heartBeats:Array = notDead.heartController.getHeartbeats();
 				for each (var h:Heartbeat in heartBeats)
@@ -124,7 +125,7 @@ package
 			else
 			{
 				notDead.pause();
-				notDead.darkMask.fadeOut(RED_MASK_IN_DURATION);
+				if (notDead.darkMask) notDead.darkMask.fadeOut(RED_MASK_IN_DURATION);
 				notDead.heartController.hotZone.active = true;
 				notDead.heartController.hotZone.fadeOut();
 				if (notDead.heartController.flatLine) notDead.heartController.flatLine.fadeOut(FLAT_LINE_OUT_DURATION);	

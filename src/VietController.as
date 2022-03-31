@@ -39,6 +39,12 @@ package
 			photoDisplayTime = Global.PHOTO_DISPLAY_TIME_01;
 			FP.world.add(photoController = new PhotoController(photoArray, x, y, photoDisplayTime, photoDisplayTime, false, false, Global.PHOTO_MAX_ALPHA, photoFlipped));	// FIX ME 10, 10
 			photoController.nextPhoto(false);		
+			
+			if (Global.TEST_END_SEQUENCE) {
+				heartController.health = 0;
+				dead = true;
+				photoArrayNumber = 3;
+			}			
 		}
 		
 		override public function update():void

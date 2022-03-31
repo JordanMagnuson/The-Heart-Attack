@@ -42,6 +42,12 @@ package
 			//var tweenTime:Number = heartController.heartRate * photoArray.length;
 			heartController.tweenHeartRate(Global.HEART_RATE_02, heartController.heartRate * photoArray.length);
 			heartController.tweenPulseSpeed(Global.PULSE_SPEED_02, heartController.heartRate * photoArray.length);
+			
+			if (Global.TEST_END_SEQUENCE) {
+				heartController.health = 0;
+				dead = true;
+				photoArrayNumber = 3;
+			}
 		}
 		
 		override public function update():void
