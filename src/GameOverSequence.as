@@ -246,7 +246,12 @@ package
 				}	
 				
 				// Push index
-				photoArray.push(person.photoArray03[person.photoController.currentIndex - 1]);
+				if (person.photoController.currentIndex > 0) {
+					photoArray.push(person.photoArray03[person.photoController.currentIndex - 1]);
+				}
+				else {
+					photoArray.push(person.photoArray03[person.photoController.currentIndex);
+				}
 			}			
 			
 			// Reverse the array
