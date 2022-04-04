@@ -10,7 +10,7 @@ package
 	public class Global 
 	{
 		public static const TEST_MODE:Boolean = false;
-		public static const TEST_END_SEQUENCE:Boolean = true;	// Immediately jump to end sequence at game start.
+		public static const TEST_END_SEQUENCE:Boolean = false;	// Immediately jump to end sequence at game start.
 		public static var SUCCESS_COUNT:int = 0;
 		public static var FAILURE_COUNT:int = 0;
 		
@@ -40,18 +40,35 @@ package
 		public static const LOSE_HEALTH_AMOUNT:Number = 0.1;			// 0.1
 		public static const HEALTH_DIF_TO_DIE_TOGETHER:Number = 0.3;
 		
-		public static const HEART_RATE_01:Number = 5 * FRAME_RATE;	// 5
-		public static const PULSE_SPEED_01:Number = 1;					// 1
-		
-		public static const HEART_RATE_02:Number = 3 * FRAME_RATE;		// 3
-		public static const PULSE_SPEED_02:Number = 1.5;				// 1.5
-		
-		public static const HEART_RATE_03:Number = 2 * FRAME_RATE;		// 2
-		public static const PULSE_SPEED_03:Number = 2;					// 2
-		
-		public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 60 * FRAME_RATE;
-		public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
-		public static const PULSE_SPEED_04:Number = 8;			
+		if (Global.TEST_MODE) {
+			// Make heartbeats come faster in test mode.
+			public static const HEART_RATE_01:Number = 1 * FRAME_RATE;	// 5
+			public static const PULSE_SPEED_01:Number = 5;					// 1
+			
+			public static const HEART_RATE_02:Number = 1 * FRAME_RATE;		// 3
+			public static const PULSE_SPEED_02:Number = 5;				// 1.5
+			
+			public static const HEART_RATE_03:Number = 1 * FRAME_RATE;		// 2
+			public static const PULSE_SPEED_03:Number = 5;					// 2
+			
+			public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 60 * FRAME_RATE;
+			public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
+			public static const PULSE_SPEED_04:Number = 8;			
+		}
+		else {
+			public static const HEART_RATE_01:Number = 5 * FRAME_RATE;	// 5
+			public static const PULSE_SPEED_01:Number = 1;					// 1
+			
+			public static const HEART_RATE_02:Number = 3 * FRAME_RATE;		// 3
+			public static const PULSE_SPEED_02:Number = 1.5;				// 1.5
+			
+			public static const HEART_RATE_03:Number = 2 * FRAME_RATE;		// 2
+			public static const PULSE_SPEED_03:Number = 2;					// 2
+			
+			public static const FINAL_HEART_RATE_TWEEN_DURATION:Number = 60 * FRAME_RATE;
+			public static const HEART_RATE_04:Number = 0.2 * FRAME_RATE;
+			public static const PULSE_SPEED_04:Number = 8;				
+		}
 		
 		// Photo display times - no longer used.
 		public static const PHOTO_DISPLAY_TIME_01:Number = 3 * FRAME_RATE;	// 7
