@@ -137,8 +137,8 @@ package
 		{
 			unpause();
 			if (lastPhoto) lastPhoto.fadeOut();
-			if (currentPhoto) currentPhoto.fadeOut();
 			FP.world.remove(this);			
+			if (currentPhoto) currentPhoto.fadeOut();
 		}
 		
 		public function destroy():void
